@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/workflow365-crm.git"
+    "url": "https://github.com/ite2025/crm.git"
   },
-  "homepage": "https://workflow365-crm.vercel.app"
+  "homepage": "https://crm365.vercel.app"
 }
