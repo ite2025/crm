@@ -1,33 +1,37 @@
 {
-  "name": "workflow365-crm",
-  "version": "1.0.0",
-  "description": "Workflow365 CRM - System zarządzania relacjami z klientami z mapą powiązań i systemem logowania",
+  "name": "workflow365-crm-with-search",
+  "version": "2.0.0",
+  "description": "Aplikacja CRM Workflow365 z funkcją wyszukiwania i mapą relacji firm z opiekunami",
   "main": "index.html",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite",
-    "vercel-build": "vite build"
+    "start": "http-server . -p 3000 -o"
   },
   "keywords": [
     "crm",
     "workflow365",
-    "react",
-    "d3",
-    "visualization"
+    "it-excellence",
+    "mapa-relacji",
+    "wyszukiwanie",
+    "glass-morphism"
   ],
-  "author": "IT Excellence S.A.",
+  "author": "Łukasz Dobrowolski <lukasz@ite.pl> (IT Excellence S.A.)",
   "license": "MIT",
   "dependencies": {
-    "d3": "^7.8.5",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "@vitejs/plugin-legacy": "^5.0.0"
+    "vite": "^4.4.5",
+    "http-server": "^14.1.1"
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/workflow365-crm.git"
+  },
+  "homepage": "https://workflow365-crm.vercel.app"
 }

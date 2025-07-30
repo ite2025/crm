@@ -3,202 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workflow365 CRM - Logowanie</title>
+    <title>Workflow365 CRM</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-    <!-- Strona logowania -->
-    <div id="login-page" class="login-page">
+    <!-- Ekran logowania -->
+    <div id="loginScreen" class="login-screen">
         <div class="login-container glass">
-            <div class="login-header">
-                <img src="https://ite.pl/grafiki/workflow365.png" alt="Workflow365" class="login-logo" onerror="this.style.display='none';">
-                <h1>Workflow365 CRM</h1>
-                <p>Zaloguj się do systemu</p>
+            <div class="login-logo">
+                <img src="https://ite.pl/grafiki/workflow365.png" alt="Workflow365" class="logo">
             </div>
-            
-            <form id="login-form" class="login-form">
-                <div class="form-group">
-                    <label for="email" class="form-label">Email / Login</label>
-                    <input type="email" id="email" name="email" class="form-control" required 
-                           placeholder="Wprowadź swój email">
-                </div>
-                
-                <div class="form-group">
-                    <label for="password" class="form-label">Hasło</label>
-                    <input type="password" id="password" name="password" class="form-control" required
-                           placeholder="Wprowadź hasło">
-                </div>
-                
-                <button type="submit" class="btn btn--primary btn--full-width glass-btn" id="login-btn">
-                    Zaloguj się
-                </button>
-                
-                <div id="login-error" class="login-error hidden">
-                    Nieprawidłowy email lub hasło
-                </div>
-            </form>
-            
-            <div class="login-footer">
-                <p>Przykładowe konta:</p>
-                <div class="demo-accounts">
-                    <div class="demo-account">
-                        <strong>Admin:</strong> admin@ite.pl / admin123
+            <div class="login-form">
+                <h2>Zaloguj się do systemu</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-control" required>
                     </div>
-                    <div class="demo-account">
-                        <strong>Manager:</strong> manager@ite.pl / manager123
+                    <div class="form-group">
+                        <label for="password" class="form-label">Hasło</label>
+                        <input type="password" id="password" class="form-control" required>
                     </div>
-                    <div class="demo-account">
-                        <strong>User:</strong> user@ite.pl / user123
-                    </div>
-                </div>
+                    <div id="loginError" class="login-error hidden"></div>
+                    <button type="submit" class="btn btn--primary btn--full-width login-btn">Zaloguj</button>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- Główna aplikacja CRM -->
-    <div id="main-app" class="app-container hidden">
-        <!-- Header z kontrolkami -->
+    <!-- Główny interfejs aplikacji -->
+    <div id="mainApp" class="main-app hidden">
+        <!-- Nagłówek -->
         <header class="app-header glass">
             <div class="header-content">
                 <div class="header-left">
-                    <img src="https://ite.pl/grafiki/workflow365.png" alt="Workflow365" class="logo" onerror="this.style.display='none';">
+                    <img src="https://ite.pl/grafiki/workflow365.png" alt="Workflow365" class="header-logo">
                 </div>
                 <div class="header-center">
-                    <div class="user-info">
-                        <span class="welcome-text">Witaj, <span id="current-user-name">Użytkownik</span>!</span>
-                        <span class="user-role" id="current-user-role">Rola</span>
+                    <div class="search-container">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Wyszukaj firmę lub opiekuna...">
+                        <button id="clearSearch" class="clear-search hidden">×</button>
                     </div>
                 </div>
                 <div class="header-right">
-                    <div class="controls-section">
-                        <div class="filter-controls">
-                            <label class="checkbox-container">
-                                <input type="checkbox" id="show-sales" checked>
-                                <span class="checkmark"></span>
-                                Opiekunowie handlowi
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" id="show-implementation" checked>
-                                <span class="checkmark"></span>
-                                Opiekunowie wdrożeniowi
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox" id="show-all" checked>
-                                <span class="checkmark"></span>
-                                Wszystko
-                            </label>
-                        </div>
-                        <div class="excel-controls">
-                            <input type="file" id="excel-file" accept=".xlsx,.xls" style="display: none;">
-                            <button id="load-excel-btn" class="btn btn--primary glass-btn">
-                                📊 Wczytaj Excel
-                            </button>
-                        </div>
-                        <button id="logout-btn" class="btn btn--outline glass-btn logout-btn">
-                            🚪 Wyloguj
-                        </button>
-                    </div>
+                    <span id="userInfo" class="user-info"></span>
+                    <button id="logoutBtn" class="btn btn--outline btn--sm">Wyloguj</button>
                 </div>
             </div>
         </header>
 
-        <!-- Główny kontener -->
-        <div class="main-content">
-            <!-- Wizualizacja -->
-            <main class="visualization-area glass">
-                <div class="viz-header">
-                    <h2>Sieć Połączeń</h2>
-                    <div class="viz-controls">
-                        <button id="reset-view" class="btn btn--outline btn--sm glass-btn">🔄 Reset</button>
-                        <button id="center-view" class="btn btn--outline btn--sm glass-btn">🎯 Centruj</button>
-                        <div class="legend">
-                            <div class="legend-item">
-                                <div class="legend-dot company-dot"></div>
-                                <span>Firmy</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-dot sales-dot"></div>
-                                <span>Op. handlowi</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-dot impl-dot"></div>
-                                <span>Op. wdrożeniowi</span>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Główna zawartość -->
+        <main class="app-main">
+            <!-- Panel filtrów -->
+            <div class="filters-panel glass">
+                <h3>Filtry opiekunów</h3>
+                <div class="filter-group">
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filterSales" checked>
+                        <span class="checkmark"></span>
+                        Handlowi
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filterImplementation" checked>
+                        <span class="checkmark"></span>
+                        Wdrożeniowi
+                    </label>
                 </div>
-                <div id="network-visualization" class="network-container">
-                    <svg id="network-svg"></svg>
-                    <div id="loading" class="loading-overlay glass hidden">
-                        <div class="loading-spinner"></div>
-                        <p>Ładowanie danych...</p>
-                    </div>
+                <div class="filter-actions">
+                    <button id="resetFilters" class="btn btn--secondary btn--sm">Resetuj filtry</button>
+                    <button id="resetView" class="btn btn--secondary btn--sm">Resetuj widok</button>
                 </div>
-            </main>
+                
+                <!-- Sekcja importu Excel -->
+                <div class="import-section">
+                    <h4>Import danych</h4>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="excelFile" class="file-input" accept=".xlsx,.xls" />
+                        <label for="excelFile" class="file-input-label">
+                            Wybierz plik Excel
+                        </label>
+                    </div>
+                    <button id="importBtn" class="btn btn--secondary btn--sm" style="margin-top: 8px; width: 100%;" disabled>
+                        Importuj dane
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mapa relacji -->
+            <div class="relationship-map glass" id="relationshipMap">
+                <div class="map-container">
+                    <!-- Węzły będą dodawane dynamicznie przez JavaScript -->
+                </div>
+            </div>
 
             <!-- Panel szczegółów -->
-            <aside class="details-panel glass">
-                <div class="panel-header">
+            <div class="details-panel glass" id="detailsPanel">
+                <div class="details-header">
                     <h3>Szczegóły</h3>
-                    <button id="close-details" class="btn btn--outline btn--sm">✕</button>
+                    <button id="closeDetails" class="close-btn">×</button>
                 </div>
-                <div class="panel-content">
-                    <div id="no-selection" class="no-selection">
-                        <div class="no-selection-icon">🎯</div>
-                        <p>Kliknij na firmę lub opiekuna aby zobaczyć szczegóły</p>
-                    </div>
-                    <div id="selection-details" class="selection-details hidden">
-                        <!-- Szczegóły będą wstawiane przez JavaScript -->
-                    </div>
+                <div class="details-content" id="detailsContent">
+                    <p>Kliknij na firmę lub opiekuna, aby zobaczyć szczegóły</p>
                 </div>
-            </aside>
-        </div>
+            </div>
+        </main>
 
-        <!-- Dolny panel ze statystykami -->
-        <footer class="stats-footer glass">
+        <!-- Panel statystyk -->
+        <footer class="app-footer glass">
             <div class="stats-container">
-                <div class="stat-card glass">
-                    <div class="stat-value" id="total-companies">5</div>
-                    <div class="stat-label">Firm</div>
+                <div class="stat-item glass">
+                    <span class="stat-label">Firmy</span>
+                    <span class="stat-value" id="companiesCount">0</span>
                 </div>
-                <div class="stat-card glass">
-                    <div class="stat-value" id="total-sales">4</div>
-                    <div class="stat-label">Op. handlowi</div>
+                <div class="stat-item glass">
+                    <span class="stat-label">Handlowi</span>
+                    <span class="stat-value" id="salesCount">0</span>
                 </div>
-                <div class="stat-card glass">
-                    <div class="stat-value" id="total-impl">4</div>
-                    <div class="stat-label">Op. wdrożeniowi</div>
+                <div class="stat-item glass">
+                    <span class="stat-label">Wdrożeniowi</span>
+                    <span class="stat-value" id="implementationCount">0</span>
                 </div>
-                <div class="stat-card glass">
-                    <div class="stat-value" id="visible-nodes">5</div>
-                    <div class="stat-label">Widoczne</div>
+                <div class="stat-item glass">
+                    <span class="stat-label">Łączny obrót</span>
+                    <span class="stat-value" id="totalRevenue">0 zł</span>
                 </div>
-                <div class="stat-card glass">
-                    <div class="stat-value" id="total-turnover">1 900 000 PLN</div>
-                    <div class="stat-label">Łączny obrót</div>
-                </div>
-                <div class="stat-card glass">
-                    <div class="stat-value" id="average-turnover">380 000 PLN</div>
-                    <div class="stat-label">Średni obrót</div>
+                <div class="stat-item glass">
+                    <span class="stat-label">Średni obrót</span>
+                    <span class="stat-value" id="averageRevenue">0 zł</span>
                 </div>
             </div>
         </footer>
-
-        <!-- Tooltip -->
-        <div id="tooltip" class="tooltip glass hidden">
-            <div class="tooltip-content">
-                <!-- Zawartość będzie wstawiana przez JavaScript -->
-            </div>
-        </div>
-
-        <!-- Komunikaty -->
-        <div id="message-container" class="message-container">
-            <!-- Komunikaty będą wstawiane przez JavaScript -->
-        </div>
     </div>
 
+    <!-- Biblioteka do obsługi Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
