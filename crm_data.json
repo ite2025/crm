@@ -1,0 +1,237 @@
+{
+  "companies": [
+    {
+      "ID_Firmy": 1,
+      "Nazwa_Firmy": "IT Excellence S.A.",
+      "Branża": "Technologie IT",
+      "Lokalizacja": "Wrocław",
+      "Wielkość_Firmy": "Duża (500+ pracowników)",
+      "Status": "Aktywny"
+    },
+    {
+      "ID_Firmy": 2,
+      "Nazwa_Firmy": "TechnoSoft Sp. z o.o.",
+      "Branża": "Oprogramowanie",
+      "Lokalizacja": "Warszawa",
+      "Wielkość_Firmy": "Średnia (50-250 pracowników)",
+      "Status": "Aktywny"
+    },
+    {
+      "ID_Firmy": 3,
+      "Nazwa_Firmy": "Digital Solutions Ltd.",
+      "Branża": "Usługi cyfrowe",
+      "Lokalizacja": "Kraków",
+      "Wielkość_Firmy": "Mała (10-50 pracowników)",
+      "Status": "Potencjalny"
+    },
+    {
+      "ID_Firmy": 4,
+      "Nazwa_Firmy": "InnovateCorp S.A.",
+      "Branża": "Innowacje technologiczne",
+      "Lokalizacja": "Gdańsk",
+      "Wielkość_Firmy": "Duża (500+ pracowników)",
+      "Status": "Aktywny"
+    },
+    {
+      "ID_Firmy": 5,
+      "Nazwa_Firmy": "DataFlow Systems",
+      "Branża": "Analiza danych",
+      "Lokalizacja": "Poznań",
+      "Wielkość_Firmy": "Średnia (50-250 pracowników)",
+      "Status": "Aktywny"
+    },
+    {
+      "ID_Firmy": 6,
+      "Nazwa_Firmy": "CloudTech Poland",
+      "Branża": "Chmura obliczeniowa",
+      "Lokalizacja": "Warszawa",
+      "Wielkość_Firmy": "Mała (10-50 pracowników)",
+      "Status": "Potencjalny"
+    },
+    {
+      "ID_Firmy": 7,
+      "Nazwa_Firmy": "SmartBusiness S.A.",
+      "Branża": "Rozwiązania biznesowe",
+      "Lokalizacja": "Wrocław",
+      "Wielkość_Firmy": "Średnia (50-250 pracowników)",
+      "Status": "Aktywny"
+    },
+    {
+      "ID_Firmy": 8,
+      "Nazwa_Firmy": "NextGen Software",
+      "Branża": "Tworzenie oprogramowania",
+      "Lokalizacja": "Kraków",
+      "Wielkość_Firmy": "Mała (10-50 pracowników)",
+      "Status": "Aktywny"
+    }
+  ],
+  "managers": [
+    {
+      "ID_Opiekuna": 101,
+      "Imię_Nazwisko": "Anna Kowalska",
+      "Typ_Opiekuna": "Handlowy",
+      "Region": "Dolnośląskie",
+      "Doświadczenie_Lata": 5,
+      "Specjalizacja": "Rozwiązania IT dla firm",
+      "Email": "a.kowalska@company.com"
+    },
+    {
+      "ID_Opiekuna": 102,
+      "Imię_Nazwisko": "Marcin Nowak",
+      "Typ_Opiekuna": "Handlowy",
+      "Region": "Mazowieckie",
+      "Doświadczenie_Lata": 8,
+      "Specjalizacja": "Oprogramowanie enterprise",
+      "Email": "m.nowak@company.com"
+    },
+    {
+      "ID_Opiekuna": 103,
+      "Imię_Nazwisko": "Katarzyna Wiśniewska",
+      "Typ_Opiekuna": "Handlowy",
+      "Region": "Małopolskie",
+      "Doświadczenie_Lata": 3,
+      "Specjalizacja": "Usługi cyfrowe",
+      "Email": "k.wisniewska@company.com"
+    },
+    {
+      "ID_Opiekuna": 104,
+      "Imię_Nazwisko": "Tomasz Zieliński",
+      "Typ_Opiekuna": "Handlowy",
+      "Region": "Pomorskie",
+      "Doświadczenie_Lata": 12,
+      "Specjalizacja": "Systemy analityczne",
+      "Email": "t.zielinski@company.com"
+    },
+    {
+      "ID_Opiekuna": 105,
+      "Imię_Nazwisko": "Magdalena Wójcik",
+      "Typ_Opiekuna": "Handlowy",
+      "Region": "Wielkopolskie",
+      "Doświadczenie_Lata": 6,
+      "Specjalizacja": "Rozwiązania chmurowe",
+      "Email": "m.wojcik@company.com"
+    },
+    {
+      "ID_Opiekuna": 201,
+      "Imię_Nazwisko": "Paweł Jankowski",
+      "Typ_Opiekuna": "Wdrożeniowy",
+      "Region": "Dolnośląskie/Mazowieckie",
+      "Doświadczenie_Lata": 7,
+      "Specjalizacja": "Wdrożenia systemów IT",
+      "Email": "p.jankowski@company.com"
+    },
+    {
+      "ID_Opiekuna": 202,
+      "Imię_Nazwisko": "Agnieszka Kaczmarek",
+      "Typ_Opiekuna": "Wdrożeniowy",
+      "Region": "Małopolskie/Pomorskie",
+      "Doświadczenie_Lata": 9,
+      "Specjalizacja": "Migracja danych",
+      "Email": "a.kaczmarek@company.com"
+    },
+    {
+      "ID_Opiekuna": 203,
+      "Imię_Nazwisko": "Michał Lewandowski",
+      "Typ_Opiekuna": "Wdrożeniowy",
+      "Region": "Wielkopolskie/Dolnośląskie",
+      "Doświadczenie_Lata": 4,
+      "Specjalizacja": "Szkolenia użytkowników",
+      "Email": "m.lewandowski@company.com"
+    },
+    {
+      "ID_Opiekuna": 204,
+      "Imię_Nazwisko": "Joanna Kamińska",
+      "Typ_Opiekuna": "Wdrożeniowy",
+      "Region": "Mazowieckie/Małopolskie",
+      "Doświadczenie_Lata": 11,
+      "Specjalizacja": "Wsparcie techniczne",
+      "Email": "j.kaminska@company.com"
+    }
+  ],
+  "relationships": [
+    {
+      "ID_Firmy": 1,
+      "ID_Opiekuna": 101,
+      "Typ_Relacji": "Główny opiekun handlowy",
+      "Data_Rozpoczęcia": "2023-01-15",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 1,
+      "ID_Opiekuna": 201,
+      "Typ_Relacji": "Opiekun wdrożeniowy",
+      "Data_Rozpoczęcia": "2023-02-01",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 2,
+      "ID_Opiekuna": 102,
+      "Typ_Relacji": "Główny opiekun handlowy",
+      "Data_Rozpoczęcia": "2022-11-10",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 2,
+      "ID_Opiekuna": 202,
+      "Typ_Relacji": "Opiekun wdrożeniowy",
+      "Data_Rozpoczęcia": "2023-01-20",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 3,
+      "ID_Opiekuna": 103,
+      "Typ_Relacji": "Główny opiekun handlowy",
+      "Data_Rozpoczęcia": "2024-03-05",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 4,
+      "ID_Opiekuna": 104,
+      "Typ_Relacji": "Główny opiekun handlowy",
+      "Data_Rozpoczęcia": "2023-06-12",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 4,
+      "ID_Opiekuna": 203,
+      "Typ_Relacji": "Opiekun wdrożeniowy",
+      "Data_Rozpoczęcia": "2023-07-01",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 5,
+      "ID_Opiekuna": 105,
+      "Typ_Relacji": "Główny opiekun handlowy",
+      "Data_Rozpoczęcia": "2024-01-08",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 6,
+      "ID_Opiekuna": 103,
+      "Typ_Relacji": "Wsparcie handlowe",
+      "Data_Rozpoczęcia": "2024-02-15",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 7,
+      "ID_Opiekuna": 101,
+      "Typ_Relacji": "Wsparcie handlowe",
+      "Data_Rozpoczęcia": "2023-09-20",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 7,
+      "ID_Opiekuna": 204,
+      "Typ_Relacji": "Opiekun wdrożeniowy",
+      "Data_Rozpoczęcia": "2023-10-10",
+      "Status_Relacji": "Aktywna"
+    },
+    {
+      "ID_Firmy": 8,
+      "ID_Opiekuna": 102,
+      "Typ_Relacji": "Główny opiekun handlowy",
+      "Data_Rozpoczęcia": "2024-05-03",
+      "Status_Relacji": "Aktywna"
+    }
+  ]
+}

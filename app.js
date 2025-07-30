@@ -1,903 +1,943 @@
-// NAPRAWIONE: Używanie prawidłowych danych z JSON
-const appData = {
-    companies: [
-        {
-            id: 1,
-            name: "IT Excellence S.A.",
-            nip: "8943048437", 
-            industry: "IT/Software",
-            location: "Wrocław",
-            size: "Średnia",
-            status: "Aktywna",
-            revenue: 500000
-        },
-        {
-            id: 2,
-            name: "TechFlow Sp. z o.o.",
-            nip: "5261234567",
-            industry: "Automatyzacja", 
-            location: "Warszawa",
-            size: "Duża",
-            status: "Aktywna", 
-            revenue: 750000
-        },
-        {
-            id: 3,
-            name: "DataSync Solutions",
-            nip: "7891234568",
-            industry: "Analityka",
-            location: "Kraków", 
-            size: "Mała",
-            status: "Aktywna",
-            revenue: 300000
-        },
-        {
-            id: 4,
-            name: "CloudTech Innovations",
-            nip: "9871234569",
-            industry: "Chmura",
-            location: "Gdańsk",
-            size: "Średnia", 
-            status: "Potencjalna",
-            revenue: 200000
-        },
-        {
-            id: 5,
-            name: "SecureNet Systems",
-            nip: "1234567890",
-            industry: "Cyberbezpieczeństwo",
-            location: "Poznań",
-            size: "Duża",
-            status: "Aktywna",
-            revenue: 150000
-        }
-    ],
-    caregivers: [
-        {
-            id: 1,
-            firstName: "Anna",
-            lastName: "Kowalska", 
-            type: "handlowy",
-            region: "Dolnośląskie",
-            experience: "5 lat",
-            email: "anna.kowalska@ite.pl",
-            specialization: "IT Enterprise"
-        },
-        {
-            id: 2,
-            firstName: "Piotr", 
-            lastName: "Nowak",
-            type: "wdrożeniowy", 
-            region: "Mazowieckie",
-            experience: "8 lat",
-            email: "piotr.nowak@ite.pl",
-            specialization: "Automatyzacja procesów"
-        },
-        {
-            id: 3,
-            firstName: "Katarzyna",
-            lastName: "Wiśniewska",
-            type: "handlowy",
-            region: "Małopolskie", 
-            experience: "3 lat",
-            email: "katarzyna.wisniewska@ite.pl",
-            specialization: "Analityka danych"
-        },
-        {
-            id: 4,
-            firstName: "Marcin",
-            lastName: "Kaczmarek",
-            type: "wdrożeniowy",
-            region: "Pomorskie",
-            experience: "6 lat", 
-            email: "marcin.kaczmarek@ite.pl",
-            specialization: "Rozwiązania chmurowe"
-        },
-        {
-            id: 5,
-            firstName: "Agnieszka",
-            lastName: "Zielińska",
-            type: "handlowy",
-            region: "Wielkopolskie",
-            experience: "7 lat",
-            email: "agnieszka.zielinska@ite.pl", 
-            specialization: "Cyberbezpieczeństwo"
-        }
-    ],
-    connections: [
-        {companyId: 1, caregiverId: 1},
-        {companyId: 1, caregiverId: 2},
-        {companyId: 2, caregiverId: 2}, 
-        {companyId: 2, caregiverId: 3},
-        {companyId: 3, caregiverId: 3},
-        {companyId: 3, caregiverId: 4},
-        {companyId: 4, caregiverId: 4},
-        {companyId: 4, caregiverId: 5},
-        {companyId: 5, caregiverId: 5}
-    ],
-    users: [
-        {email: "admin@ite.pl", password: "admin123", role: "admin"},
-        {email: "manager@ite.pl", password: "manager123", role: "manager"}, 
-        {email: "user@ite.pl", password: "user123", role: "user"}
-    ]
-};
-
-// Stan aplikacji
-let appState = {
-    isLoggedIn: false,
-    currentUser: null,
-    selectedNode: null,
-    expandedNodes: new Set(),
-    searchQuery: '',
-    filters: {
-        handlowy: true,
-        wdrożeniowy: true
+// Dane domyślne aplikacji
+let appData = {
+  companies: [
+    {
+      ID_Firmy: 1,
+      Nazwa_Firmy: "IT Excellence S.A.",
+      Branża: "Technologie IT",
+      Lokalizacja: "Wrocław",
+      Wielkość_Firmy: "Duża (500+ pracowników)",
+      Status: "Aktywny"
     },
-    visibleNodes: new Set()
+    {
+      ID_Firmy: 2,
+      Nazwa_Firmy: "TechnoSoft Sp. z o.o.",
+      Branża: "Oprogramowanie",
+      Lokalizacja: "Warszawa",
+      Wielkość_Firmy: "Średnia (50-250 pracowników)",
+      Status: "Aktywny"
+    },
+    {
+      ID_Firmy: 3,
+      Nazwa_Firmy: "Digital Solutions Ltd.",
+      Branża: "Usługi cyfrowe",
+      Lokalizacja: "Kraków",
+      Wielkość_Firmy: "Mała (10-50 pracowników)",
+      Status: "Potencjalny"
+    },
+    {
+      ID_Firmy: 4,
+      Nazwa_Firmy: "InnovateCorp S.A.",
+      Branża: "Innowacje technologiczne",
+      Lokalizacja: "Gdańsk",
+      Wielkość_Firmy: "Duża (500+ pracowników)",
+      Status: "Aktywny"
+    },
+    {
+      ID_Firmy: 5,
+      Nazwa_Firmy: "DataFlow Systems",
+      Branża: "Analiza danych",
+      Lokalizacja: "Poznań",
+      Wielkość_Firmy: "Średnia (50-250 pracowników)",
+      Status: "Aktywny"
+    },
+    {
+      ID_Firmy: 6,
+      Nazwa_Firmy: "CloudTech Poland",
+      Branża: "Chmura obliczeniowa",
+      Lokalizacja: "Warszawa",
+      Wielkość_Firmy: "Mała (10-50 pracowników)",
+      Status: "Potencjalny"
+    },
+    {
+      ID_Firmy: 7,
+      Nazwa_Firmy: "SmartBusiness S.A.",
+      Branża: "Rozwiązania biznesowe",
+      Lokalizacja: "Wrocław",
+      Wielkość_Firmy: "Średnia (50-250 pracowników)",
+      Status: "Aktywny"
+    },
+    {
+      ID_Firmy: 8,
+      Nazwa_Firmy: "NextGen Software",
+      Branża: "Tworzenie oprogramowania",
+      Lokalizacja: "Kraków",
+      Wielkość_Firmy: "Mała (10-50 pracowników)",
+      Status: "Aktywny"
+    }
+  ],
+  managers: [
+    {
+      ID_Opiekuna: 101,
+      Imię_Nazwisko: "Anna Kowalska",
+      Typ_Opiekuna: "Handlowy",
+      Region: "Dolnośląskie",
+      Doświadczenie_Lata: 8,
+      Specjalizacja: "Enterprise Sales",
+      Email: "anna.kowalska@itexcellence.pl"
+    },
+    {
+      ID_Opiekuna: 102,
+      Imię_Nazwisko: "Marek Nowak",
+      Typ_Opiekuna: "Wdrożeniowy",
+      Region: "Mazowieckie",
+      Doświadczenie_Lata: 6,
+      Specjalizacja: "Systemy ERP",
+      Email: "marek.nowak@itexcellence.pl"
+    },
+    {
+      ID_Opiekuna: 103,
+      Imię_Nazwisko: "Katarzyna Wiśniewska",
+      Typ_Opiekuna: "Handlowy",
+      Region: "Małopolskie",
+      Doświadczenie_Lata: 5,
+      Specjalizacja: "SME Sales",
+      Email: "katarzyna.wisniewska@itexcellence.pl"
+    },
+    {
+      ID_Opiekuna: 104,
+      Imię_Nazwisko: "Tomasz Kowalczyk",
+      Typ_Opiekuna: "Wdrożeniowy",
+      Region: "Pomorskie",
+      Doświadczenie_Lata: 7,
+      Specjalizacja: "Workflow365",
+      Email: "tomasz.kowalczyk@itexcellence.pl"
+    },
+    {
+      ID_Opiekuna: 105,
+      Imię_Nazwisko: "Agnieszka Jankowska",
+      Typ_Opiekuna: "Handlowy",
+      Region: "Wielkopolskie",
+      Doświadczenie_Lata: 4,
+      Specjalizacja: "Cloud Solutions",
+      Email: "agnieszka.jankowska@itexcellence.pl"
+    },
+    {
+      ID_Opiekuna: 106,
+      Imię_Nazwisko: "Paweł Dąbrowski",
+      Typ_Opiekuna: "Wdrożeniowy",
+      Region: "Dolnośląskie",
+      Doświadczenie_Lata: 9,
+      Specjalizacja: "Business Intelligence",
+      Email: "pawel.dabrowski@itexcellence.pl"
+    }
+  ],
+  connections: [
+    {"ID_Firmy": 1, "ID_Opiekuna": 101},
+    {"ID_Firmy": 1, "ID_Opiekuna": 106},
+    {"ID_Firmy": 2, "ID_Opiekuna": 102},
+    {"ID_Firmy": 3, "ID_Opiekuna": 103},
+    {"ID_Firmy": 4, "ID_Opiekuna": 104},
+    {"ID_Firmy": 5, "ID_Opiekuna": 105},
+    {"ID_Firmy": 6, "ID_Opiekuna": 102},
+    {"ID_Firmy": 7, "ID_Opiekuna": 101},
+    {"ID_Firmy": 7, "ID_Opiekuna": 106},
+    {"ID_Firmy": 8, "ID_Opiekuna": 103}
+  ]
 };
 
-// NAPRAWIONE: Inicjalizacja aplikacji
-function initApp() {
-    console.log('Initializing Workflow365 CRM...');
-    showLoginScreen();
-    setupEventListeners();
-    
-    // Sprawdź czy logo się ładuje
-    const loginLogo = document.querySelector('.login-logo img');
-    if (loginLogo) {
-        loginLogo.onerror = function() {
-            console.error('Logo failed to load, using fallback');
-            this.style.display = 'none';
-            const fallbackText = document.createElement('h1');
-            fallbackText.textContent = 'Workflow365';
-            fallbackText.style.color = '#0368ff';
-            fallbackText.style.fontSize = '24px';
-            fallbackText.style.margin = '0';
-            this.parentElement.appendChild(fallbackText);
-        };
-        
-        loginLogo.onload = function() {
-            console.log('Logo loaded successfully');
-        };
-    }
-}
+// Zmienne globalne
+let svg, simulation, nodes, links;
+let nodeElements, linkElements, labelElements;
+let selectedNode = null;
+let currentView = 'companies'; // 'companies', 'expanded'
+let width, height;
+let zoomBehavior;
 
-// Pokazanie ekranu logowania
-function showLoginScreen() {
-    console.log('Showing login screen...');
-    const loginScreen = document.getElementById('loginScreen');
-    const mainApp = document.getElementById('mainApp');
-    
-    if (loginScreen && mainApp) {
-        loginScreen.classList.remove('hidden');
-        mainApp.classList.add('hidden');
-        console.log('Login screen displayed');
-    }
-}
+// Filtry
+let showSalesManagers = true;
+let showImplementationManagers = true;
 
-// Pokazanie głównej aplikacji
-function showMainApp() {
-    console.log('Showing main app...');
-    const loginScreen = document.getElementById('loginScreen');
-    const mainApp = document.getElementById('mainApp');
-    const userInfo = document.getElementById('userInfo');
-    
-    if (loginScreen && mainApp) {
-        loginScreen.classList.add('hidden');
-        mainApp.classList.remove('hidden');
-        console.log('Main app displayed');
-    }
-    
-    if (userInfo && appState.currentUser) {
-        userInfo.textContent = appState.currentUser.email;
-    }
-    
-    // Inicjalizacja mapy i statystyk
-    setTimeout(() => {
-        console.log('Initializing map and statistics...');
-        initializeMap();
-        updateStatistics();
-    }, 200);
-}
-
-// NAPRAWIONE: Konfiguracja event listenerów z debugowaniem
-function setupEventListeners() {
-    console.log('Setting up event listeners...');
-    
-    // KRYTYCZNA NAPRAWA: Logowanie z prawidłowym handlerem
-    const loginForm = document.getElementById('loginForm');
-    if (loginForm) {
-        console.log('Login form found, attaching event listener');
-        
-        // Usuń poprzednie event listenery
-        loginForm.onsubmit = null;
-        
-        // Dodaj nowy event listener
-        loginForm.addEventListener('submit', function(e) {
-            console.log('=== LOGIN FORM SUBMITTED ===');
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const emailInput = document.getElementById('email');
-            const passwordInput = document.getElementById('password');
-            const loginError = document.getElementById('loginError');
-            
-            if (!emailInput || !passwordInput) {
-                console.error('Login form inputs not found');
-                return false;
-            }
-            
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-            
-            console.log('Login attempt:', { 
-                email: email, 
-                password: password.length > 0 ? '[PROVIDED]' : '[EMPTY]' 
-            });
-            
-            if (!email || !password) {
-                showLoginError('Proszę wprowadzić email i hasło');
-                return false;
-            }
-            
-            // Sprawdzenie danych uwierzytelniających
-            const user = appData.users.find(account => 
-                account.email === email && account.password === password
-            );
-            
-            console.log('User lookup result:', user ? 'FOUND' : 'NOT FOUND');
-            
-            if (user) {
-                console.log('=== LOGIN SUCCESSFUL ===');
-                appState.currentUser = user;
-                appState.isLoggedIn = true;
-                
-                if (loginError) {
-                    loginError.classList.add('hidden');
-                }
-                
-                // Przejście do głównej aplikacji
-                showMainApp();
-            } else {
-                console.log('=== LOGIN FAILED ===');
-                showLoginError('Nieprawidłowy email lub hasło');
-            }
-            
-            return false;
-        });
-        
-        console.log('Login form event listener attached successfully');
-    } else {
-        console.error('LOGIN FORM NOT FOUND!');
-    }
-    
-    // Wylogowanie
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', handleLogout);
-        console.log('Logout button event listener attached');
-    }
-    
-    // Wyszukiwanie
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        searchInput.addEventListener('input', handleSearch);
-    }
-    
-    const clearSearch = document.getElementById('clearSearch');
-    if (clearSearch) {
-        clearSearch.addEventListener('click', clearSearchHandler);
-    }
-    
-    // Filtry
-    const filterSales = document.getElementById('filterSales');
-    if (filterSales) {
-        filterSales.addEventListener('change', updateFilters);
-    }
-    
-    const filterImplementation = document.getElementById('filterImplementation');
-    if (filterImplementation) {
-        filterImplementation.addEventListener('change', updateFilters);
-    }
-    
-    const resetFilters = document.getElementById('resetFilters');
-    if (resetFilters) {
-        resetFilters.addEventListener('click', resetFiltersHandler);
-    }
-    
-    const resetView = document.getElementById('resetView');
-    if (resetView) {
-        resetView.addEventListener('click', resetViewHandler);
-    }
-    
-    // Import Excel
-    const importExcel = document.getElementById('importExcel');
-    if (importExcel) {
-        importExcel.addEventListener('click', handleImportExcel);
-    }
-    
-    // Panel szczegółów
-    const closeDetails = document.getElementById('closeDetails');
-    if (closeDetails) {
-        closeDetails.addEventListener('click', closeDetailsHandler);
-    }
-    
-    console.log('All event listeners set up successfully');
-}
-
-function showLoginError(message) {
-    const loginError = document.getElementById('loginError');
-    if (loginError) {
-        loginError.textContent = message;
-        loginError.classList.remove('hidden');
-        console.log('Login error displayed:', message);
-    }
-}
-
-// Obsługa wylogowania
-function handleLogout() {
-    console.log('Logging out...');
-    appState.currentUser = null;
-    appState.isLoggedIn = false;
-    resetAppState();
-    showLoginScreen();
-    
-    // Wyczyszczenie formularza logowania
-    const loginForm = document.getElementById('loginForm');
-    const loginError = document.getElementById('loginError');
-    
-    if (loginForm) {
-        loginForm.reset();
-    }
-    
-    if (loginError) {
-        loginError.classList.add('hidden');
-    }
-}
-
-// Resetowanie stanu aplikacji
-function resetAppState() {
-    appState.selectedNode = null;
-    appState.expandedNodes.clear();
-    appState.searchQuery = '';
-    appState.visibleNodes.clear();
-    
-    const searchInput = document.getElementById('searchInput');
-    const clearSearch = document.getElementById('clearSearch');
-    
-    if (searchInput) {
-        searchInput.value = '';
-    }
-    
-    if (clearSearch) {
-        clearSearch.classList.add('hidden');
-    }
-    
-    closeDetailsHandler();
-}
-
-// Obsługa wyszukiwania
-function handleSearch(e) {
-    const query = e.target.value.trim().toLowerCase();
-    appState.searchQuery = query;
-    
-    const clearSearch = document.getElementById('clearSearch');
-    
-    if (query && clearSearch) {
-        clearSearch.classList.remove('hidden');
-    } else if (clearSearch) {
-        clearSearch.classList.add('hidden');
-    }
-    
-    filterAndRenderNodes();
-}
-
-// Wyczyszczenie wyszukiwania
-function clearSearchHandler() {
-    const searchInput = document.getElementById('searchInput');
-    const clearSearch = document.getElementById('clearSearch');
-    
-    if (searchInput) {
-        searchInput.value = '';
-    }
-    
-    appState.searchQuery = '';
-    
-    if (clearSearch) {
-        clearSearch.classList.add('hidden');
-    }
-    
-    filterAndRenderNodes();
-}
-
-// Aktualizacja filtrów
-function updateFilters() {
-    const filterSales = document.getElementById('filterSales');
-    const filterImplementation = document.getElementById('filterImplementation');
-    
-    if (filterSales) {
-        appState.filters.handlowy = filterSales.checked;
-    }
-    
-    if (filterImplementation) {
-        appState.filters.wdrożeniowy = filterImplementation.checked;
-    }
-    
-    filterAndRenderNodes();
-}
-
-// Resetowanie filtrów
-function resetFiltersHandler() {
-    const filterSales = document.getElementById('filterSales');
-    const filterImplementation = document.getElementById('filterImplementation');
-    
-    if (filterSales) {
-        filterSales.checked = true;
-    }
-    
-    if (filterImplementation) {
-        filterImplementation.checked = true;
-    }
-    
-    appState.filters.handlowy = true;
-    appState.filters.wdrożeniowy = true;
-    filterAndRenderNodes();
-}
-
-// Resetowanie widoku
-function resetViewHandler() {
-    appState.selectedNode = null;
-    appState.expandedNodes.clear();
-    closeDetailsHandler();
-    filterAndRenderNodes();
-}
-
-// Obsługa importu Excel
-function handleImportExcel() {
-    alert('Funkcja importu Excel zostanie wkrótce dodana.');
-}
-
-// Inicjalizacja mapy
-function initializeMap() {
-    console.log('Initializing map...');
-    filterAndRenderNodes();
-}
-
-// Filtrowanie i renderowanie węzłów
-function filterAndRenderNodes() {
-    const visibleCompanies = appData.companies.filter(company => 
-        matchesSearchQuery(company, 'company')
-    );
-    
-    const visibleCaregivers = appData.caregivers.filter(caregiver => 
-        matchesSearchQuery(caregiver, 'caregiver') && 
-        matchesFilters(caregiver)
-    );
-    
-    appState.visibleNodes.clear();
-    visibleCompanies.forEach(company => appState.visibleNodes.add(`company_${company.id}`));
-    visibleCaregivers.forEach(caregiver => appState.visibleNodes.add(`caregiver_${caregiver.id}`));
-    
-    renderMap(visibleCompanies, visibleCaregivers);
-    updateStatistics();
-}
-
-// Sprawdzenie czy element pasuje do zapytania wyszukiwania
-function matchesSearchQuery(item, type) {
-    if (!appState.searchQuery) return true;
-    
-    const query = appState.searchQuery;
-    
-    if (type === 'company') {
-        return (
-            item.name.toLowerCase().includes(query) ||
-            item.nip.includes(query) ||
-            item.location.toLowerCase().includes(query) ||
-            item.industry.toLowerCase().includes(query)
-        );
-    } else if (type === 'caregiver') {
-        return (
-            item.firstName.toLowerCase().includes(query) ||
-            item.lastName.toLowerCase().includes(query) ||
-            item.region.toLowerCase().includes(query) ||
-            item.specialization.toLowerCase().includes(query) ||
-            `${item.firstName} ${item.lastName}`.toLowerCase().includes(query)
-        );
-    }
-    
-    return false;
-}
-
-// Sprawdzenie czy opiekun pasuje do filtrów
-function matchesFilters(caregiver) {
-    return appState.filters[caregiver.type] === true;
-}
-
-// Renderowanie mapy
-function renderMap(companies, caregivers) {
-    const mapContainer = document.querySelector('.map-container');
-    if (!mapContainer) {
-        console.error('Map container not found');
-        return;
-    }
-    
-    console.log(`Rendering map with ${companies.length} companies and ${caregivers.length} caregivers`);
-    
-    mapContainer.innerHTML = '';
-    
-    const containerWidth = mapContainer.clientWidth || 600;
-    const containerHeight = mapContainer.clientHeight || 500;
-    
-    // Pozycjonowanie firm (lewa strona)
-    companies.forEach((company, index) => {
-        const node = createCompanyNode(company);
-        const x = 50;
-        const y = 50 + (index * 90);
-        
-        node.style.left = `${x}px`;
-        node.style.top = `${y}px`;
-        
-        mapContainer.appendChild(node);
-    });
-    
-    // Pozycjonowanie opiekunów (prawa strona)
-    caregivers.forEach((caregiver, index) => {
-        const node = createCaregiverNode(caregiver);
-        const x = Math.max(containerWidth - 230, 320);
-        const y = 50 + (index * 90);
-        
-        node.style.left = `${x}px`;
-        node.style.top = `${y}px`;
-        
-        mapContainer.appendChild(node);
-    });
-    
-    // Renderowanie połączeń po krótkim opóźnieniu
-    setTimeout(() => {
-        renderConnections();
-        applySearchEffects();
-    }, 100);
-}
-
-// Tworzenie węzła firmy
-function createCompanyNode(company) {
-    const node = document.createElement('div');
-    node.className = 'node company';
-    node.id = `company_${company.id}`;
-    node.textContent = company.name;
-    
-    node.addEventListener('click', () => {
-        console.log('Company clicked:', company.name);
-        selectNode('company', company);
-        toggleNodeExpansion(`company_${company.id}`);
-    });
-    
-    return node;
-}
-
-// Tworzenie węzła opiekuna
-function createCaregiverNode(caregiver) {
-    const node = document.createElement('div');
-    node.className = `node caregiver-${caregiver.type}`;
-    node.id = `caregiver_${caregiver.id}`;
-    node.textContent = `${caregiver.firstName} ${caregiver.lastName}`;
-    
-    node.addEventListener('click', () => {
-        console.log('Caregiver clicked:', `${caregiver.firstName} ${caregiver.lastName}`);
-        selectNode('caregiver', caregiver);
-        toggleNodeExpansion(`caregiver_${caregiver.id}`);
-    });
-    
-    return node;
-}
-
-// Wybór węzła
-function selectNode(type, data) {
-    console.log('Selecting node:', type, data.name || `${data.firstName} ${data.lastName}`);
-    
-    // Usuń poprzednie zaznaczenie
-    document.querySelectorAll('.node.selected').forEach(node => {
-        node.classList.remove('selected');
-    });
-    
-    // Zaznacz nowy węzeł
-    const nodeId = `${type}_${data.id}`;
-    const nodeElement = document.getElementById(nodeId);
-    if (nodeElement) {
-        nodeElement.classList.add('selected');
-    }
-    
-    appState.selectedNode = {type, data};
-    showDetails(type, data);
-}
-
-// Przełączanie rozwinięcia węzła
-function toggleNodeExpansion(nodeId) {
-    if (appState.expandedNodes.has(nodeId)) {
-        appState.expandedNodes.delete(nodeId);
-    } else {
-        appState.expandedNodes.add(nodeId);
-    }
-    
-    renderConnections();
-}
-
-// Renderowanie połączeń
-function renderConnections() {
-    // Usuń istniejące połączenia
-    document.querySelectorAll('.connection').forEach(conn => conn.remove());
-    
-    const mapContainer = document.querySelector('.map-container');
-    if (!mapContainer) return;
-    
-    appData.connections.forEach(rel => {
-        const companyNode = document.getElementById(`company_${rel.companyId}`);
-        const caregiverNode = document.getElementById(`caregiver_${rel.caregiverId}`);
-        
-        if (companyNode && caregiverNode) {
-            const shouldShow = appState.expandedNodes.has(`company_${rel.companyId}`) || 
-                             appState.expandedNodes.has(`caregiver_${rel.caregiverId}`) ||
-                             appState.expandedNodes.size === 0;
-            
-            if (shouldShow) {
-                createConnection(companyNode, caregiverNode, mapContainer);
-            }
-        }
-    });
-}
-
-// Tworzenie połączenia między węzłami
-function createConnection(node1, node2, container) {
-    const rect1 = node1.getBoundingClientRect();
-    const rect2 = node2.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-    
-    const x1 = rect1.right - containerRect.left;
-    const y1 = rect1.top + rect1.height / 2 - containerRect.top;
-    const x2 = rect2.left - containerRect.left;
-    const y2 = rect2.top + rect2.height / 2 - containerRect.top;
-    
-    const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-    const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);
-    
-    const connection = document.createElement('div');
-    connection.className = 'connection';
-    connection.style.left = `${x1}px`;
-    connection.style.top = `${y1}px`;
-    connection.style.width = `${distance}px`;
-    connection.style.transform = `rotate(${angle}deg)`;
-    
-    container.appendChild(connection);
-}
-
-// Aplikowanie efektów wyszukiwania
-function applySearchEffects() {
-    if (!appState.searchQuery) {
-        // Usuń wszystkie efekty przyciemnienia
-        document.querySelectorAll('.node.dimmed').forEach(node => {
-            node.classList.remove('dimmed');
-        });
-        return;
-    }
-    
-    // Przyciemnij wszystkie węzły
-    document.querySelectorAll('.node').forEach(node => {
-        node.classList.add('dimmed');
-    });
-    
-    // Podświetl pasujące węzły
-    appState.visibleNodes.forEach(nodeId => {
-        const node = document.getElementById(nodeId);
-        if (node) {
-            node.classList.remove('dimmed');
-        }
-    });
-}
-
-// Pokazanie szczegółów
-function showDetails(type, data) {
-    const detailsContent = document.getElementById('detailsContent');
-    const detailsPanel = document.getElementById('detailsPanel');
-    
-    if (!detailsContent) return;
-    
-    let content = '';
-    
-    if (type === 'company') {
-        const relatedCaregivers = getRelatedCaregivers(data.id);
-        const totalCaregivers = relatedCaregivers.length;
-        
-        content = `
-            <div class="detail-section">
-                <h4>${data.name}</h4>
-                <div class="detail-item">
-                    <span class="detail-label">NIP:</span>
-                    <span class="detail-value">${data.nip}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Lokalizacja:</span>
-                    <span class="detail-value">${data.location}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Branża:</span>
-                    <span class="detail-value">${data.industry}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Obrót:</span>
-                    <span class="detail-value">${formatCurrency(data.revenue)}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Rozmiar:</span>
-                    <span class="detail-value">${data.size}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Status:</span>
-                    <span class="detail-value">${data.status}</span>
-                </div>
-            </div>
-            <div class="detail-section">
-                <h4>Opiekunowie (${totalCaregivers})</h4>
-                ${relatedCaregivers.map(caregiver => `
-                    <div class="detail-item">
-                        <span class="detail-label">${caregiver.firstName} ${caregiver.lastName}</span>
-                        <span class="detail-value">${caregiver.type}</span>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    } else if (type === 'caregiver') {
-        const relatedCompanies = getRelatedCompanies(data.id);
-        const totalRevenue = relatedCompanies.reduce((sum, company) => sum + company.revenue, 0);
-        
-        content = `
-            <div class="detail-section">
-                <h4>${data.firstName} ${data.lastName}</h4>
-                <div class="detail-item">
-                    <span class="detail-label">Typ:</span>
-                    <span class="detail-value">${data.type}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Region:</span>
-                    <span class="detail-value">${data.region}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Doświadczenie:</span>
-                    <span class="detail-value">${data.experience}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Email:</span>
-                    <span class="detail-value">${data.email}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Specjalizacja:</span>
-                    <span class="detail-value">${data.specialization}</span>
-                </div>
-            </div>
-            <div class="detail-section">
-                <h4>Firmy (${relatedCompanies.length})</h4>
-                <div class="detail-item">
-                    <span class="detail-label">Łączny obrót:</span>
-                    <span class="detail-value">${formatCurrency(totalRevenue)}</span>
-                </div>
-                ${relatedCompanies.map(company => `
-                    <div class="detail-item">
-                        <span class="detail-label">${company.name}</span>
-                        <span class="detail-value">${formatCurrency(company.revenue)}</span>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-    
-    detailsContent.innerHTML = content;
-    
-    if (detailsPanel) {
-        detailsPanel.classList.add('fade-in');
-    }
-}
-
-// Pobieranie powiązanych opiekunów
-function getRelatedCaregivers(companyId) {
-    const caregiverIds = appData.connections
-        .filter(rel => rel.companyId === companyId)
-        .map(rel => rel.caregiverId);
-    
-    return appData.caregivers.filter(caregiver => 
-        caregiverIds.includes(caregiver.id)
-    );
-}
-
-// Pobieranie powiązanych firm
-function getRelatedCompanies(caregiverId) {
-    const companyIds = appData.connections
-        .filter(rel => rel.caregiverId === caregiverId)
-        .map(rel => rel.companyId);
-    
-    return appData.companies.filter(company => 
-        companyIds.includes(company.id)
-    );
-}
-
-// Zamknięcie panelu szczegółów
-function closeDetailsHandler() {
-    const detailsContent = document.getElementById('detailsContent');
-    const detailsPanel = document.getElementById('detailsPanel');
-    
-    if (detailsContent) {
-        detailsContent.innerHTML = '<p>Kliknij na firmę lub opiekuna, aby zobaczyć szczegóły</p>';
-    }
-    
-    if (detailsPanel) {
-        detailsPanel.classList.remove('fade-in');
-    }
-    
-    // Usuń zaznaczenie
-    document.querySelectorAll('.node.selected').forEach(node => {
-        node.classList.remove('selected');
-    });
-    
-    appState.selectedNode = null;
-}
-
-// Aktualizacja statystyk
-function updateStatistics() {
-    const companiesCount = document.getElementById('companiesCount');
-    const caregiversCount = document.getElementById('caregiversCount');
-    const totalRevenue = document.getElementById('totalRevenue');
-    const relationshipsCount = document.getElementById('relationshipsCount');
-    
-    const visibleCompanies = appData.companies.filter(company => 
-        appState.visibleNodes.has(`company_${company.id}`) || appState.visibleNodes.size === 0
-    );
-    
-    const visibleCaregivers = appData.caregivers.filter(caregiver => 
-        appState.visibleNodes.has(`caregiver_${caregiver.id}`) || appState.visibleNodes.size === 0
-    );
-    
-    const totalRevenueValue = visibleCompanies.reduce((sum, company) => sum + company.revenue, 0);
-    const totalRelationships = appData.connections.length;
-    
-    if (companiesCount) {
-        companiesCount.textContent = visibleCompanies.length;
-    }
-    
-    if (caregiversCount) {
-        caregiversCount.textContent = visibleCaregivers.length;
-    }
-    
-    if (totalRevenue) {
-        totalRevenue.textContent = formatCurrency(totalRevenueValue);
-    }
-    
-    if (relationshipsCount) {
-        relationshipsCount.textContent = totalRelationships;
-    }
-}
-
-// Formatowanie waluty
-function formatCurrency(amount) {
-    return new Intl.NumberFormat('pl-PL', {
-        style: 'currency',
-        currency: 'PLN',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-    }).format(amount);
-}
-
-// NAPRAWIONE: Uruchomienie aplikacji po załadowaniu DOM
+// Inicjalizacja aplikacji
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('=== DOM LOADED ===');
-    
-    // Dodatkowe debugowanie
-    const loginForm = document.getElementById('loginForm');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    
-    console.log('Elements found:', {
-        loginForm: !!loginForm,
-        emailInput: !!emailInput,
-        passwordInput: !!passwordInput
+  console.log('Inicjalizacja aplikacji...');
+  setupEventListeners();
+  updateStats();
+  initializeVisualization();
+  showMessage('Aplikacja załadowana pomyślnie!', 'success');
+});
+
+function setupEventListeners() {
+  // Checkbox filters
+  const showSalesCheckbox = document.getElementById('show-sales');
+  const showImplCheckbox = document.getElementById('show-implementation');
+  const showAllCheckbox = document.getElementById('show-all');
+  
+  if (showSalesCheckbox) {
+    showSalesCheckbox.addEventListener('change', function() {
+      showSalesManagers = this.checked;
+      updateShowAllCheckbox();
+      refreshVisualization();
+      updateStats();
+    });
+  }
+  
+  if (showImplCheckbox) {
+    showImplCheckbox.addEventListener('change', function() {
+      showImplementationManagers = this.checked;
+      updateShowAllCheckbox();
+      refreshVisualization();
+      updateStats();
+    });
+  }
+  
+  if (showAllCheckbox) {
+    showAllCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        showSalesManagers = true;
+        showImplementationManagers = true;
+        if (showSalesCheckbox) showSalesCheckbox.checked = true;
+        if (showImplCheckbox) showImplCheckbox.checked = true;
+      } else {
+        showSalesManagers = false;
+        showImplementationManagers = false;
+        if (showSalesCheckbox) showSalesCheckbox.checked = false;
+        if (showImplCheckbox) showImplCheckbox.checked = false;
+      }
+      refreshVisualization();
+      updateStats();
+    });
+  }
+  
+  // Excel upload
+  const loadExcelBtn = document.getElementById('load-excel-btn');
+  const excelFile = document.getElementById('excel-file');
+  
+  if (loadExcelBtn && excelFile) {
+    loadExcelBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('Otwieranie dialogu pliku...');
+      excelFile.click();
     });
     
-    initApp();
+    excelFile.addEventListener('change', handleExcelUpload);
+  }
+  
+  // Control buttons
+  const resetViewBtn = document.getElementById('reset-view');
+  const centerViewBtn = document.getElementById('center-view');
+  const closeDetailsBtn = document.getElementById('close-details');
+  
+  if (resetViewBtn) {
+    resetViewBtn.addEventListener('click', resetView);
+  }
+  
+  if (centerViewBtn) {
+    centerViewBtn.addEventListener('click', centerView);
+  }
+  
+  if (closeDetailsBtn) {
+    closeDetailsBtn.addEventListener('click', clearSelection);
+  }
+}
+
+function updateShowAllCheckbox() {
+  const showAllCheckbox = document.getElementById('show-all');
+  if (showAllCheckbox) {
+    showAllCheckbox.checked = showSalesManagers && showImplementationManagers;
+  }
+}
+
+function handleExcelUpload(event) {
+  const file = event.target.files[0];
+  if (!file) {
+    console.log('Nie wybrano pliku');
+    return;
+  }
+  
+  console.log('Wczytywanie pliku:', file.name);
+  showLoading(true);
+  showMessage('Wczytywanie pliku Excel...', 'info');
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: 'array' });
+      
+      console.log('Dostępne arkusze:', workbook.SheetNames);
+      
+      // Sprawdź czy arkusze istnieją
+      const requiredSheets = ['Firmy', 'Opiekunowie', 'Powiązania'];
+      const availableSheets = workbook.SheetNames;
+      
+      const missingSheets = requiredSheets.filter(sheet => !availableSheets.includes(sheet));
+      if (missingSheets.length > 0) {
+        showMessage(`Brakuje arkuszy: ${missingSheets.join(', ')}`, 'error');
+        showLoading(false);
+        return;
+      }
+      
+      // Wczytaj dane z arkuszy
+      const companies = XLSX.utils.sheet_to_json(workbook.Sheets['Firmy']);
+      const managers = XLSX.utils.sheet_to_json(workbook.Sheets['Opiekunowie']);
+      const connections = XLSX.utils.sheet_to_json(workbook.Sheets['Powiązania']);
+      
+      console.log('Wczytano firmy:', companies.length);
+      console.log('Wczytano opiekunów:', managers.length);
+      console.log('Wczytano powiązania:', connections.length);
+      
+      // Walidacja danych
+      if (companies.length === 0 || managers.length === 0) {
+        showMessage('Plik Excel nie zawiera wystarczających danych', 'error');
+        showLoading(false);
+        return;
+      }
+      
+      // Aktualizuj dane aplikacji
+      appData = {
+        companies: companies,
+        managers: managers,
+        connections: connections
+      };
+      
+      // Odśwież wizualizację
+      clearSelection();
+      refreshVisualization();
+      updateStats();
+      
+      showMessage(`Wczytano: ${companies.length} firm, ${managers.length} opiekunów`, 'success');
+      showLoading(false);
+      
+      // Wyczyść input
+      event.target.value = '';
+      
+    } catch (error) {
+      console.error('Błąd podczas wczytywania Excel:', error);
+      showMessage('Błąd podczas wczytywania pliku Excel: ' + error.message, 'error');
+      showLoading(false);
+    }
+  };
+  
+  reader.onerror = function(error) {
+    console.error('Błąd odczytu pliku:', error);
+    showMessage('Błąd podczas odczytu pliku', 'error');
+    showLoading(false);
+  };
+  
+  reader.readAsArrayBuffer(file);
+}
+
+function initializeVisualization() {
+  const container = document.getElementById('network-visualization');
+  if (!container) {
+    console.error('Nie znaleziono kontenera wizualizacji');
+    return;
+  }
+  
+  width = container.clientWidth || 800;
+  height = container.clientHeight || 500;
+  
+  console.log('Inicjalizacja wizualizacji:', width, 'x', height);
+  
+  // Usuń poprzednie SVG
+  d3.select('#network-svg').selectAll('*').remove();
+  
+  svg = d3.select('#network-svg')
+    .attr('width', width)
+    .attr('height', height);
+  
+  // Zoom behavior
+  zoomBehavior = d3.zoom()
+    .scaleExtent([0.3, 3])
+    .on('zoom', function(event) {
+      const g = svg.select('.zoom-group');
+      if (!g.empty()) {
+        g.attr('transform', event.transform);
+      }
+    });
+  
+  svg.call(zoomBehavior);
+  
+  // Grupa główna
+  const g = svg.append('g').attr('class', 'zoom-group');
+  
+  // Defs dla gradientów
+  const defs = svg.append('defs');
+  
+  // Gradient dla linków
+  const gradient = defs.append('linearGradient')
+    .attr('id', 'link-gradient')
+    .attr('gradientUnits', 'userSpaceOnUse');
+  
+  gradient.append('stop')
+    .attr('offset', '0%')
+    .attr('stop-color', '#3B82F6')
+    .attr('stop-opacity', 0.8);
+  
+  gradient.append('stop')
+    .attr('offset', '100%')
+    .attr('stop-color', '#1877F2')
+    .attr('stop-opacity', 0.8);
+  
+  showCompaniesView();
+}
+
+function showCompaniesView() {
+  console.log('Pokazuję widok firm');
+  currentView = 'companies';
+  selectedNode = null;
+  
+  // Przygotuj dane - tylko firmy
+  const graphData = {
+    nodes: appData.companies.map(company => ({
+      id: `company_${company.ID_Firmy}`,
+      type: 'company',
+      name: company.Nazwa_Firmy,
+      data: company
+    })),
+    links: []
+  };
+  
+  updateVisualization(graphData);
+  clearDetailsPanel();
+}
+
+function showExpandedView(centerNodeId) {
+  console.log('Pokazuję rozszerzone powiązania dla:', centerNodeId);
+  currentView = 'expanded';
+  
+  const graphData = prepareExpandedData(centerNodeId);
+  updateVisualization(graphData);
+}
+
+function prepareExpandedData(centerNodeId) {
+  const nodes = [];
+  const links = [];
+  
+  // Sprawdź typ centralnego węzła
+  if (centerNodeId.startsWith('company_')) {
+    const companyId = parseInt(centerNodeId.replace('company_', ''));
+    const company = appData.companies.find(c => c.ID_Firmy === companyId);
+    
+    if (company) {
+      // Dodaj firmę
+      nodes.push({
+        id: centerNodeId,
+        type: 'company',
+        name: company.Nazwa_Firmy,
+        data: company,
+        fx: width / 2,
+        fy: height / 2
+      });
+      
+      // Znajdź powiązanych opiekunów
+      const relatedManagers = appData.connections
+        .filter(rel => rel.ID_Firmy === companyId)
+        .map(rel => appData.managers.find(m => m.ID_Opiekuna === rel.ID_Opiekuna))
+        .filter(manager => manager && shouldShowManager(manager));
+      
+      console.log('Powiązani opiekunowie dla firmy', companyId, ':', relatedManagers);
+      
+      // Dodaj opiekunów
+      relatedManagers.forEach(manager => {
+        const managerId = `manager_${manager.ID_Opiekuna}`;
+        const managerType = getManagerType(manager.Typ_Opiekuna);
+        nodes.push({
+          id: managerId,
+          type: managerType,
+          name: manager.Imię_Nazwisko,
+          data: manager
+        });
+        
+        // Dodaj link
+        links.push({
+          source: centerNodeId,
+          target: managerId,
+          type: 'assignment'
+        });
+      });
+    }
+  } else if (centerNodeId.startsWith('manager_')) {
+    const managerId = parseInt(centerNodeId.replace('manager_', ''));
+    const manager = appData.managers.find(m => m.ID_Opiekuna === managerId);
+    
+    if (manager && shouldShowManager(manager)) {
+      // Dodaj opiekuna
+      const managerType = getManagerType(manager.Typ_Opiekuna);
+      nodes.push({
+        id: centerNodeId,
+        type: managerType,
+        name: manager.Imię_Nazwisko,
+        data: manager,
+        fx: width / 2,
+        fy: height / 2
+      });
+      
+      // Znajdź powiązane firmy
+      const relatedCompanies = appData.connections
+        .filter(rel => rel.ID_Opiekuna === managerId)
+        .map(rel => appData.companies.find(c => c.ID_Firmy === rel.ID_Firmy))
+        .filter(company => company);
+      
+      console.log('Powiązane firmy dla opiekuna', managerId, ':', relatedCompanies);
+      
+      // Dodaj firmy
+      relatedCompanies.forEach(company => {
+        const companyId = `company_${company.ID_Firmy}`;
+        nodes.push({
+          id: companyId,
+          type: 'company',
+          name: company.Nazwa_Firmy,
+          data: company
+        });
+        
+        // Dodaj link
+        links.push({
+          source: centerNodeId,
+          target: companyId,
+          type: 'assignment'
+        });
+      });
+    }
+  }
+  
+  return { nodes, links };
+}
+
+function getManagerType(typOpiekuna) {
+  const type = typOpiekuna.toLowerCase();
+  if (type === 'handlowy') {
+    return 'sales';
+  } else if (type === 'wdrożeniowy') {
+    return 'implementation';
+  }
+  return 'manager';
+}
+
+function shouldShowManager(manager) {
+  const type = manager.Typ_Opiekuna.toLowerCase();
+  if (type === 'handlowy') {
+    return showSalesManagers;
+  } else if (type === 'wdrożeniowy') {
+    return showImplementationManagers;
+  }
+  return false;
+}
+
+function updateVisualization(graphData) {
+  nodes = graphData.nodes;
+  links = graphData.links;
+  
+  console.log(`Aktualizacja wizualizacji: ${nodes.length} węzłów, ${links.length} linków`);
+  console.log('Typy węzłów:', nodes.map(n => `${n.name}: ${n.type}`));
+  
+  // Usuń poprzednie elementy
+  svg.select('.zoom-group').selectAll('.links').remove();
+  svg.select('.zoom-group').selectAll('.nodes').remove();
+  svg.select('.zoom-group').selectAll('.labels').remove();
+  
+  const g = svg.select('.zoom-group');
+  
+  // Utwórz nową symulację
+  simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(120))
+    .force('charge', d3.forceManyBody().strength(-800))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collision', d3.forceCollide().radius(d => getNodeRadius(d) + 10));
+  
+  // Linki
+  linkElements = g.append('g')
+    .attr('class', 'links')
+    .selectAll('line')
+    .data(links)
+    .enter()
+    .append('line')
+    .attr('class', 'link');
+  
+  // Węzły
+  nodeElements = g.append('g')
+    .attr('class', 'nodes')
+    .selectAll('circle')
+    .data(nodes)
+    .enter()
+    .append('circle')
+    .attr('class', d => `node ${d.type}-node`)
+    .attr('r', getNodeRadius)
+    .style('cursor', 'pointer')
+    .call(d3.drag()
+      .on('start', dragstarted)
+      .on('drag', dragged)
+      .on('end', dragended))
+    .on('click', handleNodeClick)
+    .on('mouseover', showTooltip)
+    .on('mouseout', hideTooltip);
+  
+  // Etykiety
+  labelElements = g.append('g')
+    .attr('class', 'labels')
+    .selectAll('text')
+    .data(nodes)
+    .enter()
+    .append('text')
+    .attr('class', 'node-label')
+    .attr('dy', d => getNodeRadius(d) + 20)
+    .text(d => truncateText(d.name, 15));
+  
+  // Aktualizacja pozycji podczas symulacji
+  simulation.on('tick', function() {
+    if (linkElements) {
+      linkElements
+        .attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y);
+    }
+    
+    if (nodeElements) {
+      nodeElements
+        .attr('cx', d => d.x)
+        .attr('cy', d => d.y);
+    }
+    
+    if (labelElements) {
+      labelElements
+        .attr('x', d => d.x)
+        .attr('y', d => d.y);
+    }
+  });
+  
+  // Aktualizuj licznik widocznych węzłów
+  const visibleNodesEl = document.getElementById('visible-nodes');
+  if (visibleNodesEl) {
+    visibleNodesEl.textContent = nodes.length;
+  }
+}
+
+function getNodeRadius(d) {
+  switch (d.type) {
+    case 'company': return 30;
+    case 'sales': return 20;
+    case 'implementation': return 20;
+    default: return 15;
+  }
+}
+
+function truncateText(text, maxLength) {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + '...';
+  }
+  return text;
+}
+
+function handleNodeClick(event, d) {
+  event.stopPropagation();
+  console.log('Kliknięto węzeł:', d);
+  
+  selectedNode = d;
+  
+  // Aktualizuj klasę selected
+  if (nodeElements) {
+    nodeElements.classed('selected', node => node.id === d.id);
+  }
+  
+  // Pokaż rozszerzone powiązania
+  showExpandedView(d.id);
+  
+  // Pokaź szczegóły - wywołaj natychmiast
+  showNodeDetails(d);
+}
+
+function showNodeDetails(node) {
+  console.log('Pokazuję szczegóły dla:', node);
+  
+  const noSelection = document.getElementById('no-selection');
+  const selectionDetails = document.getElementById('selection-details');
+  
+  if (!noSelection || !selectionDetails) {
+    console.error('Nie znaleziono elementów panelu szczegółów');
+    return;
+  }
+  
+  noSelection.classList.add('hidden');
+  selectionDetails.classList.remove('hidden');
+  
+  let detailsHTML = '';
+  
+  if (node.type === 'company') {
+    const relatedManagers = getRelatedManagers(node.data.ID_Firmy);
+    
+    detailsHTML = `
+      <h4>Firma: ${node.data.Nazwa_Firmy}</h4>
+      <div class="detail-section">
+        <div class="detail-item">
+          <span class="detail-label">Branża:</span>
+          <span class="detail-value">${node.data.Branża}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Lokalizacja:</span>
+          <span class="detail-value">${node.data.Lokalizacja}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Wielkość:</span>
+          <span class="detail-value">${node.data.Wielkość_Firmy}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Status:</span>
+          <span class="detail-value">${node.data.Status}</span>
+        </div>
+      </div>
+      <h4>Opiekunowie (${relatedManagers.length})</h4>
+      <ul class="connections-list">
+        ${relatedManagers.map(manager => `
+          <li class="connection-item" onclick="focusOnManager(${manager.ID_Opiekuna})">
+            <div class="connection-name">${manager.Imię_Nazwisko}</div>
+            <div class="connection-details">${manager.Typ_Opiekuna} • ${manager.Specjalizacja}</div>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+  } else {
+    const relatedCompanies = getRelatedCompanies(node.data.ID_Opiekuna);
+    
+    detailsHTML = `
+      <h4>Opiekun: ${node.data.Imię_Nazwisko}</h4>
+      <div class="detail-section">
+        <div class="detail-item">
+          <span class="detail-label">Typ:</span>
+          <span class="detail-value">${node.data.Typ_Opiekuna}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Region:</span>
+          <span class="detail-value">${node.data.Region}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Doświadczenie:</span>
+          <span class="detail-value">${node.data.Doświadczenie_Lata} lat</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Specjalizacja:</span>
+          <span class="detail-value">${node.data.Specjalizacja}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Email:</span>
+          <span class="detail-value">${node.data.Email}</span>
+        </div>
+      </div>
+      <h4>Firmy (${relatedCompanies.length})</h4>
+      <ul class="connections-list">
+        ${relatedCompanies.map(company => `
+          <li class="connection-item" onclick="focusOnCompany(${company.ID_Firmy})">
+            <div class="connection-name">${company.Nazwa_Firmy}</div>
+            <div class="connection-details">${company.Branża} • ${company.Lokalizacja}</div>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+  }
+  
+  selectionDetails.innerHTML = detailsHTML;
+}
+
+function getRelatedManagers(companyId) {
+  return appData.connections
+    .filter(rel => rel.ID_Firmy === companyId)
+    .map(rel => appData.managers.find(m => m.ID_Opiekuna === rel.ID_Opiekuna))
+    .filter(manager => manager && shouldShowManager(manager));
+}
+
+function getRelatedCompanies(managerId) {
+  return appData.connections
+    .filter(rel => rel.ID_Opiekuna === managerId)
+    .map(rel => appData.companies.find(c => c.ID_Firmy === rel.ID_Firmy))
+    .filter(company => company);
+}
+
+// Funkcje globalne dla onclick
+window.focusOnManager = function(managerId) {
+  const nodeId = `manager_${managerId}`;
+  const manager = appData.managers.find(m => m.ID_Opiekuna === managerId);
+  if (manager && shouldShowManager(manager)) {
+    const managerType = getManagerType(manager.Typ_Opiekuna);
+    const nodeData = {
+      id: nodeId,
+      type: managerType,
+      name: manager.Imię_Nazwisko,
+      data: manager
+    };
+    selectedNode = nodeData;
+    showExpandedView(nodeId);
+    showNodeDetails(nodeData);
+  }
+};
+
+window.focusOnCompany = function(companyId) {
+  const nodeId = `company_${companyId}`;
+  const company = appData.companies.find(c => c.ID_Firmy === companyId);
+  if (company) {
+    const nodeData = {
+      id: nodeId,
+      type: 'company',
+      name: company.Nazwa_Firmy,
+      data: company
+    };
+    selectedNode = nodeData;
+    showExpandedView(nodeId);
+    showNodeDetails(nodeData);
+  }
+};
+
+function clearSelection() {
+  selectedNode = null;
+  showCompaniesView();
+  clearDetailsPanel();
+}
+
+function clearDetailsPanel() {
+  const noSelection = document.getElementById('no-selection');
+  const selectionDetails = document.getElementById('selection-details');
+  
+  if (noSelection) noSelection.classList.remove('hidden');
+  if (selectionDetails) selectionDetails.classList.add('hidden');
+}
+
+function refreshVisualization() {
+  if (currentView === 'companies') {
+    showCompaniesView();
+  } else if (selectedNode) {
+    showExpandedView(selectedNode.id);
+  }
+}
+
+function resetView() {
+  if (svg && zoomBehavior) {
+    svg.transition()
+      .duration(750)
+      .call(zoomBehavior.transform, d3.zoomIdentity);
+  }
+  showCompaniesView();
+}
+
+function centerView() {
+  if (svg && zoomBehavior) {
+    svg.transition()
+      .duration(750)
+      .call(zoomBehavior.transform, d3.zoomIdentity);
+  }
+}
+
+function updateStats() {
+  const totalCompanies = appData.companies.length;
+  const salesManagers = appData.managers.filter(m => m.Typ_Opiekuna.toLowerCase() === 'handlowy').length;
+  const implManagers = appData.managers.filter(m => m.Typ_Opiekuna.toLowerCase() === 'wdrożeniowy').length;
+  
+  const totalCompaniesEl = document.getElementById('total-companies');
+  const totalSalesEl = document.getElementById('total-sales');
+  const totalImplEl = document.getElementById('total-impl');
+  
+  if (totalCompaniesEl) totalCompaniesEl.textContent = totalCompanies;
+  if (totalSalesEl) totalSalesEl.textContent = salesManagers;
+  if (totalImplEl) totalImplEl.textContent = implManagers;
+}
+
+function showTooltip(event, d) {
+  const tooltip = document.getElementById('tooltip');
+  if (!tooltip) return;
+  
+  let content = '';
+  if (d.type === 'company') {
+    content = `
+      <h4>${d.data.Nazwa_Firmy}</h4>
+      <p><strong>Branża:</strong> ${d.data.Branża}</p>
+      <p><strong>Lokalizacja:</strong> ${d.data.Lokalizacja}</p>
+      <p><strong>Status:</strong> ${d.data.Status}</p>
+    `;
+  } else {
+    content = `
+      <h4>${d.data.Imię_Nazwisko}</h4>
+      <p><strong>Typ:</strong> ${d.data.Typ_Opiekuna}</p>
+      <p><strong>Specjalizacja:</strong> ${d.data.Specjalizacja}</p>
+      <p><strong>Region:</strong> ${d.data.Region}</p>
+    `;
+  }
+  
+  tooltip.innerHTML = `<div class="tooltip-content">${content}</div>`;
+  tooltip.style.left = (event.pageX + 10) + 'px';
+  tooltip.style.top = (event.pageY - 10) + 'px';
+  tooltip.classList.remove('hidden');
+  tooltip.classList.add('visible');
+}
+
+function hideTooltip() {
+  const tooltip = document.getElementById('tooltip');
+  if (tooltip) {
+    tooltip.classList.remove('visible');
+    tooltip.classList.add('hidden');
+  }
+}
+
+function showLoading(show) {
+  const loading = document.getElementById('loading');
+  if (loading) {
+    if (show) {
+      loading.classList.remove('hidden');
+    } else {
+      loading.classList.add('hidden');
+    }
+  }
+}
+
+function showMessage(text, type = 'info') {
+  const container = document.getElementById('message-container');
+  if (!container) return;
+  
+  const message = document.createElement('div');
+  message.className = `message ${type}`;
+  message.textContent = text;
+  
+  container.appendChild(message);
+  
+  setTimeout(() => {
+    if (message.parentNode) {
+      message.remove();
+    }
+  }, 5000);
+}
+
+// Funkcje drag and drop dla D3
+function dragstarted(event, d) {
+  if (!event.active && simulation) simulation.alphaTarget(0.3).restart();
+  d.fx = d.x;
+  d.fy = d.y;
+}
+
+function dragged(event, d) {
+  d.fx = event.x;
+  d.fy = event.y;
+}
+
+function dragended(event, d) {
+  if (!event.active && simulation) simulation.alphaTarget(0);
+  d.fx = null;
+  d.fy = null;
+}
+
+// Responsywność
+window.addEventListener('resize', function() {
+  const container = document.getElementById('network-visualization');
+  if (!container || !svg) return;
+  
+  const newWidth = container.clientWidth;
+  const newHeight = container.clientHeight;
+  
+  if (newWidth !== width || newHeight !== height) {
+    width = newWidth;
+    height = newHeight;
+    
+    svg.attr('width', width).attr('height', height);
+    if (simulation) {
+      simulation.force('center', d3.forceCenter(width / 2, height / 2));
+      simulation.restart();
+    }
+  }
+});
+
+// Obsługa kliknięcia w tło SVG
+document.addEventListener('click', function(event) {
+  if (event.target.closest('#network-svg') && !event.target.closest('.node')) {
+    if (currentView === 'expanded') {
+      resetView();
+    }
+  }
 });
