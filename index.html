@@ -9,7 +9,7 @@
 <body>
     <!-- Ekran logowania -->
     <div id="loginScreen" class="login-screen">
-        <div class="login-container glass">
+        <div class="login-container">
             <div class="login-logo">
                 <img src="https://ite.pl/grafiki/workflow365.png" alt="Workflow365" class="logo">
             </div>
@@ -34,7 +34,7 @@
     <!-- Główny interfejs aplikacji -->
     <div id="mainApp" class="main-app hidden">
         <!-- Nagłówek -->
-        <header class="app-header glass">
+        <header class="app-header">
             <div class="header-content">
                 <div class="header-left">
                     <img src="https://ite.pl/grafiki/workflow365.png" alt="Workflow365" class="header-logo">
@@ -59,7 +59,7 @@
         <!-- Główna zawartość -->
         <main class="app-main">
             <!-- Panel filtrów -->
-            <div class="filters-panel glass">
+            <div class="filters-panel">
                 <h3>Filtry opiekunów</h3>
                 <div class="filter-group">
                     <label class="filter-checkbox">
@@ -76,32 +76,19 @@
                 <div class="filter-actions">
                     <button id="resetFilters" class="btn btn--secondary btn--sm">Resetuj filtry</button>
                     <button id="resetView" class="btn btn--secondary btn--sm">Resetuj widok</button>
-                </div>
-                
-                <!-- Sekcja importu Excel -->
-                <div class="import-section">
-                    <h4>Import danych</h4>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="excelFile" class="file-input" accept=".xlsx,.xls" />
-                        <label for="excelFile" class="file-input-label">
-                            Wybierz plik Excel
-                        </label>
-                    </div>
-                    <button id="importBtn" class="btn btn--secondary btn--sm" style="margin-top: 8px; width: 100%;" disabled>
-                        Importuj dane
-                    </button>
+                    <button id="importExcel" class="btn btn--primary btn--sm">Import Excel</button>
                 </div>
             </div>
 
             <!-- Mapa relacji -->
-            <div class="relationship-map glass" id="relationshipMap">
+            <div class="relationship-map" id="relationshipMap">
                 <div class="map-container">
                     <!-- Węzły będą dodawane dynamicznie przez JavaScript -->
                 </div>
             </div>
 
             <!-- Panel szczegółów -->
-            <div class="details-panel glass" id="detailsPanel">
+            <div class="details-panel" id="detailsPanel">
                 <div class="details-header">
                     <h3>Szczegóły</h3>
                     <button id="closeDetails" class="close-btn">×</button>
@@ -112,35 +99,29 @@
             </div>
         </main>
 
-        <!-- Panel statystyk -->
-        <footer class="app-footer glass">
+        <!-- Statystyki -->
+        <footer class="app-footer">
             <div class="stats-container">
-                <div class="stat-item glass">
+                <div class="stat-item">
                     <span class="stat-label">Firmy</span>
                     <span class="stat-value" id="companiesCount">0</span>
                 </div>
-                <div class="stat-item glass">
-                    <span class="stat-label">Handlowi</span>
-                    <span class="stat-value" id="salesCount">0</span>
+                <div class="stat-item">
+                    <span class="stat-label">Opiekunowie</span>
+                    <span class="stat-value" id="caregiversCount">0</span>
                 </div>
-                <div class="stat-item glass">
-                    <span class="stat-label">Wdrożeniowi</span>
-                    <span class="stat-value" id="implementationCount">0</span>
-                </div>
-                <div class="stat-item glass">
+                <div class="stat-item">
                     <span class="stat-label">Łączny obrót</span>
                     <span class="stat-value" id="totalRevenue">0 zł</span>
                 </div>
-                <div class="stat-item glass">
-                    <span class="stat-label">Średni obrót</span>
-                    <span class="stat-value" id="averageRevenue">0 zł</span>
+                <div class="stat-item">
+                    <span class="stat-label">Relacje</span>
+                    <span class="stat-value" id="relationshipsCount">0</span>
                 </div>
             </div>
         </footer>
     </div>
 
-    <!-- Biblioteka do obsługi Excel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

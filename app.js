@@ -1,35 +1,125 @@
-// Dane aplikacji
+// NAPRAWIONE: Używanie prawidłowych danych z JSON
 const appData = {
     companies: [
-        {id: 1, name: "IT Excellence S.A.", industry: "IT Services", location: "Wrocław", size: "Duża", status: "Aktywna", nip: "8971235467", revenue: 450000},
-        {id: 2, name: "TechSoft Sp. z o.o.", industry: "Software", location: "Warszawa", size: "Średnia", status: "Aktywna", nip: "1234567890", revenue: 320000},
-        {id: 3, name: "DataFlow Systems", industry: "Data Analytics", location: "Kraków", size: "Duża", status: "Aktywna", nip: "9876543210", revenue: 580000},
-        {id: 4, name: "CloudPoint Ltd.", industry: "Cloud Services", location: "Gdańsk", size: "Średnia", status: "Aktywna", nip: "5555666677", revenue: 280000},
-        {id: 5, name: "NetWork Solutions", industry: "Networking", location: "Poznań", size: "Mała", status: "Aktywna", nip: "1111222233", revenue: 270000}
+        {
+            id: 1,
+            name: "IT Excellence S.A.",
+            nip: "8943048437", 
+            industry: "IT/Software",
+            location: "Wrocław",
+            size: "Średnia",
+            status: "Aktywna",
+            revenue: 500000
+        },
+        {
+            id: 2,
+            name: "TechFlow Sp. z o.o.",
+            nip: "5261234567",
+            industry: "Automatyzacja", 
+            location: "Warszawa",
+            size: "Duża",
+            status: "Aktywna", 
+            revenue: 750000
+        },
+        {
+            id: 3,
+            name: "DataSync Solutions",
+            nip: "7891234568",
+            industry: "Analityka",
+            location: "Kraków", 
+            size: "Mała",
+            status: "Aktywna",
+            revenue: 300000
+        },
+        {
+            id: 4,
+            name: "CloudTech Innovations",
+            nip: "9871234569",
+            industry: "Chmura",
+            location: "Gdańsk",
+            size: "Średnia", 
+            status: "Potencjalna",
+            revenue: 200000
+        },
+        {
+            id: 5,
+            name: "SecureNet Systems",
+            nip: "1234567890",
+            industry: "Cyberbezpieczeństwo",
+            location: "Poznań",
+            size: "Duża",
+            status: "Aktywna",
+            revenue: 150000
+        }
     ],
     caregivers: [
-        {id: 1, firstName: "Anna", lastName: "Kowalska", type: "handlowy", region: "Dolnośląskie", experience: "5 lat", specialization: "IT Services", email: "anna.kowalska@ite.pl"},
-        {id: 2, firstName: "Piotr", lastName: "Nowak", type: "handlowy", region: "Mazowieckie", experience: "7 lat", specialization: "Software", email: "piotr.nowak@ite.pl"},
-        {id: 3, firstName: "Magdalena", lastName: "Wiśniewska", type: "wdrożeniowy", region: "Małopolskie", experience: "4 lat", specialization: "Data Analytics", email: "magdalena.wisniewska@ite.pl"},
-        {id: 4, firstName: "Tomasz", lastName: "Wójcik", type: "wdrożeniowy", region: "Pomorskie", experience: "6 lat", specialization: "Cloud Services", email: "tomasz.wojcik@ite.pl"},
-        {id: 5, firstName: "Katarzyna", lastName: "Kaczmarek", type: "handlowy", region: "Wielkopolskie", experience: "3 lat", specialization: "Networking", email: "katarzyna.kaczmarek@ite.pl"},
-        {id: 6, firstName: "Michał", lastName: "Zieliński", type: "wdrożeniowy", region: "Dolnośląskie", experience: "8 lat", specialization: "IT Services", email: "michal.zielinski@ite.pl"},
-        {id: 7, firstName: "Agnieszka", lastName: "Szymańska", type: "handlowy", region: "Mazowieckie", experience: "5 lat", specialization: "Software", email: "agnieszka.szymanska@ite.pl"},
-        {id: 8, firstName: "Paweł", lastName: "Dąbrowski", type: "wdrożeniowy", region: "Małopolskie", experience: "4 lat", specialization: "Data Analytics", email: "pawel.dabrowski@ite.pl"}
+        {
+            id: 1,
+            firstName: "Anna",
+            lastName: "Kowalska", 
+            type: "handlowy",
+            region: "Dolnośląskie",
+            experience: "5 lat",
+            email: "anna.kowalska@ite.pl",
+            specialization: "IT Enterprise"
+        },
+        {
+            id: 2,
+            firstName: "Piotr", 
+            lastName: "Nowak",
+            type: "wdrożeniowy", 
+            region: "Mazowieckie",
+            experience: "8 lat",
+            email: "piotr.nowak@ite.pl",
+            specialization: "Automatyzacja procesów"
+        },
+        {
+            id: 3,
+            firstName: "Katarzyna",
+            lastName: "Wiśniewska",
+            type: "handlowy",
+            region: "Małopolskie", 
+            experience: "3 lat",
+            email: "katarzyna.wisniewska@ite.pl",
+            specialization: "Analityka danych"
+        },
+        {
+            id: 4,
+            firstName: "Marcin",
+            lastName: "Kaczmarek",
+            type: "wdrożeniowy",
+            region: "Pomorskie",
+            experience: "6 lat", 
+            email: "marcin.kaczmarek@ite.pl",
+            specialization: "Rozwiązania chmurowe"
+        },
+        {
+            id: 5,
+            firstName: "Agnieszka",
+            lastName: "Zielińska",
+            type: "handlowy",
+            region: "Wielkopolskie",
+            experience: "7 lat",
+            email: "agnieszka.zielinska@ite.pl", 
+            specialization: "Cyberbezpieczeństwo"
+        }
     ],
-    relationships: [
-        {companyId: 1, caregiverId: 1}, {companyId: 1, caregiverId: 6},
-        {companyId: 2, caregiverId: 2}, {companyId: 2, caregiverId: 7},
-        {companyId: 3, caregiverId: 3}, {companyId: 3, caregiverId: 8},
-        {companyId: 4, caregiverId: 4}, {companyId: 5, caregiverId: 5}
+    connections: [
+        {companyId: 1, caregiverId: 1},
+        {companyId: 1, caregiverId: 2},
+        {companyId: 2, caregiverId: 2}, 
+        {companyId: 2, caregiverId: 3},
+        {companyId: 3, caregiverId: 3},
+        {companyId: 3, caregiverId: 4},
+        {companyId: 4, caregiverId: 4},
+        {companyId: 4, caregiverId: 5},
+        {companyId: 5, caregiverId: 5}
     ],
-    auth: {
-        accounts: [
-            {email: "admin@ite.pl", password: "admin123", role: "admin"},
-            {email: "manager@ite.pl", password: "manager123", role: "manager"},
-            {email: "user@ite.pl", password: "user123", role: "user"}
-        ]
-    }
+    users: [
+        {email: "admin@ite.pl", password: "admin123", role: "admin"},
+        {email: "manager@ite.pl", password: "manager123", role: "manager"}, 
+        {email: "user@ite.pl", password: "user123", role: "user"}
+    ]
 };
 
 // Stan aplikacji
@@ -40,37 +130,35 @@ let appState = {
     expandedNodes: new Set(),
     searchQuery: '',
     filters: {
-        sales: true,
-        implementation: true
+        handlowy: true,
+        wdrożeniowy: true
     },
     visibleNodes: new Set()
 };
 
-// Inicjalizacja aplikacji
+// NAPRAWIONE: Inicjalizacja aplikacji
 function initApp() {
     console.log('Initializing Workflow365 CRM...');
-    checkAuthStatus();
+    showLoginScreen();
     setupEventListeners();
-}
-
-// Sprawdzenie stanu logowania
-function checkAuthStatus() {
-    console.log('Checking auth status...');
-    const savedUser = localStorage.getItem('workflow365_user');
-    if (savedUser) {
-        try {
-            appState.currentUser = JSON.parse(savedUser);
-            appState.isLoggedIn = true;
-            console.log('User found in localStorage:', appState.currentUser.email);
-            showMainApp();
-        } catch (e) {
-            console.error('Error parsing saved user data:', e);
-            localStorage.removeItem('workflow365_user');
-            showLoginScreen();
-        }
-    } else {
-        console.log('No saved user found, showing login screen');
-        showLoginScreen();
+    
+    // Sprawdź czy logo się ładuje
+    const loginLogo = document.querySelector('.login-logo img');
+    if (loginLogo) {
+        loginLogo.onerror = function() {
+            console.error('Logo failed to load, using fallback');
+            this.style.display = 'none';
+            const fallbackText = document.createElement('h1');
+            fallbackText.textContent = 'Workflow365';
+            fallbackText.style.color = '#0368ff';
+            fallbackText.style.fontSize = '24px';
+            fallbackText.style.margin = '0';
+            this.parentElement.appendChild(fallbackText);
+        };
+        
+        loginLogo.onload = function() {
+            console.log('Logo loaded successfully');
+        };
     }
 }
 
@@ -83,6 +171,7 @@ function showLoginScreen() {
     if (loginScreen && mainApp) {
         loginScreen.classList.remove('hidden');
         mainApp.classList.add('hidden');
+        console.log('Login screen displayed');
     }
 }
 
@@ -96,6 +185,7 @@ function showMainApp() {
     if (loginScreen && mainApp) {
         loginScreen.classList.add('hidden');
         mainApp.classList.remove('hidden');
+        console.log('Main app displayed');
     }
     
     if (userInfo && appState.currentUser) {
@@ -104,26 +194,88 @@ function showMainApp() {
     
     // Inicjalizacja mapy i statystyk
     setTimeout(() => {
+        console.log('Initializing map and statistics...');
         initializeMap();
         updateStatistics();
     }, 200);
 }
 
-// Konfiguracja event listenerów
+// NAPRAWIONE: Konfiguracja event listenerów z debugowaniem
 function setupEventListeners() {
     console.log('Setting up event listeners...');
     
-    // Logowanie
+    // KRYTYCZNA NAPRAWA: Logowanie z prawidłowym handlerem
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
-        loginForm.removeEventListener('submit', handleLogin);
-        loginForm.addEventListener('submit', handleLogin);
+        console.log('Login form found, attaching event listener');
+        
+        // Usuń poprzednie event listenery
+        loginForm.onsubmit = null;
+        
+        // Dodaj nowy event listener
+        loginForm.addEventListener('submit', function(e) {
+            console.log('=== LOGIN FORM SUBMITTED ===');
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const loginError = document.getElementById('loginError');
+            
+            if (!emailInput || !passwordInput) {
+                console.error('Login form inputs not found');
+                return false;
+            }
+            
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            console.log('Login attempt:', { 
+                email: email, 
+                password: password.length > 0 ? '[PROVIDED]' : '[EMPTY]' 
+            });
+            
+            if (!email || !password) {
+                showLoginError('Proszę wprowadzić email i hasło');
+                return false;
+            }
+            
+            // Sprawdzenie danych uwierzytelniających
+            const user = appData.users.find(account => 
+                account.email === email && account.password === password
+            );
+            
+            console.log('User lookup result:', user ? 'FOUND' : 'NOT FOUND');
+            
+            if (user) {
+                console.log('=== LOGIN SUCCESSFUL ===');
+                appState.currentUser = user;
+                appState.isLoggedIn = true;
+                
+                if (loginError) {
+                    loginError.classList.add('hidden');
+                }
+                
+                // Przejście do głównej aplikacji
+                showMainApp();
+            } else {
+                console.log('=== LOGIN FAILED ===');
+                showLoginError('Nieprawidłowy email lub hasło');
+            }
+            
+            return false;
+        });
+        
+        console.log('Login form event listener attached successfully');
+    } else {
+        console.error('LOGIN FORM NOT FOUND!');
     }
     
     // Wylogowanie
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', handleLogout);
+        console.log('Logout button event listener attached');
     }
     
     // Wyszukiwanie
@@ -158,82 +310,39 @@ function setupEventListeners() {
         resetView.addEventListener('click', resetViewHandler);
     }
     
+    // Import Excel
+    const importExcel = document.getElementById('importExcel');
+    if (importExcel) {
+        importExcel.addEventListener('click', handleImportExcel);
+    }
+    
     // Panel szczegółów
     const closeDetails = document.getElementById('closeDetails');
     if (closeDetails) {
         closeDetails.addEventListener('click', closeDetailsHandler);
     }
     
-    // Excel import
-    const excelFile = document.getElementById('excelFile');
-    if (excelFile) {
-        excelFile.addEventListener('change', handleFileSelect);
-    }
-    
-    const importBtn = document.getElementById('importBtn');
-    if (importBtn) {
-        importBtn.addEventListener('click', handleExcelImport);
-    }
+    console.log('All event listeners set up successfully');
 }
 
-// Obsługa logowania
-function handleLogin(e) {
-    e.preventDefault();
-    
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
+function showLoginError(message) {
     const loginError = document.getElementById('loginError');
-    
-    if (!emailInput || !passwordInput) {
-        return;
-    }
-    
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-    
-    if (!email || !password) {
-        if (loginError) {
-            loginError.textContent = 'Proszę wprowadzić email i hasło';
-            loginError.classList.remove('hidden');
-        }
-        return;
-    }
-    
-    const user = appData.auth.accounts.find(account => 
-        account.email === email && account.password === password
-    );
-    
-    if (user) {
-        appState.currentUser = user;
-        appState.isLoggedIn = true;
-        
-        try {
-            localStorage.setItem('workflow365_user', JSON.stringify(user));
-        } catch (e) {
-            console.error('Failed to save user to localStorage:', e);
-        }
-        
-        if (loginError) {
-            loginError.classList.add('hidden');
-        }
-        
-        showMainApp();
-    } else {
-        if (loginError) {
-            loginError.textContent = 'Nieprawidłowy email lub hasło';
-            loginError.classList.remove('hidden');
-        }
+    if (loginError) {
+        loginError.textContent = message;
+        loginError.classList.remove('hidden');
+        console.log('Login error displayed:', message);
     }
 }
 
 // Obsługa wylogowania
 function handleLogout() {
+    console.log('Logging out...');
     appState.currentUser = null;
     appState.isLoggedIn = false;
-    localStorage.removeItem('workflow365_user');
     resetAppState();
     showLoginScreen();
     
+    // Wyczyszczenie formularza logowania
     const loginForm = document.getElementById('loginForm');
     const loginError = document.getElementById('loginError');
     
@@ -307,11 +416,11 @@ function updateFilters() {
     const filterImplementation = document.getElementById('filterImplementation');
     
     if (filterSales) {
-        appState.filters.sales = filterSales.checked;
+        appState.filters.handlowy = filterSales.checked;
     }
     
     if (filterImplementation) {
-        appState.filters.implementation = filterImplementation.checked;
+        appState.filters.wdrożeniowy = filterImplementation.checked;
     }
     
     filterAndRenderNodes();
@@ -330,8 +439,8 @@ function resetFiltersHandler() {
         filterImplementation.checked = true;
     }
     
-    appState.filters.sales = true;
-    appState.filters.implementation = true;
+    appState.filters.handlowy = true;
+    appState.filters.wdrożeniowy = true;
     filterAndRenderNodes();
 }
 
@@ -343,83 +452,14 @@ function resetViewHandler() {
     filterAndRenderNodes();
 }
 
-// Obsługa wyboru pliku Excel
-function handleFileSelect(e) {
-    const file = e.target.files[0];
-    const importBtn = document.getElementById('importBtn');
-    const label = document.querySelector('.file-input-label');
-    
-    if (file && importBtn && label) {
-        importBtn.disabled = false;
-        label.textContent = file.name;
-    } else if (importBtn && label) {
-        importBtn.disabled = true;
-        label.textContent = 'Wybierz plik Excel';
-    }
-}
-
 // Obsługa importu Excel
-function handleExcelImport() {
-    const fileInput = document.getElementById('excelFile');
-    const file = fileInput.files[0];
-    
-    if (!file) {
-        alert('Proszę wybrać plik Excel');
-        return;
-    }
-    
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        try {
-            const data = new Uint8Array(e.target.result);
-            const workbook = XLSX.read(data, {type: 'array'});
-            
-            // Sprawdź arkusze
-            const sheetNames = workbook.SheetNames;
-            console.log('Dostępne arkusze:', sheetNames);
-            
-            // Importuj dane z arkuszy
-            if (sheetNames.includes('Firmy')) {
-                const firmySheet = workbook.Sheets['Firmy'];
-                const firmyData = XLSX.utils.sheet_to_json(firmySheet);
-                console.log('Dane firm:', firmyData);
-                
-                // Zaktualizuj dane firm (przykład)
-                if (firmyData.length > 0) {
-                    // Możesz tutaj dodać logikę aktualizacji danych
-                    console.log('Aktualizowanie danych firm...');
-                }
-            }
-            
-            if (sheetNames.includes('Opiekunowie')) {
-                const opiekunowieSheet = workbook.Sheets['Opiekunowie'];
-                const opiekunowieData = XLSX.utils.sheet_to_json(opiekunowieSheet);
-                console.log('Dane opiekunów:', opiekunowieData);
-            }
-            
-            if (sheetNames.includes('Powiązania')) {
-                const powiazaniaSheet = workbook.Sheets['Powiązania'];
-                const powiazaniaData = XLSX.utils.sheet_to_json(powiazaniaSheet);
-                console.log('Dane powiązań:', powiazaniaData);
-            }
-            
-            alert('Dane zostały zaimportowane pomyślnie!');
-            
-            // Odśwież wizualizację
-            filterAndRenderNodes();
-            updateStatistics();
-            
-        } catch (error) {
-            console.error('Błąd importu:', error);
-            alert('Błąd podczas importu pliku Excel');
-        }
-    };
-    
-    reader.readAsArrayBuffer(file);
+function handleImportExcel() {
+    alert('Funkcja importu Excel zostanie wkrótce dodana.');
 }
 
 // Inicjalizacja mapy
 function initializeMap() {
+    console.log('Initializing map...');
     filterAndRenderNodes();
 }
 
@@ -470,24 +510,23 @@ function matchesSearchQuery(item, type) {
 
 // Sprawdzenie czy opiekun pasuje do filtrów
 function matchesFilters(caregiver) {
-    if (caregiver.type === 'handlowy') {
-        return appState.filters.sales;
-    } else if (caregiver.type === 'wdrożeniowy') {
-        return appState.filters.implementation;
-    }
-    return true;
+    return appState.filters[caregiver.type] === true;
 }
 
 // Renderowanie mapy
 function renderMap(companies, caregivers) {
     const mapContainer = document.querySelector('.map-container');
     if (!mapContainer) {
+        console.error('Map container not found');
         return;
     }
+    
+    console.log(`Rendering map with ${companies.length} companies and ${caregivers.length} caregivers`);
     
     mapContainer.innerHTML = '';
     
     const containerWidth = mapContainer.clientWidth || 600;
+    const containerHeight = mapContainer.clientHeight || 500;
     
     // Pozycjonowanie firm (lewa strona)
     companies.forEach((company, index) => {
@@ -513,7 +552,7 @@ function renderMap(companies, caregivers) {
         mapContainer.appendChild(node);
     });
     
-    // Renderowanie połączeń
+    // Renderowanie połączeń po krótkim opóźnieniu
     setTimeout(() => {
         renderConnections();
         applySearchEffects();
@@ -528,6 +567,7 @@ function createCompanyNode(company) {
     node.textContent = company.name;
     
     node.addEventListener('click', () => {
+        console.log('Company clicked:', company.name);
         selectNode('company', company);
         toggleNodeExpansion(`company_${company.id}`);
     });
@@ -543,6 +583,7 @@ function createCaregiverNode(caregiver) {
     node.textContent = `${caregiver.firstName} ${caregiver.lastName}`;
     
     node.addEventListener('click', () => {
+        console.log('Caregiver clicked:', `${caregiver.firstName} ${caregiver.lastName}`);
         selectNode('caregiver', caregiver);
         toggleNodeExpansion(`caregiver_${caregiver.id}`);
     });
@@ -552,6 +593,8 @@ function createCaregiverNode(caregiver) {
 
 // Wybór węzła
 function selectNode(type, data) {
+    console.log('Selecting node:', type, data.name || `${data.firstName} ${data.lastName}`);
+    
     // Usuń poprzednie zaznaczenie
     document.querySelectorAll('.node.selected').forEach(node => {
         node.classList.remove('selected');
@@ -587,7 +630,7 @@ function renderConnections() {
     const mapContainer = document.querySelector('.map-container');
     if (!mapContainer) return;
     
-    appData.relationships.forEach(rel => {
+    appData.connections.forEach(rel => {
         const companyNode = document.getElementById(`company_${rel.companyId}`);
         const caregiverNode = document.getElementById(`caregiver_${rel.caregiverId}`);
         
@@ -630,6 +673,7 @@ function createConnection(node1, node2, container) {
 // Aplikowanie efektów wyszukiwania
 function applySearchEffects() {
     if (!appState.searchQuery) {
+        // Usuń wszystkie efekty przyciemnienia
         document.querySelectorAll('.node.dimmed').forEach(node => {
             node.classList.remove('dimmed');
         });
@@ -661,6 +705,7 @@ function showDetails(type, data) {
     
     if (type === 'company') {
         const relatedCaregivers = getRelatedCaregivers(data.id);
+        const totalCaregivers = relatedCaregivers.length;
         
         content = `
             <div class="detail-section">
@@ -691,7 +736,7 @@ function showDetails(type, data) {
                 </div>
             </div>
             <div class="detail-section">
-                <h4>Opiekunowie (${relatedCaregivers.length})</h4>
+                <h4>Opiekunowie (${totalCaregivers})</h4>
                 ${relatedCaregivers.map(caregiver => `
                     <div class="detail-item">
                         <span class="detail-label">${caregiver.firstName} ${caregiver.lastName}</span>
@@ -753,7 +798,7 @@ function showDetails(type, data) {
 
 // Pobieranie powiązanych opiekunów
 function getRelatedCaregivers(companyId) {
-    const caregiverIds = appData.relationships
+    const caregiverIds = appData.connections
         .filter(rel => rel.companyId === companyId)
         .map(rel => rel.caregiverId);
     
@@ -764,7 +809,7 @@ function getRelatedCaregivers(companyId) {
 
 // Pobieranie powiązanych firm
 function getRelatedCompanies(caregiverId) {
-    const companyIds = appData.relationships
+    const companyIds = appData.connections
         .filter(rel => rel.caregiverId === caregiverId)
         .map(rel => rel.companyId);
     
@@ -797,10 +842,9 @@ function closeDetailsHandler() {
 // Aktualizacja statystyk
 function updateStatistics() {
     const companiesCount = document.getElementById('companiesCount');
-    const salesCount = document.getElementById('salesCount');
-    const implementationCount = document.getElementById('implementationCount');
+    const caregiversCount = document.getElementById('caregiversCount');
     const totalRevenue = document.getElementById('totalRevenue');
-    const averageRevenue = document.getElementById('averageRevenue');
+    const relationshipsCount = document.getElementById('relationshipsCount');
     
     const visibleCompanies = appData.companies.filter(company => 
         appState.visibleNodes.has(`company_${company.id}`) || appState.visibleNodes.size === 0
@@ -810,30 +854,23 @@ function updateStatistics() {
         appState.visibleNodes.has(`caregiver_${caregiver.id}`) || appState.visibleNodes.size === 0
     );
     
-    const salesCaregivers = visibleCaregivers.filter(c => c.type === 'handlowy');
-    const implementationCaregivers = visibleCaregivers.filter(c => c.type === 'wdrożeniowy');
-    
     const totalRevenueValue = visibleCompanies.reduce((sum, company) => sum + company.revenue, 0);
-    const averageRevenueValue = visibleCompanies.length > 0 ? totalRevenueValue / visibleCompanies.length : 0;
+    const totalRelationships = appData.connections.length;
     
     if (companiesCount) {
         companiesCount.textContent = visibleCompanies.length;
     }
     
-    if (salesCount) {
-        salesCount.textContent = salesCaregivers.length;
-    }
-    
-    if (implementationCount) {
-        implementationCount.textContent = implementationCaregivers.length;
+    if (caregiversCount) {
+        caregiversCount.textContent = visibleCaregivers.length;
     }
     
     if (totalRevenue) {
         totalRevenue.textContent = formatCurrency(totalRevenueValue);
     }
     
-    if (averageRevenue) {
-        averageRevenue.textContent = formatCurrency(averageRevenueValue);
+    if (relationshipsCount) {
+        relationshipsCount.textContent = totalRelationships;
     }
 }
 
@@ -847,5 +884,20 @@ function formatCurrency(amount) {
     }).format(amount);
 }
 
-// Uruchomienie aplikacji po załadowaniu DOM
-document.addEventListener('DOMContentLoaded', initApp);
+// NAPRAWIONE: Uruchomienie aplikacji po załadowaniu DOM
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== DOM LOADED ===');
+    
+    // Dodatkowe debugowanie
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    
+    console.log('Elements found:', {
+        loginForm: !!loginForm,
+        emailInput: !!emailInput,
+        passwordInput: !!passwordInput
+    });
+    
+    initApp();
+});
