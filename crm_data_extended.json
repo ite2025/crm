@@ -1,0 +1,178 @@
+{
+  "companies": [
+    {
+      "ID_Firmy": 1,
+      "Nazwa_Firmy": "IT Excellence S.A.",
+      "Branża": "Technologie IT",
+      "Lokalizacja": "Wrocław",
+      "Wielkość_Firmy": "Duża (500+ pracowników)",
+      "Status": "Aktywny",
+      "Obrót_z_ITE": "2,5 mln PLN"
+    },
+    {
+      "ID_Firmy": 2,
+      "Nazwa_Firmy": "TechnoSoft Sp. z o.o.",
+      "Branża": "Oprogramowanie",
+      "Lokalizacja": "Warszawa",
+      "Wielkość_Firmy": "Średnia (50-250 pracowników)",
+      "Status": "Aktywny",
+      "Obrót_z_ITE": "850 tys. PLN"
+    },
+    {
+      "ID_Firmy": 3,
+      "Nazwa_Firmy": "Digital Solutions Ltd.",
+      "Branża": "Usługi cyfrowe",
+      "Lokalizacja": "Kraków",
+      "Wielkość_Firmy": "Mała (10-50 pracowników)",
+      "Status": "Potencjalny",
+      "Obrót_z_ITE": "120 tys. PLN"
+    },
+    {
+      "ID_Firmy": 4,
+      "Nazwa_Firmy": "InnovateCorp S.A.",
+      "Branża": "Innowacje technologiczne",
+      "Lokalizacja": "Gdańsk",
+      "Wielkość_Firmy": "Duża (500+ pracowników)",
+      "Status": "Aktywny",
+      "Obrót_z_ITE": "1,8 mln PLN"
+    },
+    {
+      "ID_Firmy": 5,
+      "Nazwa_Firmy": "DataFlow Systems",
+      "Branża": "Analiza danych",
+      "Lokalizacja": "Poznań",
+      "Wielkość_Firmy": "Średnia (50-250 pracowników)",
+      "Status": "Aktywny",
+      "Obrót_z_ITE": "650 tys. PLN"
+    },
+    {
+      "ID_Firmy": 6,
+      "Nazwa_Firmy": "CloudTech Poland",
+      "Branża": "Chmura obliczeniowa",
+      "Lokalizacja": "Warszawa",
+      "Wielkość_Firmy": "Mała (10-50 pracowników)",
+      "Status": "Potencjalny",
+      "Obrót_z_ITE": "95 tys. PLN"
+    },
+    {
+      "ID_Firmy": 7,
+      "Nazwa_Firmy": "SmartBusiness S.A.",
+      "Branża": "Rozwiązania biznesowe",
+      "Lokalizacja": "Wrocław",
+      "Wielkość_Firmy": "Średnia (50-250 pracowników)",
+      "Status": "Aktywny",
+      "Obrót_z_ITE": "420 tys. PLN"
+    },
+    {
+      "ID_Firmy": 8,
+      "Nazwa_Firmy": "NextGen Software",
+      "Branża": "Tworzenie oprogramowania",
+      "Lokalizacja": "Kraków",
+      "Wielkość_Firmy": "Mała (10-50 pracowników)",
+      "Status": "Aktywny",
+      "Obrót_z_ITE": "230 tys. PLN"
+    }
+  ],
+  "managers": [
+    {
+      "ID_Opiekuna": 101,
+      "Imię_Nazwisko": "Anna Kowalska",
+      "Typ_Opiekuna": "Handlowy",
+      "Region": "Dolnośląskie",
+      "Doświadczenie": "5 lat",
+      "Specjalizacja": "Duże przedsiębiorstwa",
+      "Email": "anna.kowalska@ite.pl"
+    },
+    {
+      "ID_Opiekuna": 102,
+      "Imię_Nazwisko": "Marcin Nowak",
+      "Typ_Opiekuna": "Wdrożeniowy",
+      "Region": "Mazowieckie",
+      "Doświadczenie": "7 lat",
+      "Specjalizacja": "Systemy CRM",
+      "Email": "marcin.nowak@ite.pl"
+    },
+    {
+      "ID_Opiekuna": 103,
+      "Imię_Nazwisko": "Katarzyna Wiśniewska",
+      "Typ_Opiekuna": "Handlowy",
+      "Region": "Małopolskie",
+      "Doświadczenie": "3 lata",
+      "Specjalizacja": "SME",
+      "Email": "katarzyna.wisniewska@ite.pl"
+    },
+    {
+      "ID_Opiekuna": 104,
+      "Imię_Nazwisko": "Piotr Kowalczyk",
+      "Typ_Opiekuna": "Wdrożeniowy",
+      "Region": "Pomorskie",
+      "Doświadczenie": "6 lat",
+      "Specjalizacja": "Integracje systemowe",
+      "Email": "piotr.kowalczyk@ite.pl"
+    },
+    {
+      "ID_Opiekuna": 105,
+      "Imię_Nazwisko": "Magdalena Zielińska",
+      "Typ_Opiekuna": "Handlowy",
+      "Region": "Wielkopolskie",
+      "Doświadczenie": "4 lata",
+      "Specjalizacja": "Analizy biznesowe",
+      "Email": "magdalena.zielinska@ite.pl"
+    },
+    {
+      "ID_Opiekuna": 106,
+      "Imię_Nazwisko": "Tomasz Lewandowski",
+      "Typ_Opiekuna": "Wdrożeniowy",
+      "Region": "Dolnośląskie",
+      "Doświadczenie": "8 lat",
+      "Specjalizacja": "Workflow365",
+      "Email": "tomasz.lewandowski@ite.pl"
+    }
+  ],
+  "relationships": [
+    {
+      "ID_Firmy": 1,
+      "ID_Opiekuna": 101
+    },
+    {
+      "ID_Firmy": 1,
+      "ID_Opiekuna": 106
+    },
+    {
+      "ID_Firmy": 2,
+      "ID_Opiekuna": 102
+    },
+    {
+      "ID_Firmy": 3,
+      "ID_Opiekuna": 103
+    },
+    {
+      "ID_Firmy": 4,
+      "ID_Opiekuna": 104
+    },
+    {
+      "ID_Firmy": 4,
+      "ID_Opiekuna": 101
+    },
+    {
+      "ID_Firmy": 5,
+      "ID_Opiekuna": 105
+    },
+    {
+      "ID_Firmy": 6,
+      "ID_Opiekuna": 102
+    },
+    {
+      "ID_Firmy": 7,
+      "ID_Opiekuna": 101
+    },
+    {
+      "ID_Firmy": 7,
+      "ID_Opiekuna": 106
+    },
+    {
+      "ID_Firmy": 8,
+      "ID_Opiekuna": 103
+    }
+  ]
+}
