@@ -1,147 +1,102 @@
-// Dane domyślne aplikacji
+// Dane z JSON użytkownika
 let appData = {
   companies: [
     {
-      ID_Firmy: 1,
-      Nazwa_Firmy: "IT Excellence S.A.",
-      Branża: "Technologie IT",
-      Lokalizacja: "Wrocław",
-      Wielkość_Firmy: "Duża (500+ pracowników)",
-      Status: "Aktywny",
-      Obrót_z_ITE: "2,5 mln PLN"
+      id: "f1",
+      nazwa: "IT Excellence S.A.",
+      branza: "IT/Software", 
+      lokalizacja: "Wrocław",
+      wielkosc: "Duża",
+      status: "Aktywna",
+      obrot_z_ite: "3,2 mln PLN"
     },
     {
-      ID_Firmy: 2,
-      Nazwa_Firmy: "TechnoSoft Sp. z o.o.",
-      Branża: "Oprogramowanie",
-      Lokalizacja: "Warszawa",
-      Wielkość_Firmy: "Średnia (50-250 pracowników)",
-      Status: "Aktywny",
-      Obrót_z_ITE: "850 tys. PLN"
+      id: "f2", 
+      nazwa: "TechSoft Sp. z o.o.",
+      branza: "IT/Consulting",
+      lokalizacja: "Kraków", 
+      wielkosc: "Średnia",
+      status: "Aktywna",
+      obrot_z_ite: "1,8 mln PLN"
     },
     {
-      ID_Firmy: 3,
-      Nazwa_Firmy: "Digital Solutions Ltd.",
-      Branża: "Usługi cyfrowe",
-      Lokalizacja: "Kraków",
-      Wielkość_Firmy: "Mała (10-50 pracowników)",
-      Status: "Potencjalny",
-      Obrót_z_ITE: "120 tys. PLN"
+      id: "f3",
+      nazwa: "DataCorp Ltd.", 
+      branza: "Big Data",
+      lokalizacja: "Warszawa",
+      wielkosc: "Duża", 
+      status: "Potencjalna",
+      obrot_z_ite: "4,5 mln PLN"
     },
     {
-      ID_Firmy: 4,
-      Nazwa_Firmy: "InnovateCorp S.A.",
-      Branża: "Innowacje technologiczne",
-      Lokalizacja: "Gdańsk",
-      Wielkość_Firmy: "Duża (500+ pracowników)",
-      Status: "Aktywny",
-      Obrót_z_ITE: "1,8 mln PLN"
+      id: "f4",
+      nazwa: "CloudNet Systems",
+      branza: "Cloud Services", 
+      lokalizacja: "Gdańsk",
+      wielkosc: "Średnia",
+      status: "Aktywna", 
+      obrot_z_ite: "2,1 mln PLN"
     },
     {
-      ID_Firmy: 5,
-      Nazwa_Firmy: "DataFlow Systems",
-      Branża: "Analiza danych",
-      Lokalizacja: "Poznań",
-      Wielkość_Firmy: "Średnia (50-250 pracowników)",
-      Status: "Aktywny",
-      Obrót_z_ITE: "650 tys. PLN"
-    },
-    {
-      ID_Firmy: 6,
-      Nazwa_Firmy: "CloudTech Poland",
-      Branża: "Chmura obliczeniowa",
-      Lokalizacja: "Warszawa",
-      Wielkość_Firmy: "Mała (10-50 pracowników)",
-      Status: "Potencjalny",
-      Obrót_z_ITE: "95 tys. PLN"
-    },
-    {
-      ID_Firmy: 7,
-      Nazwa_Firmy: "SmartBusiness S.A.",
-      Branża: "Rozwiązania biznesowe",
-      Lokalizacja: "Wrocław",
-      Wielkość_Firmy: "Średnia (50-250 pracowników)",
-      Status: "Aktywny",
-      Obrót_z_ITE: "420 tys. PLN"
-    },
-    {
-      ID_Firmy: 8,
-      Nazwa_Firmy: "NextGen Software",
-      Branża: "Tworzenie oprogramowania",
-      Lokalizacja: "Kraków",
-      Wielkość_Firmy: "Mała (10-50 pracowników)",
-      Status: "Aktywny",
-      Obrót_z_ITE: "230 tys. PLN"
+      id: "f5",
+      nazwa: "WebDev Agency",
+      branza: "Web Development",
+      lokalizacja: "Poznań", 
+      wielkosc: "Mała",
+      status: "Aktywna",
+      obrot_z_ite: "850 tys. PLN"
     }
   ],
   managers: [
     {
-      ID_Opiekuna: 101,
-      Imię_Nazwisko: "Anna Kowalska",
-      Typ_Opiekuna: "Handlowy",
-      Region: "Dolnośląskie",
-      Doświadczenie: "5 lat",
-      Specjalizacja: "Duże przedsiębiorstwa",
-      Email: "anna.kowalska@ite.pl"
+      id: "oh1",
+      imie: "Anna", 
+      nazwisko: "Kowalska",
+      typ: "handlowy",
+      region: "Wrocław",
+      doswiadczenie: "5 lat", 
+      specjalizacja: "Enterprise Sales",
+      email: "anna.kowalska@ite.pl"
     },
     {
-      ID_Opiekuna: 102,
-      Imię_Nazwisko: "Marcin Nowak",
-      Typ_Opiekuna: "Wdrożeniowy",
-      Region: "Mazowieckie",
-      Doświadczenie: "7 lat",
-      Specjalizacja: "Systemy CRM",
-      Email: "marcin.nowak@ite.pl"
+      id: "oh2",
+      imie: "Piotr",
+      nazwisko: "Nowak", 
+      typ: "handlowy",
+      region: "Kraków", 
+      doswiadczenie: "3 lata",
+      specjalizacja: "SMB Sales",
+      email: "piotr.nowak@ite.pl"
     },
     {
-      ID_Opiekuna: 103,
-      Imię_Nazwisko: "Katarzyna Wiśniewska",
-      Typ_Opiekuna: "Handlowy",
-      Region: "Małopolskie",
-      Doświadczenie: "3 lata",
-      Specjalizacja: "SME",
-      Email: "katarzyna.wisniewska@ite.pl"
+      id: "ow1", 
+      imie: "Michał",
+      nazwisko: "Wiśniewski",
+      typ: "wdrożeniowy",
+      region: "Warszawa",
+      doswiadczenie: "7 lat",
+      specjalizacja: "Technical Implementation", 
+      email: "michal.wisniewski@ite.pl"
     },
     {
-      ID_Opiekuna: 104,
-      Imię_Nazwisko: "Piotr Kowalczyk",
-      Typ_Opiekuna: "Wdrożeniowy",
-      Region: "Pomorskie",
-      Doświadczenie: "6 lat",
-      Specjalizacja: "Integracje systemowe",
-      Email: "piotr.kowalczyk@ite.pl"
-    },
-    {
-      ID_Opiekuna: 105,
-      Imię_Nazwisko: "Magdalena Zielińska",
-      Typ_Opiekuna: "Handlowy",
-      Region: "Wielkopolskie",
-      Doświadczenie: "4 lata",
-      Specjalizacja: "Analizy biznesowe",
-      Email: "magdalena.zielinska@ite.pl"
-    },
-    {
-      ID_Opiekuna: 106,
-      Imię_Nazwisko: "Tomasz Lewandowski",
-      Typ_Opiekuna: "Wdrożeniowy",
-      Region: "Dolnośląskie",
-      Doświadczenie: "8 lat",
-      Specjalizacja: "Workflow365",
-      Email: "tomasz.lewandowski@ite.pl"
+      id: "ow2",
+      imie: "Katarzyna",
+      nazwisko: "Zielińska", 
+      typ: "wdrożeniowy",
+      region: "Gdańsk",
+      doswiadczenie: "4 lata",
+      specjalizacja: "Project Management",
+      email: "katarzyna.zielinska@ite.pl"
     }
   ],
   relationships: [
-    {"ID_Firmy": 1, "ID_Opiekuna": 101},
-    {"ID_Firmy": 1, "ID_Opiekuna": 106},
-    {"ID_Firmy": 2, "ID_Opiekuna": 102},
-    {"ID_Firmy": 3, "ID_Opiekuna": 103},
-    {"ID_Firmy": 4, "ID_Opiekuna": 104},
-    {"ID_Firmy": 4, "ID_Opiekuna": 101},
-    {"ID_Firmy": 5, "ID_Opiekuna": 105},
-    {"ID_Firmy": 6, "ID_Opiekuna": 102},
-    {"ID_Firmy": 7, "ID_Opiekuna": 101},
-    {"ID_Firmy": 7, "ID_Opiekuna": 106},
-    {"ID_Firmy": 8, "ID_Opiekuna": 103}
+    {"firma_id": "f1", "opiekun_id": "oh1"},
+    {"firma_id": "f1", "opiekun_id": "ow1"}, 
+    {"firma_id": "f2", "opiekun_id": "oh2"},
+    {"firma_id": "f3", "opiekun_id": "oh1"},
+    {"firma_id": "f3", "opiekun_id": "ow2"},
+    {"firma_id": "f4", "opiekun_id": "oh1"},
+    {"firma_id": "f5", "opiekun_id": "oh2"}
   ]
 };
 
@@ -152,6 +107,7 @@ let selectedNode = null;
 let currentView = 'companies'; // 'companies', 'expanded'
 let width, height;
 let zoomBehavior;
+let searchQuery = '';
 
 // Filtry
 let showSalesManagers = true;
@@ -163,10 +119,43 @@ document.addEventListener('DOMContentLoaded', function() {
   setupEventListeners();
   updateStats();
   initializeVisualization();
-  showMessage('Aplikacja załadowana pomyślnie!', 'success');
+  showMessage('Aplikacja załadowana pomyślnie! Kliknij na firmę aby zobaczyć jej opiekunów.', 'success');
 });
 
 function setupEventListeners() {
+  // Wyszukiwanie
+  const searchInput = document.getElementById('search-input');
+  const clearSearch = document.getElementById('clear-search');
+  
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      searchQuery = e.target.value.toLowerCase().trim();
+      console.log('Wyszukiwanie:', searchQuery);
+      
+      if (clearSearch) {
+        if (searchQuery) {
+          clearSearch.classList.remove('hidden');
+        } else {
+          clearSearch.classList.add('hidden');
+        }
+      }
+      
+      performSearch();
+    });
+  }
+  
+  if (clearSearch) {
+    clearSearch.addEventListener('click', function() {
+      if (searchInput) {
+        searchInput.value = '';
+        searchQuery = '';
+        clearSearch.classList.add('hidden');
+        performSearch();
+        searchInput.focus();
+      }
+    });
+  }
+
   // Checkbox filters
   const showSalesCheckbox = document.getElementById('show-sales');
   const showImplCheckbox = document.getElementById('show-implementation');
@@ -205,7 +194,7 @@ function setupEventListeners() {
     });
   }
   
-  // Excel upload
+  // Excel upload - naprawione
   const loadExcelBtn = document.getElementById('load-excel-btn');
   const excelFile = document.getElementById('excel-file');
   
@@ -213,7 +202,7 @@ function setupEventListeners() {
     loadExcelBtn.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      console.log('Otwieranie dialogu pliku...');
+      console.log('Kliknięto przycisk Excel - otwieranie dialogu...');
       excelFile.click();
     });
     
@@ -238,6 +227,77 @@ function setupEventListeners() {
   }
 }
 
+function performSearch() {
+  console.log('Wykonuję wyszukiwanie dla:', searchQuery);
+  
+  if (!searchQuery) {
+    // Usuń podświetlenia
+    if (nodeElements) {
+      nodeElements.classed('highlighted', false);
+    }
+    if (labelElements) {
+      labelElements.classed('highlighted', false);
+    }
+    showMessage('Wyszukiwanie wyczyszczone', 'info');
+    return;
+  }
+  
+  const matchingNodes = [];
+  
+  // Przeszukaj firmy
+  appData.companies.forEach(company => {
+    if (company.nazwa.toLowerCase().includes(searchQuery)) {
+      matchingNodes.push(`company_${company.id}`);
+      console.log('Znaleziono firmę:', company.nazwa);
+    }
+  });
+  
+  // Przeszukaj opiekunów
+  appData.managers.forEach(manager => {
+    const fullName = `${manager.imie} ${manager.nazwisko}`.toLowerCase();
+    if (fullName.includes(searchQuery) || 
+        manager.imie.toLowerCase().includes(searchQuery) ||
+        manager.nazwisko.toLowerCase().includes(searchQuery)) {
+      matchingNodes.push(`manager_${manager.id}`);
+      console.log('Znaleziono opiekuna:', fullName);
+    }
+  });
+  
+  console.log('Wszystkie znalezione węzły:', matchingNodes);
+  
+  // Podświetl znalezione węzły
+  if (nodeElements && nodes) {
+    nodeElements.classed('highlighted', d => {
+      const isMatch = matchingNodes.includes(d.id);
+      if (isMatch) console.log('Podświetlam węzeł:', d.id, d.name);
+      return isMatch;
+    });
+  }
+  if (labelElements && nodes) {
+    labelElements.classed('highlighted', d => matchingNodes.includes(d.id));
+  }
+  
+  // Komunikat o wynikach
+  if (matchingNodes.length > 0) {
+    showMessage(`Znaleziono ${matchingNodes.length} wyników dla "${searchQuery}"`, 'success');
+    
+    // Jeśli znaleziono dokładnie jeden element, pokaż jego szczegóły
+    if (matchingNodes.length === 1) {
+      const nodeId = matchingNodes[0];
+      const nodeData = nodes ? nodes.find(n => n.id === nodeId) : null;
+      if (nodeData) {
+        setTimeout(() => {
+          selectedNode = nodeData;
+          showExpandedView(nodeId);
+          showNodeDetails(nodeData);
+        }, 500);
+      }
+    }
+  } else {
+    showMessage(`Nie znaleziono wyników dla "${searchQuery}"`, 'warning');
+  }
+}
+
 function updateShowAllCheckbox() {
   const showAllCheckbox = document.getElementById('show-all');
   if (showAllCheckbox) {
@@ -252,12 +312,13 @@ function handleExcelUpload(event) {
     return;
   }
   
-  console.log('Wczytywanie pliku:', file.name);
+  console.log('Przetwarzanie pliku Excel:', file.name);
   showMessage('Wczytywanie pliku Excel...', 'info');
   
   const reader = new FileReader();
   reader.onload = function(e) {
     try {
+      console.log('Odczytywanie danych pliku...');
       const data = new Uint8Array(e.target.result);
       const workbook = XLSX.read(data, { type: 'array' });
       
@@ -269,51 +330,99 @@ function handleExcelUpload(event) {
       
       const missingSheets = requiredSheets.filter(sheet => !availableSheets.includes(sheet));
       if (missingSheets.length > 0) {
-        showMessage(`Brakuje arkuszy: ${missingSheets.join(', ')}`, 'error');
+        showMessage(`Brakuje arkuszy: ${missingSheets.join(', ')}. Wymagane arkusze: Firmy, Opiekunowie, Powiązania`, 'error');
+        event.target.value = '';
         return;
       }
+      
+      console.log('Parsowanie arkuszy...');
       
       // Wczytaj dane z arkuszy
       const companies = XLSX.utils.sheet_to_json(workbook.Sheets['Firmy']);
       const managers = XLSX.utils.sheet_to_json(workbook.Sheets['Opiekunowie']);
       const relationships = XLSX.utils.sheet_to_json(workbook.Sheets['Powiązania']);
       
-      console.log('Wczytano firmy:', companies.length);
-      console.log('Wczytano opiekunów:', managers.length);
-      console.log('Wczytano powiązania:', relationships.length);
+      console.log('Wczytano firmy:', companies.length, companies);
+      console.log('Wczytano opiekunów:', managers.length, managers);
+      console.log('Wczytano powiązania:', relationships.length, relationships);
       
       // Walidacja danych
-      if (companies.length === 0 || managers.length === 0) {
-        showMessage('Plik Excel nie zawiera wystarczających danych', 'error');
+      if (companies.length === 0) {
+        showMessage('Arkusz "Firmy" jest pusty lub nie zawiera danych', 'error');
+        event.target.value = '';
         return;
       }
       
-      // Aktualizuj dane aplikacji
-      appData = {
-        companies: companies,
-        managers: managers,
-        relationships: relationships
+      if (managers.length === 0) {
+        showMessage('Arkusz "Opiekunowie" jest pusty lub nie zawiera danych', 'error');
+        event.target.value = '';
+        return;
+      }
+      
+      // Przekształć dane do formatu aplikacji
+      const transformedData = {
+        companies: companies.map((company, index) => ({
+          id: `f${index + 1}`,
+          nazwa: company.Nazwa || company.nazwa || `Firma ${index + 1}`,
+          branza: company.Branża || company.branza || 'Nie podano',
+          lokalizacja: company.Lokalizacja || company.lokalizacja || 'Nie podano',
+          wielkosc: company.Wielkość || company.wielkosc || 'Nie podano', 
+          status: company.Status || company.status || 'Aktywna',
+          obrot_z_ite: company['Obrót z ITE'] || company.obrot_z_ite || 'Brak danych'
+        })),
+        managers: managers.map((manager, index) => ({
+          id: `o${index + 1}`,
+          imie: manager.Imię || manager.imie || 'Imię',
+          nazwisko: manager.Nazwisko || manager.nazwisko || 'Nazwisko',
+          typ: (manager.Typ || manager.typ || 'handlowy').toLowerCase(),
+          region: manager.Region || manager.region || 'Nie podano',
+          doswiadczenie: manager.Doświadczenie || manager.doswiadczenie || 'Nie podano',
+          specjalizacja: manager.Specjalizacja || manager.specjalizacja || 'Nie podano',
+          email: manager.Email || manager.email || 'brak@ite.pl'
+        })),
+        relationships: relationships.map(rel => ({
+          firma_id: rel.firma_id || rel.ID_Firmy || rel.Firma_ID,
+          opiekun_id: rel.opiekun_id || rel.ID_Opiekuna || rel.Opiekun_ID
+        })).filter(rel => rel.firma_id && rel.opiekun_id)
       };
+      
+      console.log('Przekształcone dane:', transformedData);
+      
+      // Aktualizuj dane aplikacji
+      appData = transformedData;
+      
+      // Wyczyść wyszukiwanie
+      const searchInput = document.getElementById('search-input');
+      const clearSearch = document.getElementById('clear-search');
+      if (searchInput) {
+        searchInput.value = '';
+        searchQuery = '';
+      }
+      if (clearSearch) {
+        clearSearch.classList.add('hidden');
+      }
       
       // Odśwież wizualizację
       clearSelection();
       refreshVisualization();
       updateStats();
       
-      showMessage(`Wczytano: ${companies.length} firm, ${managers.length} opiekunów`, 'success');
+      showMessage(`Pomyślnie wczytano: ${transformedData.companies.length} firm, ${transformedData.managers.length} opiekunów, ${transformedData.relationships.length} powiązań`, 'success');
       
       // Wyczyść input
       event.target.value = '';
       
     } catch (error) {
-      console.error('Błąd podczas wczytywania Excel:', error);
+      console.error('Błąd podczas przetwarzania Excel:', error);
       showMessage('Błąd podczas wczytywania pliku Excel: ' + error.message, 'error');
+      event.target.value = '';
     }
   };
   
   reader.onerror = function(error) {
     console.error('Błąd odczytu pliku:', error);
     showMessage('Błąd podczas odczytu pliku', 'error');
+    event.target.value = '';
   };
   
   reader.readAsArrayBuffer(file);
@@ -353,44 +462,27 @@ function initializeVisualization() {
   // Grupa główna
   const g = svg.append('g').attr('class', 'zoom-group');
   
-  // Defs dla gradientów
-  const defs = svg.append('defs');
-  
-  // Gradient dla linków
-  const gradient = defs.append('linearGradient')
-    .attr('id', 'link-gradient')
-    .attr('gradientUnits', 'userSpaceOnUse');
-  
-  gradient.append('stop')
-    .attr('offset', '0%')
-    .attr('stop-color', '#1877F2')
-    .attr('stop-opacity', 0.8);
-  
-  gradient.append('stop')
-    .attr('offset', '100%')
-    .attr('stop-color', '#1877F2')
-    .attr('stop-opacity', 0.8);
-  
-  // Natychmiast pokaż widok firm bez opóźnień
+  // Natychmiast pokaż widok firm
   showCompaniesView();
 }
 
 function showCompaniesView() {
-  console.log('Pokazuję widok firm');
+  console.log('Pokazuję widok firm - liczba firm:', appData.companies.length);
   currentView = 'companies';
   selectedNode = null;
   
   // Przygotuj dane - tylko firmy
   const graphData = {
     nodes: appData.companies.map(company => ({
-      id: `company_${company.ID_Firmy}`,
+      id: `company_${company.id}`,
       type: 'company',
-      name: company.Nazwa_Firmy,
+      name: company.nazwa,
       data: company
     })),
     links: []
   };
   
+  console.log('Dane grafu firm:', graphData);
   updateVisualization(graphData);
   clearDetailsPanel();
 }
@@ -409,15 +501,15 @@ function prepareExpandedData(centerNodeId) {
   
   // Sprawdź typ centralnego węzła
   if (centerNodeId.startsWith('company_')) {
-    const companyId = parseInt(centerNodeId.replace('company_', ''));
-    const company = appData.companies.find(c => c.ID_Firmy === companyId);
+    const companyId = centerNodeId.replace('company_', '');
+    const company = appData.companies.find(c => c.id === companyId);
     
     if (company) {
-      // Dodaj firmę
+      // Dodaj firmę w centrum
       nodes.push({
         id: centerNodeId,
         type: 'company',
-        name: company.Nazwa_Firmy,
+        name: company.nazwa,
         data: company,
         fx: width / 2,
         fy: height / 2
@@ -425,20 +517,25 @@ function prepareExpandedData(centerNodeId) {
       
       // Znajdź powiązanych opiekunów
       const relatedManagers = appData.relationships
-        .filter(rel => rel.ID_Firmy === companyId)
-        .map(rel => appData.managers.find(m => m.ID_Opiekuna === rel.ID_Opiekuna))
+        .filter(rel => rel.firma_id === companyId)
+        .map(rel => appData.managers.find(m => m.id === rel.opiekun_id))
         .filter(manager => manager && shouldShowManager(manager));
       
-      console.log('Powiązani opiekunowie:', relatedManagers.length);
+      console.log('Powiązani opiekunowie dla firmy:', company.nazwa, relatedManagers);
       
-      // Dodaj opiekunów
-      relatedManagers.forEach(manager => {
-        const managerId = `manager_${manager.ID_Opiekuna}`;
+      // Dodaj opiekunów w okręgu wokół firmy
+      relatedManagers.forEach((manager, index) => {
+        const managerId = `manager_${manager.id}`;
+        const angle = (2 * Math.PI * index) / relatedManagers.length;
+        const radius = 150;
+        
         nodes.push({
           id: managerId,
-          type: manager.Typ_Opiekuna.toLowerCase() === 'handlowy' ? 'sales' : 'implementation',
-          name: manager.Imię_Nazwisko,
-          data: manager
+          type: manager.typ === 'handlowy' ? 'sales' : 'implementation',
+          name: `${manager.imie} ${manager.nazwisko}`,
+          data: manager,
+          fx: width / 2 + Math.cos(angle) * radius,
+          fy: height / 2 + Math.sin(angle) * radius
         });
         
         // Dodaj link
@@ -450,15 +547,15 @@ function prepareExpandedData(centerNodeId) {
       });
     }
   } else if (centerNodeId.startsWith('manager_')) {
-    const managerId = parseInt(centerNodeId.replace('manager_', ''));
-    const manager = appData.managers.find(m => m.ID_Opiekuna === managerId);
+    const managerId = centerNodeId.replace('manager_', '');
+    const manager = appData.managers.find(m => m.id === managerId);
     
     if (manager && shouldShowManager(manager)) {
-      // Dodaj opiekuna
+      // Dodaj opiekuna w centrum
       nodes.push({
         id: centerNodeId,
-        type: manager.Typ_Opiekuna.toLowerCase() === 'handlowy' ? 'sales' : 'implementation',
-        name: manager.Imię_Nazwisko,
+        type: manager.typ === 'handlowy' ? 'sales' : 'implementation',
+        name: `${manager.imie} ${manager.nazwisko}`,
         data: manager,
         fx: width / 2,
         fy: height / 2
@@ -466,20 +563,25 @@ function prepareExpandedData(centerNodeId) {
       
       // Znajdź powiązane firmy
       const relatedCompanies = appData.relationships
-        .filter(rel => rel.ID_Opiekuna === managerId)
-        .map(rel => appData.companies.find(c => c.ID_Firmy === rel.ID_Firmy))
+        .filter(rel => rel.opiekun_id === managerId)
+        .map(rel => appData.companies.find(c => c.id === rel.firma_id))
         .filter(company => company);
       
-      console.log('Powiązane firmy:', relatedCompanies.length);
+      console.log('Powiązane firmy dla opiekuna:', `${manager.imie} ${manager.nazwisko}`, relatedCompanies);
       
-      // Dodaj firmy
-      relatedCompanies.forEach(company => {
-        const companyId = `company_${company.ID_Firmy}`;
+      // Dodaj firmy w okręgu wokół opiekuna
+      relatedCompanies.forEach((company, index) => {
+        const companyId = `company_${company.id}`;
+        const angle = (2 * Math.PI * index) / relatedCompanies.length;
+        const radius = 150;
+        
         nodes.push({
           id: companyId,
           type: 'company',
-          name: company.Nazwa_Firmy,
-          data: company
+          name: company.nazwa,
+          data: company,
+          fx: width / 2 + Math.cos(angle) * radius,
+          fy: height / 2 + Math.sin(angle) * radius
         });
         
         // Dodaj link
@@ -496,9 +598,9 @@ function prepareExpandedData(centerNodeId) {
 }
 
 function shouldShowManager(manager) {
-  if (manager.Typ_Opiekuna.toLowerCase() === 'handlowy') {
+  if (manager.typ === 'handlowy') {
     return showSalesManagers;
-  } else if (manager.Typ_Opiekuna.toLowerCase() === 'wdrożeniowy') {
+  } else if (manager.typ === 'wdrożeniowy') {
     return showImplementationManagers;
   }
   return false;
@@ -522,16 +624,18 @@ function updateVisualization(graphData) {
     .force('link', d3.forceLink(links).id(d => d.id).distance(120))
     .force('charge', d3.forceManyBody().strength(-800))
     .force('center', d3.forceCenter(width / 2, height / 2))
-    .force('collision', d3.forceCollide().radius(d => getNodeRadius(d) + 10));
+    .force('collision', d3.forceCollide().radius(d => getNodeRadius(d) + 15));
   
   // Linki
-  linkElements = g.append('g')
-    .attr('class', 'links')
-    .selectAll('line')
-    .data(links)
-    .enter()
-    .append('line')
-    .attr('class', 'link');
+  if (links.length > 0) {
+    linkElements = g.append('g')
+      .attr('class', 'links')
+      .selectAll('line')
+      .data(links)
+      .enter()
+      .append('line')
+      .attr('class', 'link');
+  }
   
   // Węzły
   nodeElements = g.append('g')
@@ -560,7 +664,9 @@ function updateVisualization(graphData) {
     .append('text')
     .attr('class', 'node-label')
     .attr('dy', d => getNodeRadius(d) + 20)
-    .text(d => truncateText(d.name, 15));
+    .text(d => truncateText(d.name, 20))
+    .style('cursor', 'pointer')
+    .on('click', handleNodeClick);
   
   // Aktualizacja pozycji podczas symulacji
   simulation.on('tick', function() {
@@ -585,6 +691,11 @@ function updateVisualization(graphData) {
     }
   });
   
+  // Ponownie zastosuj wyszukiwanie jeśli jest aktywne
+  if (searchQuery) {
+    setTimeout(() => performSearch(), 100);
+  }
+  
   // Aktualizuj licznik widocznych węzłów
   const visibleNodesEl = document.getElementById('visible-nodes');
   if (visibleNodesEl) {
@@ -594,10 +705,10 @@ function updateVisualization(graphData) {
 
 function getNodeRadius(d) {
   switch (d.type) {
-    case 'company': return 30;
-    case 'sales': return 20;
-    case 'implementation': return 20;
-    default: return 15;
+    case 'company': return 35;
+    case 'sales': return 25;
+    case 'implementation': return 25;
+    default: return 20;
   }
 }
 
@@ -622,12 +733,12 @@ function handleNodeClick(event, d) {
   // Pokaż rozszerzone powiązania
   showExpandedView(d.id);
   
-  // Pokaż szczegóły natychmiast
+  // Pokaż szczegóły
   showNodeDetails(d);
 }
 
 function showNodeDetails(node) {
-  console.log('Pokazuję szczegóły dla:', node);
+  console.log('Pokazuję szczegóły dla węzła:', node);
   
   const noSelection = document.getElementById('no-selection');
   const selectionDetails = document.getElementById('selection-details');
@@ -643,107 +754,110 @@ function showNodeDetails(node) {
   let detailsHTML = '';
   
   if (node.type === 'company') {
-    const relatedManagers = getRelatedManagers(node.data.ID_Firmy);
+    const relatedManagers = getRelatedManagers(node.data.id);
     
     detailsHTML = `
-      <h4>Firma: ${node.data.Nazwa_Firmy}</h4>
+      <h4>🏢 Firma: ${node.data.nazwa}</h4>
       <div class="detail-section">
         <div class="detail-item">
           <span class="detail-label">Branża:</span>
-          <span class="detail-value">${node.data.Branża}</span>
+          <span class="detail-value">${node.data.branza}</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Lokalizacja:</span>
-          <span class="detail-value">${node.data.Lokalizacja}</span>
+          <span class="detail-value">${node.data.lokalizacja}</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Wielkość:</span>
-          <span class="detail-value">${node.data.Wielkość_Firmy}</span>
+          <span class="detail-value">${node.data.wielkosc}</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Status:</span>
-          <span class="detail-value">${node.data.Status}</span>
+          <span class="detail-value">${node.data.status}</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Obrót z ITE:</span>
-          <span class="detail-value">${node.data.Obrót_z_ITE || 'Brak danych'}</span>
+          <span class="detail-value"><strong>${node.data.obrot_z_ite}</strong></span>
         </div>
       </div>
-      <h4>Opiekunowie (${relatedManagers.length})</h4>
+      <h4>👥 Opiekunowie (${relatedManagers.length})</h4>
       <ul class="connections-list">
-        ${relatedManagers.map(manager => `
-          <li class="connection-item" onclick="focusOnManager(${manager.ID_Opiekuna})">
-            <div class="connection-name">${manager.Imię_Nazwisko}</div>
-            <div class="connection-details">${manager.Typ_Opiekuna} • ${manager.Specjalizacja}</div>
+        ${relatedManagers.length > 0 ? relatedManagers.map(manager => `
+          <li class="connection-item" onclick="focusOnManager('${manager.id}')">
+            <div class="connection-name">${manager.imie} ${manager.nazwisko}</div>
+            <div class="connection-details">${manager.typ.charAt(0).toUpperCase() + manager.typ.slice(1)} • ${manager.specjalizacja}</div>
           </li>
-        `).join('')}
+        `).join('') : '<li class="connection-item">Brak przypisanych opiekunów</li>'}
       </ul>
     `;
   } else {
-    const relatedCompanies = getRelatedCompanies(node.data.ID_Opiekuna);
+    const relatedCompanies = getRelatedCompanies(node.data.id);
     
     detailsHTML = `
-      <h4>Opiekun: ${node.data.Imię_Nazwisko}</h4>
+      <h4>👤 Opiekun: ${node.data.imie} ${node.data.nazwisko}</h4>
       <div class="detail-section">
         <div class="detail-item">
           <span class="detail-label">Typ:</span>
-          <span class="detail-value">${node.data.Typ_Opiekuna}</span>
+          <span class="detail-value">${node.data.typ.charAt(0).toUpperCase() + node.data.typ.slice(1)}</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Region:</span>
-          <span class="detail-value">${node.data.Region}</span>
+          <span class="detail-value">${node.data.region}</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Doświadczenie:</span>
-          <span class="detail-value">${node.data.Doświadczenie}</span>
+          <span class="detail-value">${node.data.doswiadczenie}</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Specjalizacja:</span>
-          <span class="detail-value">${node.data.Specjalizacja}</span>
+          <span class="detail-value">${node.data.specjalizacja}</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Email:</span>
-          <span class="detail-value">${node.data.Email}</span>
+          <span class="detail-value"><a href="mailto:${node.data.email}">${node.data.email}</a></span>
         </div>
       </div>
-      <h4>Firmy (${relatedCompanies.length})</h4>
+      <h4>🏢 Firmy (${relatedCompanies.length})</h4>
       <ul class="connections-list">
-        ${relatedCompanies.map(company => `
-          <li class="connection-item" onclick="focusOnCompany(${company.ID_Firmy})">
-            <div class="connection-name">${company.Nazwa_Firmy}</div>
-            <div class="connection-details">${company.Branża} • ${company.Lokalizacja}</div>
+        ${relatedCompanies.length > 0 ? relatedCompanies.map(company => `
+          <li class="connection-item" onclick="focusOnCompany('${company.id}')">
+            <div class="connection-name">${company.nazwa}</div>
+            <div class="connection-details">${company.branza} • ${company.lokalizacja}</div>
           </li>
-        `).join('')}
+        `).join('') : '<li class="connection-item">Brak przypisanych firm</li>'}
       </ul>
     `;
   }
   
   selectionDetails.innerHTML = detailsHTML;
+  
+  console.log('Szczegóły zaktualizowane w panelu');
 }
 
 function getRelatedManagers(companyId) {
   return appData.relationships
-    .filter(rel => rel.ID_Firmy === companyId)
-    .map(rel => appData.managers.find(m => m.ID_Opiekuna === rel.ID_Opiekuna))
+    .filter(rel => rel.firma_id === companyId)
+    .map(rel => appData.managers.find(m => m.id === rel.opiekun_id))
     .filter(manager => manager && shouldShowManager(manager));
 }
 
 function getRelatedCompanies(managerId) {
   return appData.relationships
-    .filter(rel => rel.ID_Opiekuna === managerId)
-    .map(rel => appData.companies.find(c => c.ID_Firmy === rel.ID_Firmy))
+    .filter(rel => rel.opiekun_id === managerId)
+    .map(rel => appData.companies.find(c => c.id === rel.firma_id))
     .filter(company => company);
 }
 
 // Funkcje globalne dla onclick
 window.focusOnManager = function(managerId) {
+  console.log('Fokus na opiekuna:', managerId);
   const nodeId = `manager_${managerId}`;
-  const manager = appData.managers.find(m => m.ID_Opiekuna === managerId);
+  const manager = appData.managers.find(m => m.id === managerId);
   if (manager && shouldShowManager(manager)) {
     const nodeData = {
       id: nodeId,
-      type: manager.Typ_Opiekuna.toLowerCase() === 'handlowy' ? 'sales' : 'implementation',
-      name: manager.Imię_Nazwisko,
+      type: manager.typ === 'handlowy' ? 'sales' : 'implementation',
+      name: `${manager.imie} ${manager.nazwisko}`,
       data: manager
     };
     selectedNode = nodeData;
@@ -753,13 +867,14 @@ window.focusOnManager = function(managerId) {
 };
 
 window.focusOnCompany = function(companyId) {
+  console.log('Fokus na firmę:', companyId);
   const nodeId = `company_${companyId}`;
-  const company = appData.companies.find(c => c.ID_Firmy === companyId);
+  const company = appData.companies.find(c => c.id === companyId);
   if (company) {
     const nodeData = {
       id: nodeId,
       type: 'company',
-      name: company.Nazwa_Firmy,
+      name: company.nazwa,
       data: company
     };
     selectedNode = nodeData;
@@ -809,8 +924,8 @@ function centerView() {
 
 function updateStats() {
   const totalCompanies = appData.companies.length;
-  const salesManagers = appData.managers.filter(m => m.Typ_Opiekuna.toLowerCase() === 'handlowy').length;
-  const implManagers = appData.managers.filter(m => m.Typ_Opiekuna.toLowerCase() === 'wdrożeniowy').length;
+  const salesManagers = appData.managers.filter(m => m.typ === 'handlowy').length;
+  const implManagers = appData.managers.filter(m => m.typ === 'wdrożeniowy').length;
   
   const totalCompaniesEl = document.getElementById('total-companies');
   const totalSalesEl = document.getElementById('total-sales');
@@ -819,6 +934,8 @@ function updateStats() {
   if (totalCompaniesEl) totalCompaniesEl.textContent = totalCompanies;
   if (totalSalesEl) totalSalesEl.textContent = salesManagers;
   if (totalImplEl) totalImplEl.textContent = implManagers;
+  
+  console.log('Statystyki zaktualizowane:', { totalCompanies, salesManagers, implManagers });
 }
 
 function showTooltip(event, d) {
@@ -828,18 +945,18 @@ function showTooltip(event, d) {
   let content = '';
   if (d.type === 'company') {
     content = `
-      <h4>${d.data.Nazwa_Firmy}</h4>
-      <p><strong>Branża:</strong> ${d.data.Branża}</p>
-      <p><strong>Lokalizacja:</strong> ${d.data.Lokalizacja}</p>
-      <p><strong>Status:</strong> ${d.data.Status}</p>
-      <p><strong>Obrót z ITE:</strong> ${d.data.Obrót_z_ITE || 'Brak danych'}</p>
+      <h4>${d.data.nazwa}</h4>
+      <p><strong>Branża:</strong> ${d.data.branza}</p>
+      <p><strong>Lokalizacja:</strong> ${d.data.lokalizacja}</p>
+      <p><strong>Status:</strong> ${d.data.status}</p>
+      <p><strong>Obrót z ITE:</strong> ${d.data.obrot_z_ite}</p>
     `;
   } else {
     content = `
-      <h4>${d.data.Imię_Nazwisko}</h4>
-      <p><strong>Typ:</strong> ${d.data.Typ_Opiekuna}</p>
-      <p><strong>Specjalizacja:</strong> ${d.data.Specjalizacja}</p>
-      <p><strong>Region:</strong> ${d.data.Region}</p>
+      <h4>${d.data.imie} ${d.data.nazwisko}</h4>
+      <p><strong>Typ:</strong> ${d.data.typ.charAt(0).toUpperCase() + d.data.typ.slice(1)}</p>
+      <p><strong>Specjalizacja:</strong> ${d.data.specjalizacja}</p>
+      <p><strong>Region:</strong> ${d.data.region}</p>
     `;
   }
   
@@ -872,7 +989,9 @@ function showMessage(text, type = 'info') {
     if (message.parentNode) {
       message.remove();
     }
-  }, 5000);
+  }, 4000);
+  
+  console.log('Komunikat:', text, type);
 }
 
 // Funkcje drag and drop dla D3
@@ -915,7 +1034,7 @@ window.addEventListener('resize', function() {
 
 // Obsługa kliknięcia w tło SVG
 document.addEventListener('click', function(event) {
-  if (event.target.closest('#network-svg') && !event.target.closest('.node')) {
+  if (event.target.closest('#network-svg') && !event.target.closest('.node') && !event.target.closest('.node-label')) {
     if (currentView === 'expanded') {
       resetView();
     }
