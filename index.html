@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflow365 CRM - Logowanie</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <!-- Strona logowania -->
+    <div id="login-page" class="login-page">
+        <div class="login-container glass">
+            <div class="login-header">
+                <img src="https://ite.pl/grafiki/workflow365.png" alt="Workflow365" class="login-logo" onerror="this.style.display='none';">
+                <h1>Workflow365 CRM</h1>
+                <p>Zaloguj się do systemu</p>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email / Login</label>
+                    <input type="email" id="email" name="email" class="form-control" required 
+                           placeholder="Wprowadź swój email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Hasło</label>
+                    <input type="password" id="password" name="password" class="form-control" required
+                           placeholder="Wprowadź hasło">
+                </div>
+                
+                <button type="submit" class="btn btn--primary btn--full-width glass-btn" id="login-btn">
+                    Zaloguj się
+                </button>
+                
+                <div id="login-error" class="login-error hidden">
+                    Nieprawidłowy email lub hasło
+                </div>
+            </form>
+            
+            <div class="login-footer">
+                <p>Przykładowe konta:</p>
+                <div class="demo-accounts">
+                    <div class="demo-account">
+                        <strong>Admin:</strong> admin@ite.pl / admin123
+                    </div>
+                    <div class="demo-account">
+                        <strong>Manager:</strong> manager@ite.pl / manager123
+                    </div>
+                    <div class="demo-account">
+                        <strong>User:</strong> user@ite.pl / user123
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główna aplikacja CRM -->
+    <div id="main-app" class="app-container hidden">
+        <!-- Header z kontrolkami -->
+        <header class="app-header glass">
+            <div class="header-content">
+                <div class="header-left">
+                    <img src="https://ite.pl/grafiki/workflow365.png" alt="Workflow365" class="logo" onerror="this.style.display='none';">
+                </div>
+                <div class="header-center">
+                    <div class="user-info">
+                        <span class="welcome-text">Witaj, <span id="current-user-name">Użytkownik</span>!</span>
+                        <span class="user-role" id="current-user-role">Rola</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="controls-section">
+                        <div class="filter-controls">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="show-sales" checked>
+                                <span class="checkmark"></span>
+                                Opiekunowie handlowi
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="show-implementation" checked>
+                                <span class="checkmark"></span>
+                                Opiekunowie wdrożeniowi
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="show-all" checked>
+                                <span class="checkmark"></span>
+                                Wszystko
+                            </label>
+                        </div>
+                        <div class="excel-controls">
+                            <input type="file" id="excel-file" accept=".xlsx,.xls" style="display: none;">
+                            <button id="load-excel-btn" class="btn btn--primary glass-btn">
+                                📊 Wczytaj Excel
+                            </button>
+                        </div>
+                        <button id="logout-btn" class="btn btn--outline glass-btn logout-btn">
+                            🚪 Wyloguj
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Główny kontener -->
+        <div class="main-content">
+            <!-- Wizualizacja -->
+            <main class="visualization-area glass">
+                <div class="viz-header">
+                    <h2>Sieć Połączeń</h2>
+                    <div class="viz-controls">
+                        <button id="reset-view" class="btn btn--outline btn--sm glass-btn">🔄 Reset</button>
+                        <button id="center-view" class="btn btn--outline btn--sm glass-btn">🎯 Centruj</button>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <div class="legend-dot company-dot"></div>
+                                <span>Firmy</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot sales-dot"></div>
+                                <span>Op. handlowi</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot impl-dot"></div>
+                                <span>Op. wdrożeniowi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="network-visualization" class="network-container">
+                    <svg id="network-svg"></svg>
+                    <div id="loading" class="loading-overlay glass hidden">
+                        <div class="loading-spinner"></div>
+                        <p>Ładowanie danych...</p>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Panel szczegółów -->
+            <aside class="details-panel glass">
+                <div class="panel-header">
+                    <h3>Szczegóły</h3>
+                    <button id="close-details" class="btn btn--outline btn--sm">✕</button>
+                </div>
+                <div class="panel-content">
+                    <div id="no-selection" class="no-selection">
+                        <div class="no-selection-icon">🎯</div>
+                        <p>Kliknij na firmę lub opiekuna aby zobaczyć szczegóły</p>
+                    </div>
+                    <div id="selection-details" class="selection-details hidden">
+                        <!-- Szczegóły będą wstawiane przez JavaScript -->
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Dolny panel ze statystykami -->
+        <footer class="stats-footer glass">
+            <div class="stats-container">
+                <div class="stat-card glass">
+                    <div class="stat-value" id="total-companies">5</div>
+                    <div class="stat-label">Firm</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-value" id="total-sales">4</div>
+                    <div class="stat-label">Op. handlowi</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-value" id="total-impl">4</div>
+                    <div class="stat-label">Op. wdrożeniowi</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-value" id="visible-nodes">5</div>
+                    <div class="stat-label">Widoczne</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-value" id="total-turnover">1 900 000 PLN</div>
+                    <div class="stat-label">Łączny obrót</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-value" id="average-turnover">380 000 PLN</div>
+                    <div class="stat-label">Średni obrót</div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Tooltip -->
+        <div id="tooltip" class="tooltip glass hidden">
+            <div class="tooltip-content">
+                <!-- Zawartość będzie wstawiana przez JavaScript -->
+            </div>
+        </div>
+
+        <!-- Komunikaty -->
+        <div id="message-container" class="message-container">
+            <!-- Komunikaty będą wstawiane przez JavaScript -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

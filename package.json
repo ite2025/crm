@@ -1,0 +1,33 @@
+{
+  "name": "workflow365-crm",
+  "version": "1.0.0",
+  "description": "Workflow365 CRM - System zarządzania relacjami z klientami z mapą powiązań i systemem logowania",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite",
+    "vercel-build": "vite build"
+  },
+  "keywords": [
+    "crm",
+    "workflow365",
+    "react",
+    "d3",
+    "visualization"
+  ],
+  "author": "IT Excellence S.A.",
+  "license": "MIT",
+  "dependencies": {
+    "d3": "^7.8.5",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "@vitejs/plugin-legacy": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
