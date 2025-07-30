@@ -3,131 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workflow365 CRM</title>
+    <title>Mapa Relacji CRM - Wizualizacja Połączeń</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
     <div class="app-container">
-        <!-- Header z kontrolkami -->
-        <header class="app-header glass">
+        <!-- Header -->
+        <header class="app-header">
             <div class="header-content">
-                <div class="header-left">
-                    <img src="https://ite.pl/grafiki/workflow365.png" alt="Workflow365" class="logo" onerror="this.style.display='none';">
-                </div>
-                <div class="controls-section">
-                    <div class="filter-controls">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="show-sales" checked>
-                            <span class="checkmark"></span>
-                            Opiekunowie handlowi
-                        </label>
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="show-implementation" checked>
-                            <span class="checkmark"></span>
-                            Opiekunowie wdrożeniowi
-                        </label>
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="show-all" checked>
-                            <span class="checkmark"></span>
-                            Wszystko
-                        </label>
-                    </div>
-                    <div class="excel-controls">
-                        <input type="file" id="excel-file" accept=".xlsx,.xls" style="display: none;">
-                        <button id="load-excel-btn" class="btn btn--primary glass-btn">
-                            📊 Wczytaj Excel
-                        </button>
-                    </div>
-                </div>
+                <h1>Mapa Relacji CRM</h1>
+                <p>Wizualizacja połączeń między firmami a opiekunami handlowymi</p>
             </div>
         </header>
 
-        <!-- Główny kontener -->
+        <!-- Main Content -->
         <div class="main-content">
-            <!-- Wizualizacja -->
-            <main class="visualization-area glass">
+            <!-- Side Panel -->
+            <aside class="side-panel">
+                <div class="panel-section">
+                    <h3>Statystyki</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-value" id="total-companies">5</span>
+                            <span class="stat-label">Firm</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="total-reps">4</span>
+                            <span class="stat-label">Opiekunów</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="avg-companies">1.8</span>
+                            <span class="stat-label">Śr. firm/opiekun</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Wyszukiwanie</h3>
+                    <div class="form-group">
+                        <input type="text" id="search-input" placeholder="Szukaj firm lub opiekunów..." class="form-control">
+                    </div>
+                    <button id="clear-search" class="btn btn--secondary btn--sm">Wyczyść</button>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Lista Firm</h3>
+                    <div id="companies-list" class="companies-list">
+                        <!-- Companies will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Opiekunowie Handlowi</h3>
+                    <div id="reps-list" class="reps-list">
+                        <!-- Sales reps will be populated by JavaScript -->
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Visualization Area -->
+            <main class="visualization-area">
                 <div class="viz-header">
-                    <h2>Sieć Połączeń</h2>
+                    <h2>Mapa Połączeń</h2>
                     <div class="viz-controls">
-                        <button id="reset-view" class="btn btn--outline btn--sm glass-btn">🔄 Reset</button>
-                        <button id="center-view" class="btn btn--outline btn--sm glass-btn">🎯 Centruj</button>
+                        <button id="reset-zoom" class="btn btn--outline btn--sm">Reset widoku</button>
                         <div class="legend">
                             <div class="legend-item">
                                 <div class="legend-dot company-dot"></div>
                                 <span>Firmy</span>
                             </div>
                             <div class="legend-item">
-                                <div class="legend-dot sales-dot"></div>
-                                <span>Op. handlowi</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-dot impl-dot"></div>
-                                <span>Op. wdrożeniowi</span>
+                                <div class="legend-dot rep-dot"></div>
+                                <span>Opiekunowie</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="network-visualization" class="network-container">
                     <svg id="network-svg"></svg>
-                    <div id="loading" class="loading-overlay glass hidden">
-                        <div class="loading-spinner"></div>
-                        <p>Ładowanie danych...</p>
-                    </div>
                 </div>
             </main>
-
-            <!-- Panel szczegółów -->
-            <aside class="details-panel glass">
-                <div class="panel-header">
-                    <h3>Szczegóły</h3>
-                    <button id="close-details" class="btn btn--outline btn--sm">✕</button>
-                </div>
-                <div class="panel-content">
-                    <div id="no-selection" class="no-selection">
-                        <div class="no-selection-icon">🎯</div>
-                        <p>Kliknij na firmę lub opiekuna aby zobaczyć szczegóły</p>
-                    </div>
-                    <div id="selection-details" class="selection-details hidden">
-                        <!-- Szczegóły będą wstawiane przez JavaScript -->
-                    </div>
-                </div>
-            </aside>
         </div>
 
-        <!-- Dolny panel ze statystykami -->
-        <footer class="stats-footer glass">
-            <div class="stats-container">
-                <div class="stat-card glass">
-                    <div class="stat-value" id="total-companies">8</div>
-                    <div class="stat-label">Firm</div>
+        <!-- Details Modal -->
+        <div id="details-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Szczegóły</h3>
+                    <button id="close-modal" class="btn btn--outline btn--sm">×</button>
                 </div>
-                <div class="stat-card glass">
-                    <div class="stat-value" id="total-sales">3</div>
-                    <div class="stat-label">Op. handlowi</div>
-                </div>
-                <div class="stat-card glass">
-                    <div class="stat-value" id="total-impl">3</div>
-                    <div class="stat-label">Op. wdrożeniowi</div>
-                </div>
-                <div class="stat-card glass">
-                    <div class="stat-value" id="visible-nodes">8</div>
-                    <div class="stat-label">Widoczne</div>
+                <div id="modal-body" class="modal-body">
+                    <!-- Details will be populated by JavaScript -->
                 </div>
             </div>
-        </footer>
-
-        <!-- Tooltip -->
-        <div id="tooltip" class="tooltip glass hidden">
-            <div class="tooltip-content">
-                <!-- Zawartość będzie wstawiana przez JavaScript -->
-            </div>
-        </div>
-
-        <!-- Komunikaty -->
-        <div id="message-container" class="message-container">
-            <!-- Komunikaty będą wstawiane przez JavaScript -->
         </div>
     </div>
 

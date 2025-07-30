@@ -1,344 +1,184 @@
-// Dane domyślne aplikacji
-let appData = {
-  companies: [
+// Data
+const data = {
+  "companies": [
     {
-      ID_Firmy: 1,
-      Nazwa_Firmy: "IT Excellence S.A.",
-      Branża: "Technologie IT",
-      Lokalizacja: "Wrocław",
-      Wielkość_Firmy: "Duża (500+ pracowników)",
-      Status: "Aktywny"
+      "id": "1",
+      "name": "IT Excellence S.A.",
+      "industry": "Technologie IT",
+      "location": "Wrocław",
+      "size": "Średnia",
+      "assignedReps": ["rep1", "rep2"]
     },
     {
-      ID_Firmy: 2,
-      Nazwa_Firmy: "TechnoSoft Sp. z o.o.",
-      Branża: "Oprogramowanie",
-      Lokalizacja: "Warszawa",
-      Wielkość_Firmy: "Średnia (50-250 pracowników)",
-      Status: "Aktywny"
+      "id": "2", 
+      "name": "TechPol Sp. z o.o.",
+      "industry": "Software",
+      "location": "Warszawa",
+      "size": "Duża",
+      "assignedReps": ["rep1"]
     },
     {
-      ID_Firmy: 3,
-      Nazwa_Firmy: "Digital Solutions Ltd.",
-      Branża: "Usługi cyfrowe",
-      Lokalizacja: "Kraków",
-      Wielkość_Firmy: "Mała (10-50 pracowników)",
-      Status: "Potencjalny"
+      "id": "3",
+      "name": "Digital Solutions",
+      "industry": "Konsulting IT",
+      "location": "Kraków",
+      "size": "Mała",
+      "assignedReps": ["rep3"]
     },
     {
-      ID_Firmy: 4,
-      Nazwa_Firmy: "InnovateCorp S.A.",
-      Branża: "Innowacje technologiczne",
-      Lokalizacja: "Gdańsk",
-      Wielkość_Firmy: "Duża (500+ pracowników)",
-      Status: "Aktywny"
+      "id": "4",
+      "name": "InnovateTech",
+      "industry": "Rozwój oprogramowania",
+      "location": "Gdańsk",
+      "size": "Średnia",
+      "assignedReps": ["rep2", "rep3"]
     },
     {
-      ID_Firmy: 5,
-      Nazwa_Firmy: "DataFlow Systems",
-      Branża: "Analiza danych",
-      Lokalizacja: "Poznań",
-      Wielkość_Firmy: "Średnia (50-250 pracowników)",
-      Status: "Aktywny"
-    },
-    {
-      ID_Firmy: 6,
-      Nazwa_Firmy: "CloudTech Poland",
-      Branża: "Chmura obliczeniowa",
-      Lokalizacja: "Warszawa",
-      Wielkość_Firmy: "Mała (10-50 pracowników)",
-      Status: "Potencjalny"
-    },
-    {
-      ID_Firmy: 7,
-      Nazwa_Firmy: "SmartBusiness S.A.",
-      Branża: "Rozwiązania biznesowe",
-      Lokalizacja: "Wrocław",
-      Wielkość_Firmy: "Średnia (50-250 pracowników)",
-      Status: "Aktywny"
-    },
-    {
-      ID_Firmy: 8,
-      Nazwa_Firmy: "NextGen Software",
-      Branża: "Tworzenie oprogramowania",
-      Lokalizacja: "Kraków",
-      Wielkość_Firmy: "Mała (10-50 pracowników)",
-      Status: "Aktywny"
+      "id": "5",
+      "name": "BusinessPro",
+      "industry": "Usługi biznesowe",
+      "location": "Poznań",
+      "size": "Duża",
+      "assignedReps": ["rep1", "rep4"]
     }
   ],
-  managers: [
+  "salesReps": [
     {
-      ID_Opiekuna: 101,
-      Imię_Nazwisko: "Anna Kowalska",
-      Typ_Opiekuna: "Handlowy",
-      Region: "Dolnośląskie",
-      Doświadczenie_Lata: 8,
-      Specjalizacja: "Enterprise Sales",
-      Email: "anna.kowalska@itexcellence.pl"
+      "id": "rep1",
+      "name": "Anna Kowalska",
+      "region": "Zachód",
+      "experience": "5 lat",
+      "specialization": "Enterprise IT",
+      "email": "a.kowalska@company.pl",
+      "phone": "+48 123 456 789"
     },
     {
-      ID_Opiekuna: 102,
-      Imię_Nazwisko: "Marek Nowak",
-      Typ_Opiekuna: "Wdrożeniowy",
-      Region: "Mazowieckie",
-      Doświadczenie_Lata: 6,
-      Specjalizacja: "Systemy ERP",
-      Email: "marek.nowak@itexcellence.pl"
+      "id": "rep2",
+      "name": "Marek Nowak",
+      "region": "Południe",
+      "experience": "8 lat",
+      "specialization": "Software Solutions",
+      "email": "m.nowak@company.pl",
+      "phone": "+48 987 654 321"
     },
     {
-      ID_Opiekuna: 103,
-      Imię_Nazwisko: "Katarzyna Wiśniewska",
-      Typ_Opiekuna: "Handlowy",
-      Region: "Małopolskie",
-      Doświadczenie_Lata: 5,
-      Specjalizacja: "SME Sales",
-      Email: "katarzyna.wisniewska@itexcellence.pl"
+      "id": "rep3",
+      "name": "Katarzyna Wiśniewska",
+      "region": "Północ",
+      "experience": "3 lata",
+      "specialization": "SMB/Startups",
+      "email": "k.wisniewska@company.pl",
+      "phone": "+48 555 123 456"
     },
     {
-      ID_Opiekuna: 104,
-      Imię_Nazwisko: "Tomasz Kowalczyk",
-      Typ_Opiekuna: "Wdrożeniowy",
-      Region: "Pomorskie",
-      Doświadczenie_Lata: 7,
-      Specjalizacja: "Workflow365",
-      Email: "tomasz.kowalczyk@itexcellence.pl"
-    },
-    {
-      ID_Opiekuna: 105,
-      Imię_Nazwisko: "Agnieszka Jankowska",
-      Typ_Opiekuna: "Handlowy",
-      Region: "Wielkopolskie",
-      Doświadczenie_Lata: 4,
-      Specjalizacja: "Cloud Solutions",
-      Email: "agnieszka.jankowska@itexcellence.pl"
-    },
-    {
-      ID_Opiekuna: 106,
-      Imię_Nazwisko: "Paweł Dąbrowski",
-      Typ_Opiekuna: "Wdrożeniowy",
-      Region: "Dolnośląskie",
-      Doświadczenie_Lata: 9,
-      Specjalizacja: "Business Intelligence",
-      Email: "pawel.dabrowski@itexcellence.pl"
+      "id": "rep4",
+      "name": "Piotr Zieliński",
+      "region": "Wschód",
+      "experience": "6 lat",
+      "specialization": "Key Accounts",
+      "email": "p.zielinski@company.pl",
+      "phone": "+48 777 888 999"
     }
-  ],
-  connections: [
-    {"ID_Firmy": 1, "ID_Opiekuna": 101},
-    {"ID_Firmy": 1, "ID_Opiekuna": 106},
-    {"ID_Firmy": 2, "ID_Opiekuna": 102},
-    {"ID_Firmy": 3, "ID_Opiekuna": 103},
-    {"ID_Firmy": 4, "ID_Opiekuna": 104},
-    {"ID_Firmy": 5, "ID_Opiekuna": 105},
-    {"ID_Firmy": 6, "ID_Opiekuna": 102},
-    {"ID_Firmy": 7, "ID_Opiekuna": 101},
-    {"ID_Firmy": 7, "ID_Opiekuna": 106},
-    {"ID_Firmy": 8, "ID_Opiekuna": 103}
   ]
 };
 
-// Zmienne globalne
-let svg, simulation, nodes, links;
-let nodeElements, linkElements, labelElements;
-let selectedNode = null;
-let currentView = 'companies'; // 'companies', 'expanded'
+// Global variables
+let svg, simulation, nodes, links, nodeElements, linkElements, labelElements;
+let tooltip, selectedNode = null;
 let width, height;
 let zoomBehavior;
 
-// Filtry
-let showSalesManagers = true;
-let showImplementationManagers = true;
+// Wait for D3 to load, then initialize
+function waitForD3() {
+  if (typeof d3 !== 'undefined') {
+    initializeApp();
+  } else {
+    setTimeout(waitForD3, 100);
+  }
+}
 
-// Inicjalizacja aplikacji
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Inicjalizacja aplikacji...');
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', waitForD3);
+} else {
+  waitForD3();
+}
+
+function initializeApp() {
+  console.log('Initializing app...');
+  
+  // Create tooltip
+  tooltip = d3.select('body')
+    .append('div')
+    .attr('class', 'tooltip')
+    .style('position', 'absolute')
+    .style('opacity', 0);
+  
   setupEventListeners();
+  renderSidePanelLists();
   updateStats();
-  initializeVisualization();
-  showMessage('Aplikacja załadowana pomyślnie!', 'success');
-});
+  createNetworkVisualization();
+}
 
 function setupEventListeners() {
-  // Checkbox filters
-  const showSalesCheckbox = document.getElementById('show-sales');
-  const showImplCheckbox = document.getElementById('show-implementation');
-  const showAllCheckbox = document.getElementById('show-all');
+  // Search functionality
+  const searchInput = document.getElementById('search-input');
+  const clearSearch = document.getElementById('clear-search');
   
-  if (showSalesCheckbox) {
-    showSalesCheckbox.addEventListener('change', function() {
-      showSalesManagers = this.checked;
-      updateShowAllCheckbox();
-      refreshVisualization();
-      updateStats();
-    });
+  if (searchInput) {
+    searchInput.addEventListener('input', handleSearch);
+    searchInput.addEventListener('keyup', handleSearch);
   }
   
-  if (showImplCheckbox) {
-    showImplCheckbox.addEventListener('change', function() {
-      showImplementationManagers = this.checked;
-      updateShowAllCheckbox();
-      refreshVisualization();
-      updateStats();
-    });
+  if (clearSearch) {
+    clearSearch.addEventListener('click', clearSearchResults);
   }
   
-  if (showAllCheckbox) {
-    showAllCheckbox.addEventListener('change', function() {
-      if (this.checked) {
-        showSalesManagers = true;
-        showImplementationManagers = true;
-        if (showSalesCheckbox) showSalesCheckbox.checked = true;
-        if (showImplCheckbox) showImplCheckbox.checked = true;
-      } else {
-        showSalesManagers = false;
-        showImplementationManagers = false;
-        if (showSalesCheckbox) showSalesCheckbox.checked = false;
-        if (showImplCheckbox) showImplCheckbox.checked = false;
+  // Reset zoom button
+  const resetZoomBtn = document.getElementById('reset-zoom');
+  if (resetZoomBtn) {
+    resetZoomBtn.addEventListener('click', resetZoom);
+  }
+  
+  // Modal close button
+  const closeModalBtn = document.getElementById('close-modal');
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModal);
+  }
+  
+  // Close modal when clicking outside
+  const modal = document.getElementById('details-modal');
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
       }
-      refreshVisualization();
-      updateStats();
     });
-  }
-  
-  // Excel upload
-  const loadExcelBtn = document.getElementById('load-excel-btn');
-  const excelFile = document.getElementById('excel-file');
-  
-  if (loadExcelBtn && excelFile) {
-    loadExcelBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('Otwieranie dialogu pliku...');
-      excelFile.click();
-    });
-    
-    excelFile.addEventListener('change', handleExcelUpload);
-  }
-  
-  // Control buttons
-  const resetViewBtn = document.getElementById('reset-view');
-  const centerViewBtn = document.getElementById('center-view');
-  const closeDetailsBtn = document.getElementById('close-details');
-  
-  if (resetViewBtn) {
-    resetViewBtn.addEventListener('click', resetView);
-  }
-  
-  if (centerViewBtn) {
-    centerViewBtn.addEventListener('click', centerView);
-  }
-  
-  if (closeDetailsBtn) {
-    closeDetailsBtn.addEventListener('click', clearSelection);
   }
 }
 
-function updateShowAllCheckbox() {
-  const showAllCheckbox = document.getElementById('show-all');
-  if (showAllCheckbox) {
-    showAllCheckbox.checked = showSalesManagers && showImplementationManagers;
-  }
-}
-
-function handleExcelUpload(event) {
-  const file = event.target.files[0];
-  if (!file) {
-    console.log('Nie wybrano pliku');
-    return;
-  }
+function createNetworkVisualization() {
+  console.log('Creating network visualization...');
   
-  console.log('Wczytywanie pliku:', file.name);
-  showLoading(true);
-  showMessage('Wczytywanie pliku Excel...', 'info');
-  
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const data = new Uint8Array(e.target.result);
-      const workbook = XLSX.read(data, { type: 'array' });
-      
-      console.log('Dostępne arkusze:', workbook.SheetNames);
-      
-      // Sprawdź czy arkusze istnieją
-      const requiredSheets = ['Firmy', 'Opiekunowie', 'Powiązania'];
-      const availableSheets = workbook.SheetNames;
-      
-      const missingSheets = requiredSheets.filter(sheet => !availableSheets.includes(sheet));
-      if (missingSheets.length > 0) {
-        showMessage(`Brakuje arkuszy: ${missingSheets.join(', ')}`, 'error');
-        showLoading(false);
-        return;
-      }
-      
-      // Wczytaj dane z arkuszy
-      const companies = XLSX.utils.sheet_to_json(workbook.Sheets['Firmy']);
-      const managers = XLSX.utils.sheet_to_json(workbook.Sheets['Opiekunowie']);
-      const connections = XLSX.utils.sheet_to_json(workbook.Sheets['Powiązania']);
-      
-      console.log('Wczytano firmy:', companies.length);
-      console.log('Wczytano opiekunów:', managers.length);
-      console.log('Wczytano powiązania:', connections.length);
-      
-      // Walidacja danych
-      if (companies.length === 0 || managers.length === 0) {
-        showMessage('Plik Excel nie zawiera wystarczających danych', 'error');
-        showLoading(false);
-        return;
-      }
-      
-      // Aktualizuj dane aplikacji
-      appData = {
-        companies: companies,
-        managers: managers,
-        connections: connections
-      };
-      
-      // Odśwież wizualizację
-      clearSelection();
-      refreshVisualization();
-      updateStats();
-      
-      showMessage(`Wczytano: ${companies.length} firm, ${managers.length} opiekunów`, 'success');
-      showLoading(false);
-      
-      // Wyczyść input
-      event.target.value = '';
-      
-    } catch (error) {
-      console.error('Błąd podczas wczytywania Excel:', error);
-      showMessage('Błąd podczas wczytywania pliku Excel: ' + error.message, 'error');
-      showLoading(false);
-    }
-  };
-  
-  reader.onerror = function(error) {
-    console.error('Błąd odczytu pliku:', error);
-    showMessage('Błąd podczas odczytu pliku', 'error');
-    showLoading(false);
-  };
-  
-  reader.readAsArrayBuffer(file);
-}
-
-function initializeVisualization() {
   const container = document.getElementById('network-visualization');
   if (!container) {
-    console.error('Nie znaleziono kontenera wizualizacji');
+    console.error('Network container not found');
     return;
   }
   
   width = container.clientWidth || 800;
-  height = container.clientHeight || 500;
+  height = container.clientHeight || 600;
   
-  console.log('Inicjalizacja wizualizacji:', width, 'x', height);
+  console.log('Container dimensions:', width, height);
   
-  // Usuń poprzednie SVG
+  // Clear any existing SVG
   d3.select('#network-svg').selectAll('*').remove();
   
   svg = d3.select('#network-svg')
     .attr('width', width)
     .attr('height', height);
   
-  // Zoom behavior
+  // Create zoom behavior
   zoomBehavior = d3.zoom()
     .scaleExtent([0.3, 3])
     .on('zoom', function(event) {
@@ -350,203 +190,36 @@ function initializeVisualization() {
   
   svg.call(zoomBehavior);
   
-  // Grupa główna
+  // Create zoom group
   const g = svg.append('g').attr('class', 'zoom-group');
   
-  // Defs dla gradientów
-  const defs = svg.append('defs');
-  
-  // Gradient dla linków
-  const gradient = defs.append('linearGradient')
-    .attr('id', 'link-gradient')
-    .attr('gradientUnits', 'userSpaceOnUse');
-  
-  gradient.append('stop')
-    .attr('offset', '0%')
-    .attr('stop-color', '#3B82F6')
-    .attr('stop-opacity', 0.8);
-  
-  gradient.append('stop')
-    .attr('offset', '100%')
-    .attr('stop-color', '#1877F2')
-    .attr('stop-opacity', 0.8);
-  
-  showCompaniesView();
-}
-
-function showCompaniesView() {
-  console.log('Pokazuję widok firm');
-  currentView = 'companies';
-  selectedNode = null;
-  
-  // Przygotuj dane - tylko firmy
-  const graphData = {
-    nodes: appData.companies.map(company => ({
-      id: `company_${company.ID_Firmy}`,
-      type: 'company',
-      name: company.Nazwa_Firmy,
-      data: company
-    })),
-    links: []
-  };
-  
-  updateVisualization(graphData);
-  clearDetailsPanel();
-}
-
-function showExpandedView(centerNodeId) {
-  console.log('Pokazuję rozszerzone powiązania dla:', centerNodeId);
-  currentView = 'expanded';
-  
-  const graphData = prepareExpandedData(centerNodeId);
-  updateVisualization(graphData);
-}
-
-function prepareExpandedData(centerNodeId) {
-  const nodes = [];
-  const links = [];
-  
-  // Sprawdź typ centralnego węzła
-  if (centerNodeId.startsWith('company_')) {
-    const companyId = parseInt(centerNodeId.replace('company_', ''));
-    const company = appData.companies.find(c => c.ID_Firmy === companyId);
-    
-    if (company) {
-      // Dodaj firmę
-      nodes.push({
-        id: centerNodeId,
-        type: 'company',
-        name: company.Nazwa_Firmy,
-        data: company,
-        fx: width / 2,
-        fy: height / 2
-      });
-      
-      // Znajdź powiązanych opiekunów
-      const relatedManagers = appData.connections
-        .filter(rel => rel.ID_Firmy === companyId)
-        .map(rel => appData.managers.find(m => m.ID_Opiekuna === rel.ID_Opiekuna))
-        .filter(manager => manager && shouldShowManager(manager));
-      
-      console.log('Powiązani opiekunowie dla firmy', companyId, ':', relatedManagers);
-      
-      // Dodaj opiekunów
-      relatedManagers.forEach(manager => {
-        const managerId = `manager_${manager.ID_Opiekuna}`;
-        const managerType = getManagerType(manager.Typ_Opiekuna);
-        nodes.push({
-          id: managerId,
-          type: managerType,
-          name: manager.Imię_Nazwisko,
-          data: manager
-        });
-        
-        // Dodaj link
-        links.push({
-          source: centerNodeId,
-          target: managerId,
-          type: 'assignment'
-        });
-      });
-    }
-  } else if (centerNodeId.startsWith('manager_')) {
-    const managerId = parseInt(centerNodeId.replace('manager_', ''));
-    const manager = appData.managers.find(m => m.ID_Opiekuna === managerId);
-    
-    if (manager && shouldShowManager(manager)) {
-      // Dodaj opiekuna
-      const managerType = getManagerType(manager.Typ_Opiekuna);
-      nodes.push({
-        id: centerNodeId,
-        type: managerType,
-        name: manager.Imię_Nazwisko,
-        data: manager,
-        fx: width / 2,
-        fy: height / 2
-      });
-      
-      // Znajdź powiązane firmy
-      const relatedCompanies = appData.connections
-        .filter(rel => rel.ID_Opiekuna === managerId)
-        .map(rel => appData.companies.find(c => c.ID_Firmy === rel.ID_Firmy))
-        .filter(company => company);
-      
-      console.log('Powiązane firmy dla opiekuna', managerId, ':', relatedCompanies);
-      
-      // Dodaj firmy
-      relatedCompanies.forEach(company => {
-        const companyId = `company_${company.ID_Firmy}`;
-        nodes.push({
-          id: companyId,
-          type: 'company',
-          name: company.Nazwa_Firmy,
-          data: company
-        });
-        
-        // Dodaj link
-        links.push({
-          source: centerNodeId,
-          target: companyId,
-          type: 'assignment'
-        });
-      });
-    }
-  }
-  
-  return { nodes, links };
-}
-
-function getManagerType(typOpiekuna) {
-  const type = typOpiekuna.toLowerCase();
-  if (type === 'handlowy') {
-    return 'sales';
-  } else if (type === 'wdrożeniowy') {
-    return 'implementation';
-  }
-  return 'manager';
-}
-
-function shouldShowManager(manager) {
-  const type = manager.Typ_Opiekuna.toLowerCase();
-  if (type === 'handlowy') {
-    return showSalesManagers;
-  } else if (type === 'wdrożeniowy') {
-    return showImplementationManagers;
-  }
-  return false;
-}
-
-function updateVisualization(graphData) {
+  // Prepare data for D3
+  const graphData = prepareGraphData();
   nodes = graphData.nodes;
   links = graphData.links;
   
-  console.log(`Aktualizacja wizualizacji: ${nodes.length} węzłów, ${links.length} linków`);
-  console.log('Typy węzłów:', nodes.map(n => `${n.name}: ${n.type}`));
+  console.log('Nodes:', nodes.length, 'Links:', links.length);
   
-  // Usuń poprzednie elementy
-  svg.select('.zoom-group').selectAll('.links').remove();
-  svg.select('.zoom-group').selectAll('.nodes').remove();
-  svg.select('.zoom-group').selectAll('.labels').remove();
-  
-  const g = svg.select('.zoom-group');
-  
-  // Utwórz nową symulację
+  // Create force simulation
   simulation = d3.forceSimulation(nodes)
     .force('link', d3.forceLink(links).id(d => d.id).distance(120))
     .force('charge', d3.forceManyBody().strength(-800))
     .force('center', d3.forceCenter(width / 2, height / 2))
-    .force('collision', d3.forceCollide().radius(d => getNodeRadius(d) + 10));
+    .force('collision', d3.forceCollide().radius(40));
   
-  // Linki
+  // Create links
   linkElements = g.append('g')
     .attr('class', 'links')
     .selectAll('line')
     .data(links)
     .enter()
     .append('line')
-    .attr('class', 'link');
+    .attr('class', 'link')
+    .attr('stroke', '#999')
+    .attr('stroke-width', 2)
+    .attr('stroke-opacity', 0.6);
   
-  // Węzły
+  // Create nodes
   nodeElements = g.append('g')
     .attr('class', 'nodes')
     .selectAll('circle')
@@ -554,17 +227,26 @@ function updateVisualization(graphData) {
     .enter()
     .append('circle')
     .attr('class', d => `node ${d.type}-node`)
-    .attr('r', getNodeRadius)
+    .attr('r', d => d.type === 'company' ? 25 : 18)
+    .attr('fill', d => d.type === 'company' ? '#218296' : '#32b8c8')
+    .attr('stroke', d => d.type === 'company' ? '#1d7485' : '#2a9cb0')
+    .attr('stroke-width', 2)
     .style('cursor', 'pointer')
     .call(d3.drag()
       .on('start', dragstarted)
       .on('drag', dragged)
       .on('end', dragended))
-    .on('click', handleNodeClick)
-    .on('mouseover', showTooltip)
-    .on('mouseout', hideTooltip);
+    .on('click', function(event, d) {
+      handleNodeClick(event, d, this);
+    })
+    .on('mouseover', function(event, d) {
+      showTooltip(event, d);
+    })
+    .on('mouseout', function(event, d) {
+      hideTooltip();
+    });
   
-  // Etykiety
+  // Create labels
   labelElements = g.append('g')
     .attr('class', 'labels')
     .selectAll('text')
@@ -572,332 +254,455 @@ function updateVisualization(graphData) {
     .enter()
     .append('text')
     .attr('class', 'node-label')
-    .attr('dy', d => getNodeRadius(d) + 20)
-    .text(d => truncateText(d.name, 15));
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.type === 'company' ? 40 : 33)
+    .style('font-size', '12px')
+    .style('font-weight', '500')
+    .style('fill', '#1f3435')
+    .style('pointer-events', 'none')
+    .text(d => {
+      if (d.name.length > 15) {
+        return d.name.substring(0, 15) + '...';
+      }
+      return d.name;
+    });
   
-  // Aktualizacja pozycji podczas symulacji
+  // Update positions on simulation tick
   simulation.on('tick', function() {
-    if (linkElements) {
-      linkElements
-        .attr('x1', d => d.source.x)
-        .attr('y1', d => d.source.y)
-        .attr('x2', d => d.target.x)
-        .attr('y2', d => d.target.y);
-    }
+    linkElements
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x)
+      .attr('y2', d => d.target.y);
     
-    if (nodeElements) {
-      nodeElements
-        .attr('cx', d => d.x)
-        .attr('cy', d => d.y);
-    }
+    nodeElements
+      .attr('cx', d => d.x)
+      .attr('cy', d => d.y);
     
-    if (labelElements) {
-      labelElements
-        .attr('x', d => d.x)
-        .attr('y', d => d.y);
-    }
+    labelElements
+      .attr('x', d => d.x)
+      .attr('y', d => d.y);
   });
   
-  // Aktualizuj licznik widocznych węzłów
-  const visibleNodesEl = document.getElementById('visible-nodes');
-  if (visibleNodesEl) {
-    visibleNodesEl.textContent = nodes.length;
-  }
+  console.log('Network visualization created successfully');
 }
 
-function getNodeRadius(d) {
-  switch (d.type) {
-    case 'company': return 30;
-    case 'sales': return 20;
-    case 'implementation': return 20;
-    default: return 15;
-  }
+function prepareGraphData() {
+  const nodes = [];
+  const links = [];
+  
+  // Add company nodes
+  data.companies.forEach(company => {
+    nodes.push({
+      id: company.id,
+      name: company.name,
+      type: 'company',
+      data: company
+    });
+  });
+  
+  // Add sales rep nodes
+  data.salesReps.forEach(rep => {
+    nodes.push({
+      id: rep.id,
+      name: rep.name,
+      type: 'rep',
+      data: rep
+    });
+  });
+  
+  // Create links between companies and their assigned reps
+  data.companies.forEach(company => {
+    company.assignedReps.forEach(repId => {
+      links.push({
+        source: company.id,
+        target: repId,
+        type: 'assignment'
+      });
+    });
+  });
+  
+  return { nodes, links };
 }
 
-function truncateText(text, maxLength) {
-  if (text.length > maxLength) {
-    return text.substring(0, maxLength) + '...';
-  }
-  return text;
-}
-
-function handleNodeClick(event, d) {
+function handleNodeClick(event, d, element) {
   event.stopPropagation();
-  console.log('Kliknięto węzeł:', d);
+  console.log('Node clicked:', d);
+  
+  // Clear previous selection
+  clearSelection();
+  
+  // Select current node
+  d3.select(element)
+    .attr('stroke-width', 4)
+    .attr('stroke-dasharray', '5,5');
   
   selectedNode = d;
   
-  // Aktualizuj klasę selected
-  if (nodeElements) {
-    nodeElements.classed('selected', node => node.id === d.id);
-  }
+  // Highlight connected links
+  linkElements
+    .attr('stroke', link => 
+      (link.source.id === d.id || link.target.id === d.id) ? '#218296' : '#999'
+    )
+    .attr('stroke-width', link => 
+      (link.source.id === d.id || link.target.id === d.id) ? 3 : 2
+    )
+    .attr('stroke-opacity', link => 
+      (link.source.id === d.id || link.target.id === d.id) ? 1 : 0.6
+    );
   
-  // Pokaż rozszerzone powiązania
-  showExpandedView(d.id);
+  // Update side panel selection
+  updateSidePanelSelection(d);
   
-  // Pokaź szczegóły - wywołaj natychmiast
-  showNodeDetails(d);
+  // Show details modal
+  showDetailsModal(d);
 }
 
-function showNodeDetails(node) {
-  console.log('Pokazuję szczegóły dla:', node);
+function clearSelection() {
+  if (nodeElements) {
+    nodeElements
+      .attr('stroke-width', 2)
+      .attr('stroke-dasharray', null);
+  }
   
-  const noSelection = document.getElementById('no-selection');
-  const selectionDetails = document.getElementById('selection-details');
+  if (linkElements) {
+    linkElements
+      .attr('stroke', '#999')
+      .attr('stroke-width', 2)
+      .attr('stroke-opacity', 0.6);
+  }
   
-  if (!noSelection || !selectionDetails) {
-    console.error('Nie znaleziono elementów panelu szczegółów');
+  selectedNode = null;
+  
+  // Clear side panel selection
+  document.querySelectorAll('.list-item').forEach(item => {
+    item.classList.remove('active');
+  });
+}
+
+function showDetailsModal(node) {
+  console.log('Showing modal for:', node);
+  
+  const modal = document.getElementById('details-modal');
+  const title = document.getElementById('modal-title');
+  const body = document.getElementById('modal-body');
+  
+  if (!modal || !title || !body) {
+    console.error('Modal elements not found');
     return;
   }
   
-  noSelection.classList.add('hidden');
-  selectionDetails.classList.remove('hidden');
-  
-  let detailsHTML = '';
-  
   if (node.type === 'company') {
-    const relatedManagers = getRelatedManagers(node.data.ID_Firmy);
+    const assignedReps = node.data.assignedReps.map(repId => 
+      data.salesReps.find(r => r.id === repId)
+    ).filter(rep => rep); // Filter out undefined
     
-    detailsHTML = `
-      <h4>Firma: ${node.data.Nazwa_Firmy}</h4>
-      <div class="detail-section">
-        <div class="detail-item">
-          <span class="detail-label">Branża:</span>
-          <span class="detail-value">${node.data.Branża}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Lokalizacja:</span>
-          <span class="detail-value">${node.data.Lokalizacja}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Wielkość:</span>
-          <span class="detail-value">${node.data.Wielkość_Firmy}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Status:</span>
-          <span class="detail-value">${node.data.Status}</span>
-        </div>
+    title.textContent = node.data.name;
+    body.innerHTML = `
+      <div class="detail-group">
+        <h4>Informacje o firmie</h4>
+        <p><strong>Branża:</strong> ${node.data.industry}</p>
+        <p><strong>Lokalizacja:</strong> ${node.data.location}</p>
+        <p><strong>Rozmiar:</strong> ${node.data.size}</p>
       </div>
-      <h4>Opiekunowie (${relatedManagers.length})</h4>
-      <ul class="connections-list">
-        ${relatedManagers.map(manager => `
-          <li class="connection-item" onclick="focusOnManager(${manager.ID_Opiekuna})">
-            <div class="connection-name">${manager.Imię_Nazwisko}</div>
-            <div class="connection-details">${manager.Typ_Opiekuna} • ${manager.Specjalizacja}</div>
-          </li>
-        `).join('')}
-      </ul>
+      <div class="detail-group">
+        <h4>Przypisani opiekunowie (${assignedReps.length})</h4>
+        <ul class="connections-list">
+          ${assignedReps.map(rep => `
+            <li>
+              <strong>${rep.name}</strong><br>
+              ${rep.specialization} • ${rep.region}<br>
+              <small>${rep.email} • ${rep.phone}</small>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
     `;
   } else {
-    const relatedCompanies = getRelatedCompanies(node.data.ID_Opiekuna);
+    const assignedCompanies = data.companies.filter(c => 
+      c.assignedReps.includes(node.data.id)
+    );
     
-    detailsHTML = `
-      <h4>Opiekun: ${node.data.Imię_Nazwisko}</h4>
-      <div class="detail-section">
-        <div class="detail-item">
-          <span class="detail-label">Typ:</span>
-          <span class="detail-value">${node.data.Typ_Opiekuna}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Region:</span>
-          <span class="detail-value">${node.data.Region}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Doświadczenie:</span>
-          <span class="detail-value">${node.data.Doświadczenie_Lata} lat</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Specjalizacja:</span>
-          <span class="detail-value">${node.data.Specjalizacja}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Email:</span>
-          <span class="detail-value">${node.data.Email}</span>
-        </div>
+    title.textContent = node.data.name;
+    body.innerHTML = `
+      <div class="detail-group">
+        <h4>Informacje kontaktowe</h4>
+        <p><strong>Email:</strong> ${node.data.email}</p>
+        <p><strong>Telefon:</strong> ${node.data.phone}</p>
+        <p><strong>Region:</strong> ${node.data.region}</p>
+        <p><strong>Doświadczenie:</strong> ${node.data.experience}</p>
+        <p><strong>Specjalizacja:</strong> ${node.data.specialization}</p>
       </div>
-      <h4>Firmy (${relatedCompanies.length})</h4>
-      <ul class="connections-list">
-        ${relatedCompanies.map(company => `
-          <li class="connection-item" onclick="focusOnCompany(${company.ID_Firmy})">
-            <div class="connection-name">${company.Nazwa_Firmy}</div>
-            <div class="connection-details">${company.Branża} • ${company.Lokalizacja}</div>
-          </li>
-        `).join('')}
-      </ul>
+      <div class="detail-group">
+        <h4>Przypisane firmy (${assignedCompanies.length})</h4>
+        <ul class="connections-list">
+          ${assignedCompanies.map(company => `
+            <li>
+              <strong>${company.name}</strong><br>
+              ${company.industry} • ${company.location}<br>
+              <small>Rozmiar: ${company.size}</small>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
     `;
   }
   
-  selectionDetails.innerHTML = detailsHTML;
+  modal.classList.remove('hidden');
 }
 
-function getRelatedManagers(companyId) {
-  return appData.connections
-    .filter(rel => rel.ID_Firmy === companyId)
-    .map(rel => appData.managers.find(m => m.ID_Opiekuna === rel.ID_Opiekuna))
-    .filter(manager => manager && shouldShowManager(manager));
-}
-
-function getRelatedCompanies(managerId) {
-  return appData.connections
-    .filter(rel => rel.ID_Opiekuna === managerId)
-    .map(rel => appData.companies.find(c => c.ID_Firmy === rel.ID_Firmy))
-    .filter(company => company);
-}
-
-// Funkcje globalne dla onclick
-window.focusOnManager = function(managerId) {
-  const nodeId = `manager_${managerId}`;
-  const manager = appData.managers.find(m => m.ID_Opiekuna === managerId);
-  if (manager && shouldShowManager(manager)) {
-    const managerType = getManagerType(manager.Typ_Opiekuna);
-    const nodeData = {
-      id: nodeId,
-      type: managerType,
-      name: manager.Imię_Nazwisko,
-      data: manager
-    };
-    selectedNode = nodeData;
-    showExpandedView(nodeId);
-    showNodeDetails(nodeData);
+function closeModal() {
+  const modal = document.getElementById('details-modal');
+  if (modal) {
+    modal.classList.add('hidden');
   }
-};
-
-window.focusOnCompany = function(companyId) {
-  const nodeId = `company_${companyId}`;
-  const company = appData.companies.find(c => c.ID_Firmy === companyId);
-  if (company) {
-    const nodeData = {
-      id: nodeId,
-      type: 'company',
-      name: company.Nazwa_Firmy,
-      data: company
-    };
-    selectedNode = nodeData;
-    showExpandedView(nodeId);
-    showNodeDetails(nodeData);
-  }
-};
-
-function clearSelection() {
-  selectedNode = null;
-  showCompaniesView();
-  clearDetailsPanel();
 }
 
-function clearDetailsPanel() {
-  const noSelection = document.getElementById('no-selection');
-  const selectionDetails = document.getElementById('selection-details');
+function showTooltip(event, d) {
+  let content = '';
   
-  if (noSelection) noSelection.classList.remove('hidden');
-  if (selectionDetails) selectionDetails.classList.add('hidden');
-}
-
-function refreshVisualization() {
-  if (currentView === 'companies') {
-    showCompaniesView();
-  } else if (selectedNode) {
-    showExpandedView(selectedNode.id);
+  if (d.type === 'company') {
+    content = `
+      <h4>${d.data.name}</h4>
+      <p><strong>Branża:</strong> ${d.data.industry}</p>
+      <p><strong>Lokalizacja:</strong> ${d.data.location}</p>
+      <p><strong>Rozmiar:</strong> ${d.data.size}</p>
+      <p><strong>Opiekunów:</strong> ${d.data.assignedReps.length}</p>
+    `;
+  } else {
+    const assignedCompanies = data.companies.filter(c => 
+      c.assignedReps.includes(d.data.id)
+    );
+    
+    content = `
+      <h4>${d.data.name}</h4>
+      <p><strong>Region:</strong> ${d.data.region}</p>
+      <p><strong>Specjalizacja:</strong> ${d.data.specialization}</p>
+      <p><strong>Doświadczenie:</strong> ${d.data.experience}</p>
+      <p><strong>Przypisanych firm:</strong> ${assignedCompanies.length}</p>
+    `;
   }
+  
+  tooltip.html(content)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 10) + 'px')
+    .style('opacity', 1);
 }
 
-function resetView() {
-  if (svg && zoomBehavior) {
-    svg.transition()
-      .duration(750)
-      .call(zoomBehavior.transform, d3.zoomIdentity);
+function hideTooltip() {
+  tooltip.style('opacity', 0);
+}
+
+function renderSidePanelLists() {
+  // Render companies list
+  const companiesList = document.getElementById('companies-list');
+  if (companiesList) {
+    companiesList.innerHTML = data.companies.map(company => `
+      <div class="list-item" data-id="${company.id}" data-type="company">
+        <h4>${company.name}</h4>
+        <p>${company.industry} • ${company.location}</p>
+        <p>Rozmiar: ${company.size} • Opiekunów: ${company.assignedReps.length}</p>
+      </div>
+    `).join('');
   }
-  showCompaniesView();
+  
+  // Render sales reps list
+  const repsList = document.getElementById('reps-list');
+  if (repsList) {
+    repsList.innerHTML = data.salesReps.map(rep => {
+      const assignedCount = data.companies.filter(c => 
+        c.assignedReps.includes(rep.id)
+      ).length;
+      
+      return `
+        <div class="list-item" data-id="${rep.id}" data-type="rep">
+          <h4>${rep.name}</h4>
+          <p>${rep.specialization}</p>
+          <p>Region: ${rep.region} • Firm: ${assignedCount}</p>
+        </div>
+      `;
+    }).join('');
+  }
+  
+  // Add click listeners to all list items
+  document.querySelectorAll('.list-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const id = this.dataset.id;
+      const node = nodes ? nodes.find(n => n.id === id) : null;
+      
+      if (node) {
+        console.log('List item clicked:', node);
+        
+        // Clear previous selections
+        clearSelection();
+        
+        // Select this item
+        this.classList.add('active');
+        
+        // Find the corresponding node element
+        const nodeElement = nodeElements.nodes().find(n => 
+          d3.select(n).datum().id === id
+        );
+        
+        if (nodeElement) {
+          // Simulate node click
+          handleNodeClick(new Event('click'), node, nodeElement);
+          
+          // Center the view on the selected node
+          if (svg && zoomBehavior) {
+            const scale = 1.2;
+            const transform = d3.zoomIdentity
+              .translate(width / 2, height / 2)
+              .scale(scale)
+              .translate(-node.x, -node.y);
+            
+            svg.transition()
+              .duration(750)
+              .call(zoomBehavior.transform, transform);
+          }
+        }
+      }
+    });
+  });
 }
 
-function centerView() {
-  if (svg && zoomBehavior) {
-    svg.transition()
-      .duration(750)
-      .call(zoomBehavior.transform, d3.zoomIdentity);
+function updateSidePanelSelection(selectedNode) {
+  // Clear previous selections
+  document.querySelectorAll('.list-item').forEach(item => {
+    item.classList.remove('active');
+  });
+  
+  // Highlight selected item
+  const selectedItem = document.querySelector(`.list-item[data-id="${selectedNode.id}"]`);
+  if (selectedItem) {
+    selectedItem.classList.add('active');
   }
 }
 
 function updateStats() {
-  const totalCompanies = appData.companies.length;
-  const salesManagers = appData.managers.filter(m => m.Typ_Opiekuna.toLowerCase() === 'handlowy').length;
-  const implManagers = appData.managers.filter(m => m.Typ_Opiekuna.toLowerCase() === 'wdrożeniowy').length;
+  const totalCompanies = data.companies.length;
+  const totalReps = data.salesReps.length;
+  
+  // Calculate total assignments
+  const totalAssignments = data.companies.reduce((sum, company) => 
+    sum + company.assignedReps.length, 0
+  );
+  const avgCompaniesPerRep = (totalAssignments / totalReps).toFixed(1);
   
   const totalCompaniesEl = document.getElementById('total-companies');
-  const totalSalesEl = document.getElementById('total-sales');
-  const totalImplEl = document.getElementById('total-impl');
+  const totalRepsEl = document.getElementById('total-reps');
+  const avgCompaniesEl = document.getElementById('avg-companies');
   
   if (totalCompaniesEl) totalCompaniesEl.textContent = totalCompanies;
-  if (totalSalesEl) totalSalesEl.textContent = salesManagers;
-  if (totalImplEl) totalImplEl.textContent = implManagers;
+  if (totalRepsEl) totalRepsEl.textContent = totalReps;
+  if (avgCompaniesEl) avgCompaniesEl.textContent = avgCompaniesPerRep;
 }
 
-function showTooltip(event, d) {
-  const tooltip = document.getElementById('tooltip');
-  if (!tooltip) return;
+function handleSearch(event) {
+  const query = event.target.value.toLowerCase().trim();
+  console.log('Search:', query);
   
-  let content = '';
-  if (d.type === 'company') {
-    content = `
-      <h4>${d.data.Nazwa_Firmy}</h4>
-      <p><strong>Branża:</strong> ${d.data.Branża}</p>
-      <p><strong>Lokalizacja:</strong> ${d.data.Lokalizacja}</p>
-      <p><strong>Status:</strong> ${d.data.Status}</p>
-    `;
-  } else {
-    content = `
-      <h4>${d.data.Imię_Nazwisko}</h4>
-      <p><strong>Typ:</strong> ${d.data.Typ_Opiekuna}</p>
-      <p><strong>Specjalizacja:</strong> ${d.data.Specjalizacja}</p>
-      <p><strong>Region:</strong> ${d.data.Region}</p>
-    `;
+  // Clear previous highlights
+  document.querySelectorAll('.list-item').forEach(item => {
+    item.classList.remove('highlighted');
+    item.style.display = '';
+  });
+  
+  if (nodeElements) {
+    nodeElements.attr('stroke', d => d.type === 'company' ? '#1d7485' : '#2a9cb0');
   }
   
-  tooltip.innerHTML = `<div class="tooltip-content">${content}</div>`;
-  tooltip.style.left = (event.pageX + 10) + 'px';
-  tooltip.style.top = (event.pageY - 10) + 'px';
-  tooltip.classList.remove('hidden');
-  tooltip.classList.add('visible');
-}
-
-function hideTooltip() {
-  const tooltip = document.getElementById('tooltip');
-  if (tooltip) {
-    tooltip.classList.remove('visible');
-    tooltip.classList.add('hidden');
+  if (labelElements) {
+    labelElements.style('font-weight', '500').style('fill', '#1f3435');
   }
-}
-
-function showLoading(show) {
-  const loading = document.getElementById('loading');
-  if (loading) {
-    if (show) {
-      loading.classList.remove('hidden');
-    } else {
-      loading.classList.add('hidden');
+  
+  if (query.length > 0) {
+    // Search and highlight matching items in lists
+    document.querySelectorAll('.list-item').forEach(item => {
+      const text = item.textContent.toLowerCase();
+      if (text.includes(query)) {
+        item.classList.add('highlighted');
+      } else {
+        item.style.display = 'none';
+      }
+    });
+    
+    // Highlight matching nodes in visualization
+    if (nodeElements) {
+      nodeElements.attr('stroke', d => {
+        const matches = d.name.toLowerCase().includes(query) ||
+          (d.type === 'company' && 
+           (d.data.industry.toLowerCase().includes(query) || 
+            d.data.location.toLowerCase().includes(query))) ||
+          (d.type === 'rep' && 
+           (d.data.specialization.toLowerCase().includes(query) ||
+            d.data.region.toLowerCase().includes(query)));
+        return matches ? '#e68661' : (d.type === 'company' ? '#1d7485' : '#2a9cb0');
+      });
+    }
+    
+    // Also highlight labels of matching nodes
+    if (labelElements) {
+      labelElements
+        .style('font-weight', d => {
+          const matches = d.name.toLowerCase().includes(query) ||
+            (d.type === 'company' && 
+             (d.data.industry.toLowerCase().includes(query) || 
+              d.data.location.toLowerCase().includes(query))) ||
+            (d.type === 'rep' && 
+             (d.data.specialization.toLowerCase().includes(query) ||
+              d.data.region.toLowerCase().includes(query)));
+          return matches ? '700' : '500';
+        })
+        .style('fill', d => {
+          const matches = d.name.toLowerCase().includes(query) ||
+            (d.type === 'company' && 
+             (d.data.industry.toLowerCase().includes(query) || 
+              d.data.location.toLowerCase().includes(query))) ||
+            (d.type === 'rep' && 
+             (d.data.specialization.toLowerCase().includes(query) ||
+              d.data.region.toLowerCase().includes(query)));
+          return matches ? '#a84b2f' : '#1f3435';
+        });
     }
   }
 }
 
-function showMessage(text, type = 'info') {
-  const container = document.getElementById('message-container');
-  if (!container) return;
+function clearSearchResults() {
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.value = '';
+  }
   
-  const message = document.createElement('div');
-  message.className = `message ${type}`;
-  message.textContent = text;
+  // Show all items and remove highlights
+  document.querySelectorAll('.list-item').forEach(item => {
+    item.classList.remove('highlighted');
+    item.style.display = '';
+  });
   
-  container.appendChild(message);
+  if (nodeElements) {
+    nodeElements.attr('stroke', d => d.type === 'company' ? '#1d7485' : '#2a9cb0');
+  }
   
-  setTimeout(() => {
-    if (message.parentNode) {
-      message.remove();
-    }
-  }, 5000);
+  if (labelElements) {
+    labelElements.style('font-weight', '500').style('fill', '#1f3435');
+  }
 }
 
-// Funkcje drag and drop dla D3
+function resetZoom() {
+  if (svg && zoomBehavior) {
+    svg.transition()
+      .duration(750)
+      .call(zoomBehavior.transform, d3.zoomIdentity);
+  }
+}
+
+// Drag functions for D3
 function dragstarted(event, d) {
-  if (!event.active && simulation) simulation.alphaTarget(0.3).restart();
+  if (!event.active) simulation.alphaTarget(0.3).restart();
   d.fx = d.x;
   d.fy = d.y;
 }
@@ -908,12 +713,12 @@ function dragged(event, d) {
 }
 
 function dragended(event, d) {
-  if (!event.active && simulation) simulation.alphaTarget(0);
+  if (!event.active) simulation.alphaTarget(0);
   d.fx = null;
   d.fy = null;
 }
 
-// Responsywność
+// Handle window resize
 window.addEventListener('resize', function() {
   const container = document.getElementById('network-visualization');
   if (!container || !svg) return;
@@ -929,15 +734,6 @@ window.addEventListener('resize', function() {
     if (simulation) {
       simulation.force('center', d3.forceCenter(width / 2, height / 2));
       simulation.restart();
-    }
-  }
-});
-
-// Obsługa kliknięcia w tło SVG
-document.addEventListener('click', function(event) {
-  if (event.target.closest('#network-svg') && !event.target.closest('.node')) {
-    if (currentView === 'expanded') {
-      resetView();
     }
   }
 });
