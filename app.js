@@ -44,12 +44,6 @@ const clearFilters = document.getElementById('clearFilters');
 const resetZoom = document.getElementById('resetZoom');
 const centerGraph = document.getElementById('centerGraph');
 
-// Accordion controls
-const filtersToggle = document.getElementById('filtersToggle');
-const reportsToggle = document.getElementById('reportsToggle');
-const filtersContent = document.getElementById('filtersContent');
-const reportsContent = document.getElementById('reportsContent');
-
 // Initialize application
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
@@ -59,87 +53,157 @@ function initializeApp() {
     setupEventListeners();
     populateCaregiverFilter();
     updateReports();
+    initializeAccordions();
+    // Initialize network graph after a short delay to ensure DOM is ready
     setTimeout(() => {
-        initializeNetworkGraph();
-        hideLoading();
-    }, 1000);
+        try {
+            initializeNetworkGraph();
+            hideLoading();
+        } catch (error) {
+            console.error('Error initializing network graph:', error);
+            hideLoading();
+        }
+    }, 500);
 }
+
+// Accordion functionality - COMPLETELY FIXED
+function initializeAccordions() {
+    // Open filters by default
+    const filtersAccordion = document.getElementById('filtersAccordion');
+    const reportsAccordion = document.getElementById('reportsAccordion');
+    
+    if (filtersAccordion) {
+        filtersAccordion.classList.add('open');
+    }
+    
+    // Open reports by default too so users can see it works
+    if (reportsAccordion) {
+        reportsAccordion.classList.add('open');
+    }
+    
+    // Remove any existing click handlers first to prevent duplicates
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        // Clone the element to remove all event listeners
+        const newHeader = header.cloneNode(true);
+        header.parentNode.replaceChild(newHeader, header);
+    });
+    
+    // Add fresh click handlers for accordion headers
+    const newAccordionHeaders = document.querySelectorAll('.accordion-header');
+    newAccordionHeaders.forEach(header => {
+        header.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const accordionItem = this.parentElement;
+            if (accordionItem && accordionItem.id) {
+                toggleAccordion(accordionItem.id);
+            }
+        });
+        
+        // Make sure the header is clickable
+        header.style.cursor = 'pointer';
+        header.style.userSelect = 'none';
+    });
+}
+
+function toggleAccordion(accordionId) {
+    const accordion = document.getElementById(accordionId);
+    if (accordion) {
+        console.log('Toggling accordion:', accordionId);
+        accordion.classList.toggle('open');
+        
+        // Also toggle the icon rotation
+        const icon = accordion.querySelector('.accordion-icon');
+        if (icon) {
+            if (accordion.classList.contains('open')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+    } else {
+        console.error('Accordion not found:', accordionId);
+    }
+}
+
+// Make toggleAccordion available globally - FIXED
+window.toggleAccordion = toggleAccordion;
 
 function setupEventListeners() {
     // Modal controls
-    importBtn.addEventListener('click', () => showModal(importModal));
-    closeImportModal.addEventListener('click', () => hideModal(importModal));
-    closeCompanyModal.addEventListener('click', () => hideModal(companyModal));
-    closeCaregiverModal.addEventListener('click', () => hideModal(caregiverModal));
+    if (importBtn) importBtn.addEventListener('click', () => showModal(importModal));
+    if (closeImportModal) closeImportModal.addEventListener('click', () => hideModal(importModal));
+    if (closeCompanyModal) closeCompanyModal.addEventListener('click', () => hideModal(companyModal));
+    if (closeCaregiverModal) closeCaregiverModal.addEventListener('click', () => hideModal(caregiverModal));
     
     // File upload
-    selectFileBtn.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', handleFileSelect);
+    if (selectFileBtn) selectFileBtn.addEventListener('click', () => fileInput.click());
+    if (fileInput) fileInput.addEventListener('change', handleFileSelect);
     
     // Drag and drop
-    fileUploadArea.addEventListener('dragover', handleDragOver);
-    fileUploadArea.addEventListener('dragleave', handleDragLeave);
-    fileUploadArea.addEventListener('drop', handleFileDrop);
+    if (fileUploadArea) {
+        fileUploadArea.addEventListener('dragover', handleDragOver);
+        fileUploadArea.addEventListener('dragleave', handleDragLeave);
+        fileUploadArea.addEventListener('drop', handleFileDrop);
+    }
     
     // Filters
-    applyFilters.addEventListener('click', applyDataFilters);
-    clearFilters.addEventListener('click', clearDataFilters);
+    if (applyFilters) applyFilters.addEventListener('click', applyDataFilters);
+    if (clearFilters) clearFilters.addEventListener('click', clearDataFilters);
     
     // Network controls
-    resetZoom.addEventListener('click', resetNetworkZoom);
-    centerGraph.addEventListener('click', centerNetworkGraph);
+    if (resetZoom) resetZoom.addEventListener('click', resetNetworkZoom);
+    if (centerGraph) centerGraph.addEventListener('click', centerNetworkGraph);
     
     // Export
-    exportDataBtn.addEventListener('click', exportData);
-    
-    // Accordion controls
-    filtersToggle.addEventListener('click', () => toggleAccordion(filtersContent, filtersToggle));
-    reportsToggle.addEventListener('click', () => toggleAccordion(reportsContent, reportsToggle));
+    if (exportDataBtn) exportDataBtn.addEventListener('click', exportData);
     
     // Modal backdrop clicks
-    importModal.addEventListener('click', (e) => {
-        if (e.target === importModal) hideModal(importModal);
-    });
-    companyModal.addEventListener('click', (e) => {
-        if (e.target === companyModal) hideModal(companyModal);
-    });
-    caregiverModal.addEventListener('click', (e) => {
-        if (e.target === caregiverModal) hideModal(caregiverModal);
-    });
-}
-
-// Accordion functionality
-function toggleAccordion(content, toggle) {
-    const isCollapsed = content.classList.contains('collapsed');
-    
-    if (isCollapsed) {
-        content.classList.remove('collapsed');
-        toggle.classList.remove('collapsed');
-    } else {
-        content.classList.add('collapsed');
-        toggle.classList.add('collapsed');
+    if (importModal) {
+        importModal.addEventListener('click', (e) => {
+            if (e.target === importModal) hideModal(importModal);
+        });
+    }
+    if (companyModal) {
+        companyModal.addEventListener('click', (e) => {
+            if (e.target === companyModal) hideModal(companyModal);
+        });
+    }
+    if (caregiverModal) {
+        caregiverModal.addEventListener('click', (e) => {
+            if (e.target === caregiverModal) hideModal(caregiverModal);
+        });
     }
 }
 
 // Modal functions
 function showModal(modal) {
-    modal.classList.remove('hidden');
-    modal.classList.add('fade-in');
-    modal.style.display = 'flex';
+    if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('fade-in');
+        modal.style.display = 'flex';
+    }
 }
 
 function hideModal(modal) {
-    modal.classList.add('hidden');
-    modal.classList.remove('fade-in');
-    modal.style.display = 'none';
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('fade-in');
+        modal.style.display = 'none';
+    }
 }
 
 function hideLoading() {
-    loadingOverlay.classList.add('hidden');
+    if (loadingOverlay) {
+        loadingOverlay.classList.add('hidden');
+    }
 }
 
 function showLoading() {
-    loadingOverlay.classList.remove('hidden');
+    if (loadingOverlay) {
+        loadingOverlay.classList.remove('hidden');
+    }
 }
 
 // File handling
@@ -197,30 +261,37 @@ function processFile(file) {
 }
 
 function showImportProgress() {
-    document.getElementById('importProgress').classList.remove('hidden');
-    const progressFill = document.getElementById('progressFill');
-    const importStatus = document.getElementById('importStatus');
-    
-    let progress = 0;
-    const interval = setInterval(() => {
-        progress += 10;
-        progressFill.style.width = progress + '%';
+    const importProgress = document.getElementById('importProgress');
+    if (importProgress) {
+        importProgress.classList.remove('hidden');
+        const progressFill = document.getElementById('progressFill');
+        const importStatus = document.getElementById('importStatus');
         
-        if (progress >= 100) {
-            clearInterval(interval);
-            setTimeout(() => {
-                hideImportProgress();
-                importStatus.textContent = 'Import zakończony pomyślnie!';
-            }, 500);
-        }
-    }, 100);
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 10;
+            if (progressFill) progressFill.style.width = progress + '%';
+            
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    hideImportProgress();
+                    if (importStatus) importStatus.textContent = 'Import zakończony pomyślnie!';
+                }, 500);
+            }
+        }, 100);
+    }
 }
 
 function hideImportProgress() {
     setTimeout(() => {
-        document.getElementById('importProgress').classList.add('hidden');
-        document.getElementById('progressFill').style.width = '0%';
-        document.getElementById('importStatus').textContent = 'Importowanie danych...';
+        const importProgress = document.getElementById('importProgress');
+        const progressFill = document.getElementById('progressFill');
+        const importStatus = document.getElementById('importStatus');
+        
+        if (importProgress) importProgress.classList.add('hidden');
+        if (progressFill) progressFill.style.width = '0%';
+        if (importStatus) importStatus.textContent = 'Importowanie danych...';
     }, 1500);
 }
 
@@ -252,6 +323,8 @@ function processImportedData(jsonData) {
 
 // Filter functions
 function populateCaregiverFilter() {
+    if (!caregiverFilter) return;
+    
     const caregivers = [...new Set(companiesData.map(c => c.Opiekun))].sort();
     caregiverFilter.innerHTML = '<option value="">Wszyscy opiekunowie</option>';
     
@@ -264,10 +337,10 @@ function populateCaregiverFilter() {
 }
 
 function applyDataFilters() {
-    const companyName = companyFilter.value.toLowerCase();
-    const selectedCaregiver = caregiverFilter.value;
-    const minValue = parseFloat(minTurnover.value) || 0;
-    const maxValue = parseFloat(maxTurnover.value) || Infinity;
+    const companyName = companyFilter?.value?.toLowerCase() || '';
+    const selectedCaregiver = caregiverFilter?.value || '';
+    const minValue = parseFloat(minTurnover?.value) || 0;
+    const maxValue = parseFloat(maxTurnover?.value) || Infinity;
     
     filteredData = companiesData.filter(company => {
         const matchesName = company.Firma.toLowerCase().includes(companyName);
@@ -283,10 +356,10 @@ function applyDataFilters() {
 }
 
 function clearDataFilters() {
-    companyFilter.value = '';
-    caregiverFilter.value = '';
-    minTurnover.value = '';
-    maxTurnover.value = '';
+    if (companyFilter) companyFilter.value = '';
+    if (caregiverFilter) caregiverFilter.value = '';
+    if (minTurnover) minTurnover.value = '';
+    if (maxTurnover) maxTurnover.value = '';
     
     filteredData = [...companiesData];
     updateReports();
@@ -318,26 +391,28 @@ function updateCaregiverStats() {
     });
     
     const statsContainer = document.getElementById('caregiverStats');
-    statsContainer.innerHTML = '';
-    
-    Object.entries(caregiverData)
-        .sort(([,a], [,b]) => b.totalTurnover - a.totalTurnover)
-        .forEach(([caregiver, data]) => {
-            const avgTurnover = data.totalTurnover / data.count;
-            
-            const statElement = document.createElement('div');
-            statElement.className = 'caregiver-stat';
-            statElement.innerHTML = `
-                <div class="caregiver-name">${caregiver}</div>
-                <div class="caregiver-details">
-                    <div>Liczba firm: ${data.count}</div>
-                    <div>Łączny obrót: ${formatCurrency(data.totalTurnover)}</div>
-                    <div>Średni obrót: ${formatCurrency(avgTurnover)}</div>
-                </div>
-            `;
-            
-            statsContainer.appendChild(statElement);
-        });
+    if (statsContainer) {
+        statsContainer.innerHTML = '';
+        
+        Object.entries(caregiverData)
+            .sort(([,a], [,b]) => b.totalTurnover - a.totalTurnover)
+            .forEach(([caregiver, data]) => {
+                const avgTurnover = data.totalTurnover / data.count;
+                
+                const statElement = document.createElement('div');
+                statElement.className = 'caregiver-stat';
+                statElement.innerHTML = `
+                    <div class="caregiver-name">${caregiver}</div>
+                    <div class="caregiver-details">
+                        <div>Liczba firm: ${data.count}</div>
+                        <div>Łączny obrót: ${formatCurrency(data.totalTurnover)}</div>
+                        <div>Średni obrót: ${formatCurrency(avgTurnover)}</div>
+                    </div>
+                `;
+                
+                statsContainer.appendChild(statElement);
+            });
+    }
 }
 
 function updateSummaryStats() {
@@ -346,10 +421,15 @@ function updateSummaryStats() {
     const avgTurnover = totalCompanies > 0 ? totalTurnover / totalCompanies : 0;
     const totalCaregivers = new Set(filteredData.map(c => c.Opiekun)).size;
     
-    document.getElementById('totalCompanies').textContent = totalCompanies;
-    document.getElementById('totalTurnover').textContent = formatCurrency(totalTurnover);
-    document.getElementById('avgTurnover').textContent = formatCurrency(avgTurnover);
-    document.getElementById('totalCaregivers').textContent = totalCaregivers;
+    const totalCompaniesEl = document.getElementById('totalCompanies');
+    const totalTurnoverEl = document.getElementById('totalTurnover');
+    const avgTurnoverEl = document.getElementById('avgTurnover');
+    const totalCaregiversEl = document.getElementById('totalCaregivers');
+    
+    if (totalCompaniesEl) totalCompaniesEl.textContent = totalCompanies;
+    if (totalTurnoverEl) totalTurnoverEl.textContent = formatCurrency(totalTurnover);
+    if (avgTurnoverEl) avgTurnoverEl.textContent = formatCurrency(avgTurnover);
+    if (totalCaregiversEl) totalCaregiversEl.textContent = totalCaregivers;
 }
 
 function formatCurrency(amount) {
@@ -361,199 +441,217 @@ function formatCurrency(amount) {
     }).format(amount);
 }
 
-// Network graph functions
+// Network graph functions - FIXED
 function initializeNetworkGraph() {
     const container = document.getElementById('networkGraph');
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    if (!container) {
+        console.error('Network graph container not found');
+        return;
+    }
+    
+    const width = container.clientWidth || 800;
+    const height = container.clientHeight || 600;
     
     // Clear existing graph
     d3.select('#networkGraph svg').remove();
     
-    svg = d3.select('#networkGraph')
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height);
-    
-    // Define gradients
-    const defs = svg.append('defs');
-    
-    // Company gradient
-    const companyGradient = defs.append('linearGradient')
-        .attr('id', 'companyGradient')
-        .attr('x1', '0%').attr('y1', '0%')
-        .attr('x2', '100%').attr('y2', '100%');
-    companyGradient.append('stop')
-        .attr('offset', '0%')
-        .attr('stop-color', '#e3f2fd');
-    companyGradient.append('stop')
-        .attr('offset', '100%')
-        .attr('stop-color', '#b3e5fc');
-    
-    // Caregiver gradient
-    const caregiverGradient = defs.append('linearGradient')
-        .attr('id', 'caregiverGradient')
-        .attr('x1', '0%').attr('y1', '0%')
-        .attr('x2', '100%').attr('y2', '100%');
-    caregiverGradient.append('stop')
-        .attr('offset', '0%')
-        .attr('stop-color', '#e8f5e8');
-    caregiverGradient.append('stop')
-        .attr('offset', '100%')
-        .attr('stop-color', '#a5d6a7');
-    
-    // Create zoom behavior
-    const zoom = d3.zoom()
-        .scaleExtent([0.1, 4])
-        .on('zoom', (event) => {
-            currentTransform = event.transform;
-            svg.select('.graph-container').attr('transform', event.transform);
-        });
-    
-    svg.call(zoom);
-    
-    // Create container for graph elements
-    const graphContainer = svg.append('g').attr('class', 'graph-container');
-    
-    // Store zoom for reset function
-    svg.zoom = zoom;
-    
-    updateNetworkGraph();
+    try {
+        svg = d3.select('#networkGraph')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+        
+        // Define gradients
+        const defs = svg.append('defs');
+        
+        // Company gradient
+        const companyGradient = defs.append('linearGradient')
+            .attr('id', 'companyGradient')
+            .attr('x1', '0%').attr('y1', '0%')
+            .attr('x2', '100%').attr('y2', '100%');
+        companyGradient.append('stop')
+            .attr('offset', '0%')
+            .attr('stop-color', '#e3f2fd');
+        companyGradient.append('stop')
+            .attr('offset', '100%')
+            .attr('stop-color', '#b3e5fc');
+        
+        // Caregiver gradient
+        const caregiverGradient = defs.append('linearGradient')
+            .attr('id', 'caregiverGradient')
+            .attr('x1', '0%').attr('y1', '0%')
+            .attr('x2', '100%').attr('y2', '100%');
+        caregiverGradient.append('stop')
+            .attr('offset', '0%')
+            .attr('stop-color', '#e8f5e8');
+        caregiverGradient.append('stop')
+            .attr('offset', '100%')
+            .attr('stop-color', '#a5d6a7');
+        
+        // Create zoom behavior
+        const zoom = d3.zoom()
+            .scaleExtent([0.1, 4])
+            .on('zoom', (event) => {
+                currentTransform = event.transform;
+                svg.select('.graph-container').attr('transform', event.transform);
+            });
+        
+        svg.call(zoom);
+        
+        // Create container for graph elements
+        const graphContainer = svg.append('g').attr('class', 'graph-container');
+        
+        // Store zoom for reset function
+        svg.zoom = zoom;
+        
+        updateNetworkGraph();
+        
+    } catch (error) {
+        console.error('Error creating SVG:', error);
+    }
 }
 
 function updateNetworkGraph() {
-    if (!svg) return;
+    if (!svg) {
+        console.log('SVG not initialized, initializing network graph...');
+        initializeNetworkGraph();
+        return;
+    }
     
-    const { nodes, links } = prepareGraphData();
-    
-    // Clear existing elements
-    svg.select('.graph-container').selectAll('*').remove();
-    const graphContainer = svg.select('.graph-container');
-    
-    // Apply current transform to maintain zoom/pan state
-    graphContainer.attr('transform', currentTransform);
-    
-    // Create force simulation
-    simulation = d3.forceSimulation(nodes)
-        .force('link', d3.forceLink(links).id(d => d.id).distance(120))
-        .force('charge', d3.forceManyBody().strength(-300))
-        .force('center', d3.forceCenter(svg.attr('width') / 2, svg.attr('height') / 2))
-        .force('collision', d3.forceCollide().radius(d => d.radius + 25));
-    
-    // Create links
-    const link = graphContainer.append('g')
-        .attr('class', 'links')
-        .selectAll('line')
-        .data(links)
-        .enter().append('line')
-        .style('stroke', '#000')
-        .style('stroke-width', '1px')
-        .style('opacity', '0.4');
-    
-    // Create nodes
-    const node = graphContainer.append('g')
-        .attr('class', 'nodes')
-        .selectAll('circle')
-        .data(nodes)
-        .enter().append('circle')
-        .attr('r', d => d.radius)
-        .style('fill', d => d.type === 'company' ? 'url(#companyGradient)' : 'url(#caregiverGradient)')
-        .style('stroke', 'rgba(0, 0, 0, 0.4)')
-        .style('stroke-width', '1px')
-        .style('cursor', 'pointer')
-        .call(d3.drag()
-            .on('start', function(event, d) {
-                isDragging = false;
-                dragstarted(event, d);
+    try {
+        const { nodes, links } = prepareGraphData();
+        
+        // Clear existing elements
+        svg.select('.graph-container').selectAll('*').remove();
+        const graphContainer = svg.select('.graph-container');
+        
+        // Apply current transform to maintain zoom/pan state
+        graphContainer.attr('transform', currentTransform);
+        
+        // Create force simulation
+        simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(120))
+            .force('charge', d3.forceManyBody().strength(-300))
+            .force('center', d3.forceCenter(svg.attr('width') / 2, svg.attr('height') / 2))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 25));
+        
+        // Create links
+        const link = graphContainer.append('g')
+            .attr('class', 'links')
+            .selectAll('line')
+            .data(links)
+            .enter().append('line')
+            .style('stroke', '#000')
+            .style('stroke-width', '1px')
+            .style('opacity', '0.4');
+        
+        // Create nodes
+        const node = graphContainer.append('g')
+            .attr('class', 'nodes')
+            .selectAll('circle')
+            .data(nodes)
+            .enter().append('circle')
+            .attr('r', d => d.radius)
+            .style('fill', d => d.type === 'company' ? 'url(#companyGradient)' : 'url(#caregiverGradient)')
+            .style('stroke', 'rgba(0, 0, 0, 0.4)')
+            .style('stroke-width', '1px')
+            .style('cursor', 'pointer')
+            .call(d3.drag()
+                .on('start', function(event, d) {
+                    isDragging = false;
+                    dragstarted(event, d);
+                })
+                .on('drag', function(event, d) {
+                    isDragging = true;
+                    dragged(event, d);
+                })
+                .on('end', function(event, d) {
+                    dragended(event, d);
+                    setTimeout(() => { isDragging = false; }, 100);
+                }))
+            .on('click', function(event, d) {
+                if (isDragging) {
+                    return;
+                }
+                
+                event.stopPropagation();
+                hideTooltip();
+                
+                if (d.type === 'company') {
+                    showCompanyModal(d);
+                } else if (d.type === 'caregiver') {
+                    showCaregiverModal(d.name);
+                }
             })
-            .on('drag', function(event, d) {
-                isDragging = true;
-                dragged(event, d);
+            .on('mouseover', function(event, d) {
+                d3.select(this).style('filter', 'brightness(1.3)');
+                
+                link.style('opacity', function(linkData) {
+                    return (linkData.source.id === d.id || linkData.target.id === d.id) ? '1' : '0.2';
+                }).style('stroke-width', function(linkData) {
+                    return (linkData.source.id === d.id || linkData.target.id === d.id) ? '3px' : '1px';
+                });
+                
+                showTooltip(event, d);
             })
-            .on('end', function(event, d) {
-                dragended(event, d);
-                setTimeout(() => { isDragging = false; }, 100);
-            }))
-        .on('click', function(event, d) {
-            if (isDragging) {
-                return;
-            }
-            
-            event.stopPropagation();
-            hideTooltip();
-            
-            if (d.type === 'company') {
-                showCompanyModal(d);
-            } else if (d.type === 'caregiver') {
-                showCaregiverModal(d.name);
-            }
-        })
-        .on('mouseover', function(event, d) {
-            d3.select(this).style('filter', 'brightness(1.3)');
-            
-            link.style('opacity', function(linkData) {
-                return (linkData.source.id === d.id || linkData.target.id === d.id) ? '1' : '0.2';
-            }).style('stroke-width', function(linkData) {
-                return (linkData.source.id === d.id || linkData.target.id === d.id) ? '3px' : '1px';
+            .on('mouseout', function(event, d) {
+                d3.select(this).style('filter', null);
+                link.style('opacity', '0.4').style('stroke-width', '1px');
+                hideTooltip();
             });
+        
+        // Add icons inside nodes
+        const nodeIcons = graphContainer.append('g')
+            .attr('class', 'node-icons')
+            .selectAll('text')
+            .data(nodes)
+            .enter().append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'central')
+            .attr('fill', '#333')
+            .attr('font-size', d => d.radius * 0.6)
+            .style('pointer-events', 'none')
+            .text(d => d.type === 'company' ? '🏢' : '👤');
+        
+        // Add labels
+        const labels = graphContainer.append('g')
+            .attr('class', 'labels')
+            .selectAll('text')
+            .data(nodes)
+            .enter().append('text')
+            .style('font-family', 'var(--font-family-base)')
+            .style('font-size', '11px')
+            .style('font-weight', 'var(--font-weight-medium)')
+            .style('fill', 'var(--color-text)')
+            .style('text-anchor', 'middle')
+            .style('pointer-events', 'none')
+            .style('text-shadow', '0 1px 3px rgba(0, 0, 0, 0.3)')
+            .text(d => d.label)
+            .attr('dy', d => d.radius + 15);
+        
+        // Update positions on simulation tick
+        simulation.on('tick', () => {
+            link
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
             
-            showTooltip(event, d);
-        })
-        .on('mouseout', function(event, d) {
-            d3.select(this).style('filter', null);
-            link.style('opacity', '0.4').style('stroke-width', '1px');
-            hideTooltip();
+            node
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y);
+            
+            nodeIcons
+                .attr('x', d => d.x)
+                .attr('y', d => d.y);
+            
+            labels
+                .attr('x', d => d.x)
+                .attr('y', d => d.y);
         });
-    
-    // Add icons inside nodes
-    const nodeIcons = graphContainer.append('g')
-        .attr('class', 'node-icons')
-        .selectAll('text')
-        .data(nodes)
-        .enter().append('text')
-        .attr('text-anchor', 'middle')
-        .attr('dominant-baseline', 'central')
-        .attr('fill', '#333')
-        .attr('font-size', d => d.radius * 0.6)
-        .style('pointer-events', 'none')
-        .text(d => d.type === 'company' ? '\u{1F3E2}' : '\u{1F464}');
-    
-    // Add labels
-    const labels = graphContainer.append('g')
-        .attr('class', 'labels')
-        .selectAll('text')
-        .data(nodes)
-        .enter().append('text')
-        .style('font-family', 'var(--font-family-base)')
-        .style('font-size', '11px')
-        .style('font-weight', 'var(--font-weight-medium)')
-        .style('fill', 'var(--color-text)')
-        .style('text-anchor', 'middle')
-        .style('pointer-events', 'none')
-        .style('text-shadow', '0 1px 3px rgba(0, 0, 0, 0.3)')
-        .text(d => d.label)
-        .attr('dy', d => d.radius + 15);
-    
-    // Update positions on simulation tick
-    simulation.on('tick', () => {
-        link
-            .attr('x1', d => d.source.x)
-            .attr('y1', d => d.source.y)
-            .attr('x2', d => d.target.x)
-            .attr('y2', d => d.target.y);
-        
-        node
-            .attr('cx', d => d.x)
-            .attr('cy', d => d.y);
-        
-        nodeIcons
-            .attr('x', d => d.x)
-            .attr('y', d => d.y);
-        
-        labels
-            .attr('x', d => d.x)
-            .attr('y', d => d.y);
-    });
+    } catch (error) {
+        console.error('Error updating network graph:', error);
+    }
 }
 
 function prepareGraphData() {
@@ -681,32 +779,35 @@ function centerNetworkGraph() {
 function showCompanyModal(d) {
     const company = d.data;
     
-    document.getElementById('companyModalTitle').textContent = company.Firma;
+    const companyModalTitle = document.getElementById('companyModalTitle');
+    if (companyModalTitle) companyModalTitle.textContent = company.Firma;
     
     const detailsContainer = document.getElementById('companyDetails');
-    detailsContainer.innerHTML = `
-        <div class="detail-item">
-            <span class="detail-label">Nazwa firmy:</span>
-            <span class="detail-value">${company.Firma}</span>
-        </div>
-        <div class="detail-item">
-            <span class="detail-label">NIP:</span>
-            <span class="detail-value">${company.NIP}</span>
-        </div>
-        <div class="detail-item">
-            <span class="detail-label">Opiekun wdrożeniowy:</span>
-            <span class="detail-value">${company.Opiekun}</span>
-        </div>
-        <div class="detail-item">
-            <span class="detail-label">Obrót z IT Excellence:</span>
-            <span class="detail-value">${formatCurrency(company.Obrót)}</span>
-        </div>
-    `;
+    if (detailsContainer) {
+        detailsContainer.innerHTML = `
+            <div class="detail-item">
+                <span class="detail-label">Nazwa firmy:</span>
+                <span class="detail-value">${company.Firma}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">NIP:</span>
+                <span class="detail-value">${company.NIP}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Opiekun wdrożeniowy:</span>
+                <span class="detail-value">${company.Opiekun}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Obrót z IT Excellence:</span>
+                <span class="detail-value">${formatCurrency(company.Obrót)}</span>
+            </div>
+        `;
+    }
     
     showModal(companyModal);
 }
 
-// Caregiver details modal with sorting
+// Caregiver details modal - IMPROVED WITH SORTING - FIXED
 function showCaregiverModal(caregiverName) {
     const modal = document.getElementById('caregiverModal');
     if (!modal) {
@@ -718,13 +819,20 @@ function showCaregiverModal(caregiverName) {
     const totalTurnover = caregiverData.reduce((sum, d) => sum + d.Obrót, 0);
     const avgTurnover = caregiverData.length > 0 ? totalTurnover / caregiverData.length : 0;
     
-    document.getElementById('caregiverName').textContent = caregiverName;
-    document.getElementById('caregiverNameDisplay').textContent = caregiverName;
-    document.getElementById('caregiverCompanyCount').textContent = caregiverData.length;
-    document.getElementById('caregiverTotalTurnover').textContent = totalTurnover.toLocaleString('pl-PL') + ' zł';
-    document.getElementById('caregiverAvgTurnover').textContent = Math.round(avgTurnover).toLocaleString('pl-PL') + ' zł';
+    // Update modal content
+    const caregiverNameEl = document.getElementById('caregiverName');
+    const caregiverNameDisplayEl = document.getElementById('caregiverNameDisplay');
+    const caregiverCompanyCountEl = document.getElementById('caregiverCompanyCount');
+    const caregiverTotalTurnoverEl = document.getElementById('caregiverTotalTurnover');
+    const caregiverAvgTurnoverEl = document.getElementById('caregiverAvgTurnover');
     
-    // Sort and display companies
+    if (caregiverNameEl) caregiverNameEl.textContent = caregiverName;
+    if (caregiverNameDisplayEl) caregiverNameDisplayEl.textContent = caregiverName;
+    if (caregiverCompanyCountEl) caregiverCompanyCountEl.textContent = caregiverData.length;
+    if (caregiverTotalTurnoverEl) caregiverTotalTurnoverEl.textContent = totalTurnover.toLocaleString('pl-PL') + ' zł';
+    if (caregiverAvgTurnoverEl) caregiverAvgTurnoverEl.textContent = Math.round(avgTurnover).toLocaleString('pl-PL') + ' zł';
+    
+    // Sorting functionality
     const sortSelect = document.getElementById('companySortSelect');
     
     function sortAndDisplayCompanies() {
@@ -754,22 +862,29 @@ function showCaregiverModal(caregiverName) {
         }
     }
     
-    // Initial sort and display
+    // Reset select to default value
+    if (sortSelect) {
+        sortSelect.value = 'alphabetical';
+    }
+    
     sortAndDisplayCompanies();
     
-    // Add event listener for sort change
+    // Add fresh event listener
     if (sortSelect) {
+        sortSelect.removeEventListener('change', sortAndDisplayCompanies);
         sortSelect.addEventListener('change', sortAndDisplayCompanies);
     }
     
     showModal(modal);
 }
 
-// Enhanced export function
+// Export function
 function exportData() {
     try {
-        exportDataBtn.textContent = 'Eksportowanie...';
-        exportDataBtn.disabled = true;
+        if (exportDataBtn) {
+            exportDataBtn.textContent = 'Eksportowanie...';
+            exportDataBtn.disabled = true;
+        }
         
         const dataToExport = filteredData.map(company => ({
             'Firma': company.Firma,
@@ -782,7 +897,7 @@ function exportData() {
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Dane');
         
-        const filename = `IT_Excellence_Export_${new Date().toISOString().split('T')[0]}.xlsx`;
+        const filename = `ITE_Workflow_365_Export_${new Date().toISOString().split('T')[0]}.xlsx`;
         XLSX.writeFile(wb, filename);
         
         showNotification(`Wyeksportowano ${filteredData.length} firm do pliku ${filename}`, 'success');
@@ -792,8 +907,10 @@ function exportData() {
         showNotification('Błąd podczas eksportu danych: ' + error.message, 'error');
     } finally {
         setTimeout(() => {
-            exportDataBtn.textContent = 'Eksportuj';
-            exportDataBtn.disabled = false;
+            if (exportDataBtn) {
+                exportDataBtn.textContent = 'Eksportuj';
+                exportDataBtn.disabled = false;
+            }
         }, 1000);
     }
 }
@@ -863,14 +980,16 @@ function showNotification(message, type = 'info') {
 window.addEventListener('resize', () => {
     if (svg) {
         const container = document.getElementById('networkGraph');
-        const width = container.clientWidth;
-        const height = container.clientHeight;
-        
-        svg.attr('width', width).attr('height', height);
-        
-        if (simulation) {
-            simulation.force('center', d3.forceCenter(width / 2, height / 2));
-            simulation.alpha(0.3).restart();
+        if (container) {
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            
+            svg.attr('width', width).attr('height', height);
+            
+            if (simulation) {
+                simulation.force('center', d3.forceCenter(width / 2, height / 2));
+                simulation.alpha(0.3).restart();
+            }
         }
     }
 });
