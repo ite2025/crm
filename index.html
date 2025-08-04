@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITE Workflow 365 - Mapa Powiązań Biznesowych</title>
+    <title>IT Excellence - Mapa Powiązań Biznesowych</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -14,9 +14,8 @@
         <header class="header">
             <div class="header-content">
                 <div class="logo">
-                    <img src="https://ite.pl/grafiki/workflow365.png" alt="ITE Workflow 365" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <span class="logo-fallback" style="display: none;">ITE Workflow 365</span>
-                    <span class="subtitle">Mapa Powiązań Biznesowych</span>
+                    <h1>IT Excellence</h1>
+                    <span>Mapa Powiązań Biznesowych</span>
                 </div>
                 <div class="header-actions">
                     <button class="btn btn--primary" id="importBtn">
@@ -37,30 +36,77 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Filters Panel -->
-            <aside class="filters-panel glass-panel">
-                <h3>Filtry</h3>
-                <div class="filter-group">
-                    <label class="form-label">Nazwa firmy</label>
-                    <input type="text" class="form-control" id="companyFilter" placeholder="Wyszukaj firmę...">
-                </div>
-                <div class="filter-group">
-                    <label class="form-label">Opiekun wdrożeniowy</label>
-                    <select class="form-control" id="caregiverFilter">
-                        <option value="">Wszyscy opiekunowie</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label class="form-label">Zakres obrotu (PLN)</label>
-                    <div class="range-inputs">
-                        <input type="number" class="form-control" id="minTurnover" placeholder="Min">
-                        <input type="number" class="form-control" id="maxTurnover" placeholder="Max">
+            <!-- Left Panel with Accordion -->
+            <aside class="left-panel glass-panel">
+                <!-- Filters Accordion -->
+                <section class="accordion-item">
+                    <header class="accordion-header" id="filtersToggle">
+                        <h3>Filtry</h3>
+                        <span class="accordion-icon">▾</span>
+                    </header>
+                    <div class="accordion-body" id="filtersBody">
+                        <div class="filter-group">
+                            <label class="form-label">Nazwa firmy</label>
+                            <input type="text" class="form-control" id="companyFilter" placeholder="Wyszukaj firmę...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="form-label">Opiekun wdrożeniowy</label>
+                            <select class="form-control" id="caregiverFilter">
+                                <option value="">Wszyscy opiekunowie</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="form-label">Zakres obrotu (PLN)</label>
+                            <div class="range-inputs">
+                                <input type="number" class="form-control" id="minTurnover" placeholder="Min">
+                                <input type="number" class="form-control" id="maxTurnover" placeholder="Max">
+                            </div>
+                        </div>
+                        <div class="filter-actions">
+                            <button class="btn btn--primary btn--full-width" id="applyFilters">Zastosuj filtry</button>
+                            <button class="btn btn--outline btn--full-width" id="clearFilters">Wyczyść</button>
+                        </div>
                     </div>
-                </div>
-                <div class="filter-actions">
-                    <button class="btn btn--primary btn--full-width" id="applyFilters">Zastosuj filtry</button>
-                    <button class="btn btn--outline btn--full-width" id="clearFilters">Wyczyść</button>
-                </div>
+                </section>
+
+                <!-- Reports Accordion -->
+                <section class="accordion-item">
+                    <header class="accordion-header" id="reportsToggle">
+                        <h3>Raporty</h3>
+                        <span class="accordion-icon">▾</span>
+                    </header>
+                    <div class="accordion-body" id="reportsBody">
+                        <div id="reports">
+                            <div class="report-card">
+                                <h4>Statystyki opiekunów</h4>
+                                <div id="caregiverStats" class="stats-list">
+                                    <!-- Dynamically populated -->
+                                </div>
+                            </div>
+                            <div class="report-card">
+                                <h4>Podsumowanie</h4>
+                                <div class="summary-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Łączna liczba firm:</span>
+                                        <span class="stat-value" id="totalCompanies">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Łączny obrót:</span>
+                                        <span class="stat-value" id="totalTurnover">0 PLN</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Średni obrót:</span>
+                                        <span class="stat-value" id="avgTurnover">0 PLN</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Liczba opiekunów:</span>
+                                        <span class="stat-value" id="totalCaregivers">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </aside>
 
             <!-- Network Graph -->
@@ -89,38 +135,6 @@
                     </div>
                 </div>
             </section>
-
-            <!-- Reports Panel -->
-            <aside class="reports-panel glass-panel">
-                <h3>Raporty</h3>
-                <div class="report-card">
-                    <h4>Statystyki opiekunów</h4>
-                    <div id="caregiverStats" class="stats-list">
-                        <!-- Dynamically populated -->
-                    </div>
-                </div>
-                <div class="report-card">
-                    <h4>Podsumowanie</h4>
-                    <div class="summary-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Łączna liczba firm:</span>
-                            <span class="stat-value" id="totalCompanies">0</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Łączny obrót:</span>
-                            <span class="stat-value" id="totalTurnover">0 PLN</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Średni obrót:</span>
-                            <span class="stat-value" id="avgTurnover">0 PLN</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Liczba opiekunów:</span>
-                            <span class="stat-value" id="totalCaregivers">0</span>
-                        </div>
-                    </div>
-                </div>
-            </aside>
         </main>
     </div>
 

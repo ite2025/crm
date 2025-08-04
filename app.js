@@ -96,6 +96,24 @@ function setupEventListeners() {
     caregiverModal.addEventListener('click', (e) => {
         if (e.target === caregiverModal) hideModal(caregiverModal);
     });
+
+    // Accordion toggle logic
+    const filtersToggle = document.getElementById('filtersToggle');
+    const reportsToggle = document.getElementById('reportsToggle');
+    const filtersItem = filtersToggle.parentElement;
+    const reportsItem = reportsToggle.parentElement;
+
+    filtersToggle.addEventListener('click', () => {
+        filtersItem.classList.toggle('open');
+    });
+    
+    reportsToggle.addEventListener('click', () => {
+        reportsItem.classList.toggle('open');
+    });
+
+    // Open both sections by default
+    filtersItem.classList.add('open');
+    reportsItem.classList.add('open');
 }
 
 // Modal functions
