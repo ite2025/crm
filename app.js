@@ -44,6 +44,12 @@ const clearFilters = document.getElementById('clearFilters');
 const resetZoom = document.getElementById('resetZoom');
 const centerGraph = document.getElementById('centerGraph');
 
+// Accordion controls
+const filtersToggle = document.getElementById('filtersToggle');
+const reportsToggle = document.getElementById('reportsToggle');
+const filtersContent = document.getElementById('filtersContent');
+const reportsContent = document.getElementById('reportsContent');
+
 // Initialize application
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
@@ -79,12 +85,16 @@ function setupEventListeners() {
     applyFilters.addEventListener('click', applyDataFilters);
     clearFilters.addEventListener('click', clearDataFilters);
     
-    // Network controls - Fixed to prevent visualization disappearing
+    // Network controls
     resetZoom.addEventListener('click', resetNetworkZoom);
     centerGraph.addEventListener('click', centerNetworkGraph);
     
     // Export
     exportDataBtn.addEventListener('click', exportData);
+    
+    // Accordion controls
+    filtersToggle.addEventListener('click', () => toggleAccordion(filtersContent, filtersToggle));
+    reportsToggle.addEventListener('click', () => toggleAccordion(reportsContent, reportsToggle));
     
     // Modal backdrop clicks
     importModal.addEventListener('click', (e) => {
@@ -96,24 +106,19 @@ function setupEventListeners() {
     caregiverModal.addEventListener('click', (e) => {
         if (e.target === caregiverModal) hideModal(caregiverModal);
     });
+}
 
-    // Accordion toggle logic
-    const filtersToggle = document.getElementById('filtersToggle');
-    const reportsToggle = document.getElementById('reportsToggle');
-    const filtersItem = filtersToggle.parentElement;
-    const reportsItem = reportsToggle.parentElement;
-
-    filtersToggle.addEventListener('click', () => {
-        filtersItem.classList.toggle('open');
-    });
+// Accordion functionality
+function toggleAccordion(content, toggle) {
+    const isCollapsed = content.classList.contains('collapsed');
     
-    reportsToggle.addEventListener('click', () => {
-        reportsItem.classList.toggle('open');
-    });
-
-    // Open both sections by default
-    filtersItem.classList.add('open');
-    reportsItem.classList.add('open');
+    if (isCollapsed) {
+        content.classList.remove('collapsed');
+        toggle.classList.remove('collapsed');
+    } else {
+        content.classList.add('collapsed');
+        toggle.classList.add('collapsed');
+    }
 }
 
 // Modal functions
@@ -370,10 +375,10 @@ function initializeNetworkGraph() {
         .attr('width', width)
         .attr('height', height);
     
-    // Define gradients - BARDZO JASNE ale bardziej widoczne
+    // Define gradients
     const defs = svg.append('defs');
     
-    // Company gradient - bardziej widoczny jasny błękit
+    // Company gradient
     const companyGradient = defs.append('linearGradient')
         .attr('id', 'companyGradient')
         .attr('x1', '0%').attr('y1', '0%')
@@ -385,7 +390,7 @@ function initializeNetworkGraph() {
         .attr('offset', '100%')
         .attr('stop-color', '#b3e5fc');
     
-    // Caregiver gradient - bardziej widoczna jasna zieleń
+    // Caregiver gradient
     const caregiverGradient = defs.append('linearGradient')
         .attr('id', 'caregiverGradient')
         .attr('x1', '0%').attr('y1', '0%')
@@ -421,8 +426,6 @@ function updateNetworkGraph() {
     
     const { nodes, links } = prepareGraphData();
     
-    console.log('Created links:', links);
-    
     // Clear existing elements
     svg.select('.graph-container').selectAll('*').remove();
     const graphContainer = svg.select('.graph-container');
@@ -437,7 +440,7 @@ function updateNetworkGraph() {
         .force('center', d3.forceCenter(svg.attr('width') / 2, svg.attr('height') / 2))
         .force('collision', d3.forceCollide().radius(d => d.radius + 25));
     
-    // Create links FIRST - so they appear behind nodes
+    // Create links
     const link = graphContainer.append('g')
         .attr('class', 'links')
         .selectAll('line')
@@ -469,33 +472,25 @@ function updateNetworkGraph() {
             })
             .on('end', function(event, d) {
                 dragended(event, d);
-                // Allow click to fire if not dragging
                 setTimeout(() => { isDragging = false; }, 100);
             }))
         .on('click', function(event, d) {
-            // Prevent click if we were dragging
             if (isDragging) {
                 return;
             }
             
             event.stopPropagation();
-            console.log('Clicked node:', d.type, d.name); // debug
-            
-            // Hide tooltip first
             hideTooltip();
             
             if (d.type === 'company') {
-                console.log('Opening company modal for:', d.name);
                 showCompanyModal(d);
             } else if (d.type === 'caregiver') {
-                console.log('Opening caregiver modal for:', d.name);
                 showCaregiverModal(d.name);
             }
         })
         .on('mouseover', function(event, d) {
             d3.select(this).style('filter', 'brightness(1.3)');
             
-            // Highlight connected links
             link.style('opacity', function(linkData) {
                 return (linkData.source.id === d.id || linkData.target.id === d.id) ? '1' : '0.2';
             }).style('stroke-width', function(linkData) {
@@ -506,14 +501,11 @@ function updateNetworkGraph() {
         })
         .on('mouseout', function(event, d) {
             d3.select(this).style('filter', null);
-            
-            // Reset all links
             link.style('opacity', '0.4').style('stroke-width', '1px');
-            
             hideTooltip();
         });
     
-    // Add icons inside nodes - wycentrowane
+    // Add icons inside nodes
     const nodeIcons = graphContainer.append('g')
         .attr('class', 'node-icons')
         .selectAll('text')
@@ -595,7 +587,7 @@ function prepareGraphData() {
         });
     });
     
-    // Create links ONLY between companies and their caregivers
+    // Create links between companies and their caregivers
     filteredData.forEach(company => {
         links.push({
             source: `company_${company.Firma}`,
@@ -661,31 +653,25 @@ function dragended(event, d) {
     d.fy = null;
 }
 
-// Network controls - Fixed to prevent visualization disappearing
+// Network controls
 function resetNetworkZoom() {
     if (svg && svg.zoom) {
-        // Reset transform and store it
         currentTransform = d3.zoomIdentity;
         svg.transition().duration(750).call(
             svg.zoom.transform,
             d3.zoomIdentity
         );
-        // Ensure graph container maintains correct transform
         svg.select('.graph-container').attr('transform', currentTransform);
     }
 }
 
 function centerNetworkGraph() {
     if (simulation) {
-        // Restart simulation with gentle alpha to re-center nodes
         simulation.alpha(0.3).restart();
         
-        // Reset any zoom/pan while maintaining visualization
         if (svg && svg.zoom) {
             const width = svg.attr('width');
             const height = svg.attr('height');
-            
-            // Update center force
             simulation.force('center', d3.forceCenter(width / 2, height / 2));
         }
     }
@@ -693,7 +679,6 @@ function centerNetworkGraph() {
 
 // Company details modal
 function showCompanyModal(d) {
-    console.log('showCompanyModal called with:', d);
     const company = d.data;
     
     document.getElementById('companyModalTitle').textContent = company.Firma;
@@ -721,10 +706,8 @@ function showCompanyModal(d) {
     showModal(companyModal);
 }
 
-// Caregiver details modal - NAPRAWIONY
+// Caregiver details modal with sorting
 function showCaregiverModal(caregiverName) {
-    console.log('showCaregiverModal called with:', caregiverName);
-    
     const modal = document.getElementById('caregiverModal');
     if (!modal) {
         console.error('caregiverModal not found!');
@@ -741,21 +724,50 @@ function showCaregiverModal(caregiverName) {
     document.getElementById('caregiverTotalTurnover').textContent = totalTurnover.toLocaleString('pl-PL') + ' zł';
     document.getElementById('caregiverAvgTurnover').textContent = Math.round(avgTurnover).toLocaleString('pl-PL') + ' zł';
     
-    const companiesList = document.getElementById('caregiverCompanies');
-    companiesList.innerHTML = '';
-    caregiverData.forEach(company => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${company.Firma}</strong> - ${company.Obrót.toLocaleString('pl-PL')} zł`;
-        companiesList.appendChild(li);
-    });
+    // Sort and display companies
+    const sortSelect = document.getElementById('companySortSelect');
+    
+    function sortAndDisplayCompanies() {
+        const sortBy = sortSelect?.value || 'alphabetical';
+        let sortedData = [...caregiverData];
+        
+        switch(sortBy) {
+            case 'alphabetical':
+                sortedData.sort((a, b) => a.Firma.localeCompare(b.Firma, 'pl'));
+                break;
+            case 'turnover-desc':
+                sortedData.sort((a, b) => b.Obrót - a.Obrót);
+                break;
+            case 'turnover-asc':
+                sortedData.sort((a, b) => a.Obrót - b.Obrót);
+                break;
+        }
+        
+        const companiesList = document.getElementById('caregiverCompanies');
+        if (companiesList) {
+            companiesList.innerHTML = '';
+            sortedData.forEach(company => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${company.Firma}</strong> - ${company.Obrót.toLocaleString('pl-PL')} zł`;
+                companiesList.appendChild(li);
+            });
+        }
+    }
+    
+    // Initial sort and display
+    sortAndDisplayCompanies();
+    
+    // Add event listener for sort change
+    if (sortSelect) {
+        sortSelect.addEventListener('change', sortAndDisplayCompanies);
+    }
     
     showModal(modal);
 }
 
-// Enhanced export function with user feedback
+// Enhanced export function
 function exportData() {
     try {
-        // Show loading state
         exportDataBtn.textContent = 'Eksportowanie...';
         exportDataBtn.disabled = true;
         
@@ -773,14 +785,12 @@ function exportData() {
         const filename = `IT_Excellence_Export_${new Date().toISOString().split('T')[0]}.xlsx`;
         XLSX.writeFile(wb, filename);
         
-        // Show success notification
         showNotification(`Wyeksportowano ${filteredData.length} firm do pliku ${filename}`, 'success');
         
     } catch (error) {
         console.error('Export error:', error);
         showNotification('Błąd podczas eksportu danych: ' + error.message, 'error');
     } finally {
-        // Reset button state
         setTimeout(() => {
             exportDataBtn.textContent = 'Eksportuj';
             exportDataBtn.disabled = false;
@@ -790,7 +800,6 @@ function exportData() {
 
 // Notification system
 function showNotification(message, type = 'info') {
-    // Remove existing notifications
     const existingNotifications = document.querySelectorAll('.notification');
     existingNotifications.forEach(n => n.remove());
     
@@ -814,7 +823,6 @@ function showNotification(message, type = 'info') {
         transition: transform 0.3s ease;
     `;
     
-    // Set color based on type
     switch (type) {
         case 'success':
             notification.style.borderLeftColor = '#059669';
@@ -837,12 +845,10 @@ function showNotification(message, type = 'info') {
     
     document.body.appendChild(notification);
     
-    // Animate in
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
     
-    // Auto remove after 4 seconds
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';
         setTimeout(() => {

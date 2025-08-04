@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Excellence - Mapa Powiązań Biznesowych</title>
+    <title>ITE Workflow 365 - Mapa Powiązań Biznesowych</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -14,7 +14,10 @@
         <header class="header">
             <div class="header-content">
                 <div class="logo">
-                    <h1>IT Excellence</h1>
+                    <div class="logo-container">
+                        <img src="https://ite.pl/grafiki/workflow365.png" alt="ITE Workflow 365" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="logo-fallback">ITE Workflow 365</div>
+                    </div>
                     <span>Mapa Powiązań Biznesowych</span>
                 </div>
                 <div class="header-actions">
@@ -36,77 +39,39 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Left Panel with Accordion -->
-            <aside class="left-panel glass-panel">
-                <!-- Filters Accordion -->
-                <section class="accordion-item">
-                    <header class="accordion-header" id="filtersToggle">
-                        <h3>Filtry</h3>
-                        <span class="accordion-icon">▾</span>
-                    </header>
-                    <div class="accordion-body" id="filtersBody">
-                        <div class="filter-group">
-                            <label class="form-label">Nazwa firmy</label>
-                            <input type="text" class="form-control" id="companyFilter" placeholder="Wyszukaj firmę...">
-                        </div>
-                        <div class="filter-group">
-                            <label class="form-label">Opiekun wdrożeniowy</label>
-                            <select class="form-control" id="caregiverFilter">
-                                <option value="">Wszyscy opiekunowie</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label class="form-label">Zakres obrotu (PLN)</label>
-                            <div class="range-inputs">
-                                <input type="number" class="form-control" id="minTurnover" placeholder="Min">
-                                <input type="number" class="form-control" id="maxTurnover" placeholder="Max">
-                            </div>
-                        </div>
-                        <div class="filter-actions">
-                            <button class="btn btn--primary btn--full-width" id="applyFilters">Zastosuj filtry</button>
-                            <button class="btn btn--outline btn--full-width" id="clearFilters">Wyczyść</button>
+            <!-- Filters Panel -->
+            <aside class="filters-panel glass-panel">
+                <div class="panel-header">
+                    <h3>Filtry</h3>
+                    <button class="accordion-toggle" id="filtersToggle">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="panel-content" id="filtersContent">
+                    <div class="filter-group">
+                        <label class="form-label">Nazwa firmy</label>
+                        <input type="text" class="form-control" id="companyFilter" placeholder="Wyszukaj firmę...">
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Opiekun wdrożeniowy</label>
+                        <select class="form-control" id="caregiverFilter">
+                            <option value="">Wszyscy opiekunowie</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Zakres obrotu (PLN)</label>
+                        <div class="range-inputs">
+                            <input type="number" class="form-control" id="minTurnover" placeholder="Min">
+                            <input type="number" class="form-control" id="maxTurnover" placeholder="Max">
                         </div>
                     </div>
-                </section>
-
-                <!-- Reports Accordion -->
-                <section class="accordion-item">
-                    <header class="accordion-header" id="reportsToggle">
-                        <h3>Raporty</h3>
-                        <span class="accordion-icon">▾</span>
-                    </header>
-                    <div class="accordion-body" id="reportsBody">
-                        <div id="reports">
-                            <div class="report-card">
-                                <h4>Statystyki opiekunów</h4>
-                                <div id="caregiverStats" class="stats-list">
-                                    <!-- Dynamically populated -->
-                                </div>
-                            </div>
-                            <div class="report-card">
-                                <h4>Podsumowanie</h4>
-                                <div class="summary-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-label">Łączna liczba firm:</span>
-                                        <span class="stat-value" id="totalCompanies">0</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Łączny obrót:</span>
-                                        <span class="stat-value" id="totalTurnover">0 PLN</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Średni obrót:</span>
-                                        <span class="stat-value" id="avgTurnover">0 PLN</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Liczba opiekunów:</span>
-                                        <span class="stat-value" id="totalCaregivers">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="filter-actions">
+                        <button class="btn btn--primary btn--full-width" id="applyFilters">Zastosuj filtry</button>
+                        <button class="btn btn--outline btn--full-width" id="clearFilters">Wyczyść</button>
                     </div>
-                </section>
+                </div>
             </aside>
 
             <!-- Network Graph -->
@@ -135,6 +100,47 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Reports Panel -->
+            <aside class="reports-panel glass-panel">
+                <div class="panel-header">
+                    <h3>Raporty</h3>
+                    <button class="accordion-toggle" id="reportsToggle">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="panel-content" id="reportsContent">
+                    <div class="report-card">
+                        <h4>Statystyki opiekunów</h4>
+                        <div id="caregiverStats" class="stats-list">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <h4>Podsumowanie</h4>
+                        <div class="summary-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Łączna liczba firm:</span>
+                                <span class="stat-value" id="totalCompanies">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Łączny obrót:</span>
+                                <span class="stat-value" id="totalTurnover">0 PLN</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Średni obrót:</span>
+                                <span class="stat-value" id="avgTurnover">0 PLN</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Liczba opiekunów:</span>
+                                <span class="stat-value" id="totalCaregivers">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
         </main>
     </div>
 
@@ -230,7 +236,14 @@
                     </div>
                 </div>
                 <div class="company-list">
-                    <h4>Obsługiwane firmy:</h4>
+                    <div class="company-list-header">
+                        <h4>Obsługiwane firmy:</h4>
+                        <select id="companySortSelect" class="sort-select">
+                            <option value="alphabetical">Alfabetycznie</option>
+                            <option value="turnover-desc">Od największego obrotu</option>
+                            <option value="turnover-asc">Od najmniejszego obrotu</option>
+                        </select>
+                    </div>
                     <ul id="caregiverCompanies">
                     </ul>
                 </div>
